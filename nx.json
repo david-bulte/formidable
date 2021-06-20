@@ -25,6 +25,18 @@
     "console-e2e": {
       "tags": [],
       "implicitDependencies": ["console"]
+    },
+    "shared-builder": {
+      "tags": []
+    },
+    "shared-layout": {
+      "tags": []
+    },
+    "console-builder": {
+      "tags": []
+    },
+    "shared-drag-n-drop": {
+      "tags": []
     }
   }
 }

@@ -28,7 +28,9 @@
       "unitTestRunner": "jest"
     },
     "@nrwl/angular:component": {
-      "style": "scss"
+      "style": "scss",
+      "inlineStyle": true,
+      "inlineTemplate": true
     }
   },
   "projects": {
@@ -52,7 +54,10 @@
               "apps/console/src/assets"
             ],
             "styles": ["apps/console/src/styles.scss"],
-            "scripts": []
+            "scripts": [],
+            "stylePreprocessorOptions": {
+              "includePaths": ["styles/"]
+            }
           },
           "configurations": {
             "production": {
@@ -146,6 +151,106 @@
           "builder": "@nrwl/linter:eslint",
           "options": {
             "lintFilePatterns": ["apps/console-e2e/**/*.{js,ts}"]
+          }
+        }
+      }
+    },
+    "shared-builder": {
+      "projectType": "library",
+      "root": "libs/shared/builder",
+      "sourceRoot": "libs/shared/builder/src",
+      "prefix": "formidable",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/shared/builder"],
+          "options": {
+            "jestConfig": "libs/shared/builder/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/shared/builder/src/**/*.ts",
+              "libs/shared/builder/src/**/*.html"
+            ]
+          }
+        }
+      }
+    },
+    "shared-layout": {
+      "projectType": "library",
+      "root": "libs/shared/layout",
+      "sourceRoot": "libs/shared/layout/src",
+      "prefix": "formidable",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/shared/layout"],
+          "options": {
+            "jestConfig": "libs/shared/layout/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/shared/layout/src/**/*.ts",
+              "libs/shared/layout/src/**/*.html"
+            ]
+          }
+        }
+      }
+    },
+    "console-builder": {
+      "projectType": "library",
+      "root": "libs/console/builder",
+      "sourceRoot": "libs/console/builder/src",
+      "prefix": "formidable",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/console/builder"],
+          "options": {
+            "jestConfig": "libs/console/builder/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/console/builder/src/**/*.ts",
+              "libs/console/builder/src/**/*.html"
+            ]
+          }
+        }
+      }
+    },
+    "shared-drag-n-drop": {
+      "projectType": "library",
+      "root": "libs/shared/drag-n-drop",
+      "sourceRoot": "libs/shared/drag-n-drop/src",
+      "prefix": "formidable",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/shared/drag-n-drop"],
+          "options": {
+            "jestConfig": "libs/shared/drag-n-drop/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/shared/drag-n-drop/src/**/*.ts",
+              "libs/shared/drag-n-drop/src/**/*.html"
+            ]
           }
         }
       }

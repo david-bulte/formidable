@@ -14,7 +14,12 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@formidable/shared/builder": ["libs/shared/builder/src/index.ts"],
+      "@formidable/shared/layout": ["libs/shared/layout/src/index.ts"],
+      "@formidable/console/builder": ["libs/console/builder/src/index.ts"],
+      "@formidable/shared/drag-n-drop": ["libs/shared/drag-n-drop/src/index.ts"]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }
