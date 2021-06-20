@@ -3,8 +3,6 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { FormSchemeQuery } from '../state/form-scheme.query';
 import { FormSchemeService } from '../state/form-scheme.service';
-import { PaletteItemService } from '../state/palette-item.service';
-import { PalettteItemQuery } from '../state/palettte-item.query';
 
 @UntilDestroy()
 @Component({
@@ -14,8 +12,8 @@ import { PalettteItemQuery } from '../state/palettte-item.query';
     <div class="flex flex-col bg-white px-6 py-4 rounded-lg shadow-md">
       <!--      todo -->
 
-      {{(active$ | async)?.type}} | {{(active$ | async)?.id}}
-      
+      {{ (active$ | async)?.type }} | {{ (active$ | async)?.id }}
+
       <form [formGroup]="properties" (ngSubmit)="onSubmit()">
         <div class="mb-4">
           <label class="block text-gray-700 text-sm font-bold mb-2" for="label">
@@ -123,34 +121,22 @@ import { PalettteItemQuery } from '../state/palettte-item.query';
 export class PropertiesComponent implements OnInit {
   properties: FormGroup;
 
-  active$ = this.formSchemeQuery
-      .selectActive();
+  active$ = this.formSchemeQuery.selectActive();
 
   constructor(
     private formSchemeQuery: FormSchemeQuery,
     private formSchemeService: FormSchemeService
-    // private paletteItemQuery: PalettteItemQuery,
-    // private paletteItemService: PaletteItemService
   ) {}
 
   ngOnInit(): void {
     this.properties = new FormGroup({
       label: new FormControl(),
-      name: new FormControl()
+      name: new FormControl(),
     });
 
-    this.active$
-      .pipe(untilDestroyed(this))
-      .subscribe((item) => {
-        console.log("item", item);
-        this.properties.patchValue(item?.props ?? {});
-      });
-    // this.paletteItemQuery
-    //   .selectActive()
-    //   .pipe(untilDestroyed(this))
-    //   .subscribe((item) => {
-    //     this.properties.patchValue(item);
-    //   });
+    this.active$.pipe(untilDestroyed(this)).subscribe((item) => {
+      this.properties.patchValue(item?.props ?? {});
+    });
   }
 
   onSubmit() {
@@ -158,9 +144,5 @@ export class PropertiesComponent implements OnInit {
       this.formSchemeQuery.getActiveId(),
       this.properties.value
     );
-    // this.paletteItemService.update(
-    //   this.paletteItemQuery.getActiveId(),
-    //   this.properties.value
-    // );
   }
 }
