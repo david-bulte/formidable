@@ -29,6 +29,11 @@ export class BuildPageComponent implements OnInit {
   }
 
   createForm() {
-    this.formSchemeService.add({type: Type.FORM, props: {}, parentId: null})
+    this.formSchemeService.add({
+      type: Type.FORM,
+      props: {},
+      validation: { required: false },
+      parentId: null,
+    });
   }
 }

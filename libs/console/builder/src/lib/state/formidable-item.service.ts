@@ -12,8 +12,9 @@ export class FormidableItemService {
     const controlItem: ControlItem = {
       id: guid(),
       props: { label: null, name: null },
+      validation: {required: false},
       type: item.type,
-      parentId: item.parentId
+      parentId: item.parentId,
     };
 
     this.store.add(controlItem);
@@ -24,8 +25,7 @@ export class FormidableItemService {
     this.store.setActive(id);
   }
 
-  update(id: ID, props: any) {
-    this.store.update(id, { props });
+  update(id: ID, item: FormidableItem) {
+    this.store.update(id, { props: item.props, validation: item.validation });
   }
-
 }

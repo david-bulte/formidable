@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import {
   FormidableItem,
   FormItem,
@@ -54,7 +54,11 @@ export class FormComponent implements OnInit {
         this.addControl(form, item);
       });
     } else {
-      form.addControl(item.props.name, new FormControl());
+      // todo defaultValue
+      const defaultValue = null;
+      // todo validators
+      const validators = item.validation?.required ? [Validators.required] : [];
+      form.addControl(item.props.name, new FormControl(defaultValue, validators));
     }
   }
 }

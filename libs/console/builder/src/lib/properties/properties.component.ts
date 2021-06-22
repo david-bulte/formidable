@@ -15,28 +15,42 @@ import { FormidableItemService } from '../state/formidable-item.service';
       {{ (active$ | async)?.type }} | {{ (active$ | async)?.id }}
 
       <form [formGroup]="properties" (ngSubmit)="onSubmit()">
-        <div class="mb-4">
-          <label class="block text-gray-700 text-sm font-bold mb-2" for="label">
-            label
-          </label>
-          <input
-            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            id="label"
-            type="text"
-            [formControlName]="'label'"
-          />
+        
+        <div formGroupName="props">
+          <div class="mb-4">
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="label">
+              label
+            </label>
+            <input
+              class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              id="label"
+              type="text"
+              [formControlName]="'label'"
+            />
+          </div>
+  
+          <div class="mb-4">
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="name">
+              name
+            </label>
+            <input
+              class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              id="name"
+              type="text"
+              [formControlName]="'name'"
+            />
+          </div>
         </div>
 
-        <div class="mb-4">
-          <label class="block text-gray-700 text-sm font-bold mb-2" for="name">
-            name
+        <div formGroupName="validation">
+          <label class="flex items-center">
+            <input
+              type="checkbox"
+              class="form-checkbox"
+              formControlName="required"
+            />
+            <span class="ml-2">required</span>
           </label>
-          <input
-            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            id="name"
-            type="text"
-            [formControlName]="'name'"
-          />
         </div>
 
         <button type="submit">submit</button>
@@ -130,12 +144,17 @@ export class PropertiesComponent implements OnInit {
 
   ngOnInit(): void {
     this.properties = new FormGroup({
-      label: new FormControl(),
-      name: new FormControl(),
+      props: new FormGroup({
+        label: new FormControl(),
+        name: new FormControl(),
+      }),
+      validation: new FormGroup({
+        required: new FormControl()
+      })
     });
 
     this.active$.pipe(untilDestroyed(this)).subscribe((item) => {
-      this.properties.patchValue(item?.props ?? {});
+      this.properties.patchValue(item ?? {});
     });
   }
 
