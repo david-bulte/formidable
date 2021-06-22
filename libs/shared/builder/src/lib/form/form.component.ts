@@ -11,7 +11,7 @@ import {
 @Component({
   selector: 'formidable-form',
   template: `
-    <form [formGroup]="form">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
       <ng-container
         *ngFor="let field of item.children"
         formidableDynamicField
@@ -19,6 +19,15 @@ import {
         [group]="form"
       >
       </ng-container>
+
+      <button
+          [disabled]="form.invalid"
+          class="h-10 px-5 m-2 text-indigo-100 transition-colors duration-150 bg-indigo-700 rounded-lg focus:shadow-outline hover:bg-indigo-800"
+          type="submit"
+      >
+        Submit
+      </button>
+
     </form>
 
     <div>value: {{ form.value | json }}</div>
@@ -60,5 +69,9 @@ export class FormComponent implements OnInit {
       const validators = item.validation?.required ? [Validators.required] : [];
       form.addControl(item.props.name, new FormControl(defaultValue, validators));
     }
+  }
+
+  onSubmit() {
+    console.log('submitting', this.form.value);
   }
 }

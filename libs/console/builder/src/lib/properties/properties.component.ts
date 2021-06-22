@@ -10,9 +10,6 @@ import { FormidableItemService } from '../state/formidable-item.service';
   template: `
     <h1 class="mb-4 text-xl font-bold text-gray-700">Properties</h1>
     <div class="flex flex-col bg-white px-6 py-4 rounded-lg shadow-md">
-      <!--      todo -->
-
-      {{ (active$ | async)?.type }} | {{ (active$ | async)?.id }}
 
       <form [formGroup]="properties" (ngSubmit)="onSubmit()">
         

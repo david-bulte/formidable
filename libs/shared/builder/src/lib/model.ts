@@ -29,8 +29,8 @@ export class FormidableItem {
     classes?: string;
   };
   validation: {
-    required: boolean | undefined
-  }
+    required: boolean | undefined;
+  };
   parentId?: ID;
 }
 
@@ -50,8 +50,7 @@ export function isFormItem(value: FormidableItem): value is LayoutItem {
   return value.type === Type.FORM;
 }
 
-export class ControlItem extends FormidableItem {
-}
+export class ControlItem extends FormidableItem {}
 
 // export interface FormConfig {
 //   properties: {
