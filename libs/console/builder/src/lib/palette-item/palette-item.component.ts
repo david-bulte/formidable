@@ -1,15 +1,6 @@
-import {
-  Component,
-  EventEmitter,
-  HostListener,
-  Input,
-  OnInit,
-  Output,
-} from '@angular/core';
+import { Component, Input, OnInit, } from '@angular/core';
 import { PaletteItem } from '@formidable/shared/builder';
 import { faGripVertical } from '@fortawesome/free-solid-svg-icons/faGripVertical';
-import { Observable } from 'rxjs';
-import { FormSchemeQuery } from '../state/form-scheme.query';
 
 @Component({
   selector: 'formidable-palette-item',

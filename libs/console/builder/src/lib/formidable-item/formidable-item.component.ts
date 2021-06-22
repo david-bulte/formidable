@@ -3,8 +3,8 @@ import { FormidableItem } from '@formidable/shared/builder';
 import { faGripVertical } from '@fortawesome/free-solid-svg-icons/faGripVertical';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { FormSchemeQuery } from '../state/form-scheme.query';
-import { FormSchemeService } from '../state/form-scheme.service';
+import { FormidableItemQuery } from '../state/formidable-item-query.service';
+import { FormidableItemService } from '../state/formidable-item.service';
 
 @Component({
   selector: 'formidable-item',
@@ -74,29 +74,29 @@ export class FormidableItemComponent implements OnInit {
   @Output() select = new EventEmitter();
 
   children$: Observable<FormidableItem[]>;
-  isActive$ = this.formSchemeQuery
+  isActive$ = this.formidableItemQuery
     .selectActiveId()
     .pipe(map((activeId) => activeId === this.item.id));
 
   grip = faGripVertical;
 
   constructor(
-    private formSchemeQuery: FormSchemeQuery,
-    private formSchemeService: FormSchemeService
+    private formidableItemQuery: FormidableItemQuery,
+    private formidableItemService: FormidableItemService
   ) {}
 
   onSelect() {
-    this.formSchemeService.setActive(this.item.id);
+    this.formidableItemService.setActive(this.item.id);
   }
 
   ngOnInit(): void {
-    this.children$ = this.formSchemeQuery.selectAll({
+    this.children$ = this.formidableItemQuery.selectAll({
       filterBy: (item: FormidableItem) => item.parentId === this.item.id,
     });
   }
 
   onDrop(dragonEvent: { data: FormidableItem }) {
-    this.formSchemeService.add({
+    this.formidableItemService.add({
       ...dragonEvent.data,
       parentId: this.item.id,
     });

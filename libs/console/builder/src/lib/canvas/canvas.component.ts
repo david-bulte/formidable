@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UntilDestroy } from '@ngneat/until-destroy';
-import { FormSchemeQuery } from '../state/form-scheme.query';
+import { FormidableItemQuery } from '../state/formidable-item-query.service';
 
 @UntilDestroy()
 @Component({
@@ -51,13 +51,13 @@ import { FormSchemeQuery } from '../state/form-scheme.query';
 export class CanvasComponent implements OnInit {
   items = [];
   preview = false;
-  root$ = this.formSchemeQuery.root$;
+  root$ = this.formidableItemQuery.root$;
 
-  constructor(private formSchemeQuery: FormSchemeQuery) {}
+  constructor(private formidableItemQuery: FormidableItemQuery) {}
 
   ngOnInit(): void {}
 
   get formPreview() {
-    return this.formSchemeQuery.getAllAsTree()
+    return this.formidableItemQuery.getAllAsTree()
   }
 }

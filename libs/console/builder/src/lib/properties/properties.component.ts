@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import { FormSchemeQuery } from '../state/form-scheme.query';
-import { FormSchemeService } from '../state/form-scheme.service';
+import { FormidableItemQuery } from '../state/formidable-item-query.service';
+import { FormidableItemService } from '../state/formidable-item.service';
 
 @UntilDestroy()
 @Component({
@@ -121,11 +121,11 @@ import { FormSchemeService } from '../state/form-scheme.service';
 export class PropertiesComponent implements OnInit {
   properties: FormGroup;
 
-  active$ = this.formSchemeQuery.selectActive();
+  active$ = this.formidableItemQuery.selectActive();
 
   constructor(
-    private formSchemeQuery: FormSchemeQuery,
-    private formSchemeService: FormSchemeService
+    private formidableItemQuery: FormidableItemQuery,
+    private formidableItemService: FormidableItemService
   ) {}
 
   ngOnInit(): void {
@@ -140,8 +140,8 @@ export class PropertiesComponent implements OnInit {
   }
 
   onSubmit() {
-    this.formSchemeService.update(
-      this.formSchemeQuery.getActiveId(),
+    this.formidableItemService.update(
+      this.formidableItemQuery.getActiveId(),
       this.properties.value
     );
   }
