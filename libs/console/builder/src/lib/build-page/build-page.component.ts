@@ -29,11 +29,7 @@ export class BuildPageComponent implements OnInit {
   }
 
   createForm() {
-    this.formSchemeService.add({
-      type: Type.FORM,
-      props: {},
-      validation: { required: false },
-      parentId: null,
-    });
+    // todo first ask in popup
+    this.formSchemeService.createForm();
   }
 }

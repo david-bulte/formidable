@@ -46,6 +46,7 @@
     "@ngneat/until-destroy": "^8.0.4",
     "@nrwl/angular": "12.3.3",
     "@tailwindcss/forms": "^0.3.2",
+    "json-rules-engine": "^6.1.2",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
     "zone.js": "~0.11.4"

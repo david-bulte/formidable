@@ -30,6 +30,7 @@ export class FormidableItem {
   };
   validation: {
     required: boolean | undefined;
+    custom: string;
   };
   parentId?: ID;
 }

@@ -1,18 +1,27 @@
 import { Injectable } from '@angular/core';
 import { guid, ID } from '@datorama/akita';
-import { ControlItem, FormidableItem } from '@formidable/shared/builder';
+import { ControlItem, FormidableItem, Type } from '@formidable/shared/builder';
 import { FormidableItemStore } from './formidable-item-store.service';
 
 @Injectable({ providedIn: 'root' })
 export class FormidableItemService {
   constructor(private store: FormidableItemStore) {}
 
+  createForm() {
+    this.add({
+      type: Type.FORM,
+      props: {},
+      validation: { required: false, custom: null },
+      parentId: null,
+    });
+  }
+
   add(item: FormidableItem) {
     // todo move factory methods to PaletteItem
     const controlItem: ControlItem = {
       id: guid(),
       props: { label: null, name: null },
-      validation: {required: false},
+      validation: { required: false, custom: "{\"conditions\":{\"all\":[{\"fact\":\"age\",\"operator\":\"equal\",\"value\":\"10\"}]},\"event\":{\"type\":\"message\",\"params\":{\"data\":\"green\"}}}" },
       type: item.type,
       parentId: item.parentId,
     };
