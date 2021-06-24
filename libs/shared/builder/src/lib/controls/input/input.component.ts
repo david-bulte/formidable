@@ -21,7 +21,7 @@ import { ControlItem } from '../../model';
           [formControlName]="item.props.name"
         />
         <!--        todo valdemort?-->
-        {{parent.get(item.props.name).errors | json}}
+        {{parent.get(item.props.name)?.errors | json}}
       </div>
     </ng-container>
   `,

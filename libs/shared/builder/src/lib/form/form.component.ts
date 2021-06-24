@@ -19,9 +19,9 @@ import { FormidableItem, FormItem, isFormItem, isLayoutItem, LayoutItem, } from 
     template: `
         <form [formGroup]="form" (ngSubmit)="onSubmit()">
             <ng-container
-                    *ngFor="let field of item.children"
+                    *ngFor="let child of item.children"
                     formidableDynamicField
-                    [item]="field"
+                    [item]="child"
                     [group]="form"
             >
             </ng-container>

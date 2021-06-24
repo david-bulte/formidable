@@ -5,15 +5,15 @@ import { LayoutItem } from '../../model';
 @Component({
   selector: 'formidable-layout',
   template: `
-<!--    <div class="{{ item?.props?.classes }}">-->
-      <ng-container
-        *ngFor="let field of item.children"
+    <!--    <div class="{{ item?.props?.classes }}">-->
+    <ng-container
+        *ngFor="let child of item.children"
         formidableDynamicField
-        [item]="field"
+        [item]="child"
         [group]="parent"
-      >
-      </ng-container>
-<!--    </div>-->
+    >
+    </ng-container>
+    <!--    </div>-->
   `,
   styles: [
     `
