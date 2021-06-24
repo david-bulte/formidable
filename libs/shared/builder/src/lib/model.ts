@@ -14,6 +14,7 @@ export class PaletteItem {
 export enum Type {
   FORM = 'form',
   INPUT = 'input',
+  NUMBER = 'number',
   ROW = 'row',
   COL = 'col',
 }

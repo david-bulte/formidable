@@ -28,6 +28,7 @@ export class PaletteComponent implements OnInit {
   items: PaletteItem[] = [
     { type: Type.ROW, props: {}, propDescriptors: [] },
     { type: Type.INPUT, props: {}, propDescriptors: [] },
+    { type: Type.NUMBER, props: {}, propDescriptors: [] },
   ];
 
   constructor() {}

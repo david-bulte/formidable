@@ -6,6 +6,7 @@ import { LayoutComponent } from './controls/layout/layout.component';
 import { DynamicFieldDirective } from './dynamic-field.directive';
 import { FormComponent } from './form/form.component';
 import { PreviewComponent } from './preview/preview.component';
+import { NumberComponent } from './controls/number/number.component';
 
 @NgModule({
   imports: [CommonModule, ReactiveFormsModule],
@@ -15,6 +16,7 @@ import { PreviewComponent } from './preview/preview.component';
     InputComponent,
     DynamicFieldDirective,
     LayoutComponent,
+    NumberComponent,
   ],
   exports: [PreviewComponent]
 })

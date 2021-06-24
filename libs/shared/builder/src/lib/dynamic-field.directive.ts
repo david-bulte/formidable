@@ -9,7 +9,8 @@ import {
 import { FormGroup } from '@angular/forms';
 import { InputComponent } from './controls/input/input.component';
 import { LayoutComponent } from './controls/layout/layout.component';
-import { FormidableItem, isFormItem, isLayoutItem } from './model';
+import { NumberComponent } from './controls/number/number.component';
+import { FormidableItem, Type } from './model';
 
 @Directive({
   selector: '[formidableDynamicField]',
@@ -27,16 +28,28 @@ export class DynamicFieldDirective implements OnInit {
   ) {}
 
   ngOnInit() {
-    const isLayout = isLayoutItem(this.item) || isFormItem(this.item); // this.item.type !== Type.INPUT;
+    const componentType = this.getComponentType();
+    const componentFactory = this.resolver.resolveComponentFactory<any>(
+      componentType
+    );
 
     // todo lazy load
-    const componentType = this.resolver.resolveComponentFactory<any>(
-      isLayout ? LayoutComponent : InputComponent
-    );
     const component: ComponentRef<
-      InputComponent | LayoutComponent
-    > = this.container.createComponent(componentType);
+      InputComponent | LayoutComponent | NumberComponent
+    > = this.container.createComponent(componentFactory);
     component.instance.item = this.item;
     component.instance.parent = this.group;
+  }
+
+  getComponentType() {
+    switch (this.item.type) {
+      case Type.COL:
+      case Type.ROW:
+        return LayoutComponent;
+      case Type.NUMBER:
+        return NumberComponent;
+      default:
+        return InputComponent;
+    }
   }
 }
