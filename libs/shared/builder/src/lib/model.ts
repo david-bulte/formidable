@@ -53,27 +53,3 @@ export function isFormItem(value: FormidableItem): value is LayoutItem {
 }
 
 export class ControlItem extends FormidableItem {}
-
-// export interface FormConfig {
-//   properties: {
-//     name?: string;
-//   };
-//   children: ControlConfig[];
-// }
-//
-// export interface ControlConfig {
-//   id?: string;
-//   type: ControlType;
-//   properties: {
-//     name: string;
-//     label?: string;
-//     classes?: string;
-//   };
-//   children: ControlConfig[];
-// }
-//
-// export enum ControlType {
-//   INPUT="input",
-//   ROW= "row",
-//   COL="col",
-// }
