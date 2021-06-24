@@ -5,15 +5,15 @@ import { LayoutItem } from '../../model';
 @Component({
   selector: 'formidable-layout',
   template: `
-    <!--    <div class="{{ config?.properties?.classes }}">-->
-    <ng-container
+    <div class="{{ item?.props?.classes }}">
+      <ng-container
         *ngFor="let field of item.children"
         formidableDynamicField
         [item]="field"
         [group]="parent"
-    >
-    </ng-container>
-    <!--    </div>-->
+      >
+      </ng-container>
+    </div>
   `,
   styles: [
     `
@@ -34,6 +34,5 @@ export class LayoutComponent implements OnInit {
 
   constructor() {}
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 }

@@ -17,10 +17,9 @@ export class FormidableItemService {
   }
 
   add(item: FormidableItem) {
-    // todo move factory methods to PaletteItem
     const controlItem: ControlItem = {
       id: guid(),
-      props: { label: null, name: null },
+      props: { label: null, name: null, classes: null },
       validation: { required: false, custom: "{\"conditions\":{\"all\":[{\"fact\":\"age\",\"operator\":\"equal\",\"value\":\"10\"}]},\"event\":{\"type\":\"message\",\"params\":{\"data\":\"green\"}}}" },
       type: item.type,
       parentId: item.parentId,

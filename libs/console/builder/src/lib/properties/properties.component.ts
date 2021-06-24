@@ -41,6 +41,21 @@ import { FormidableItemService } from '../state/formidable-item.service';
               [formControlName]="'name'"
             />
           </div>
+
+          <div class="mb-4">
+            <label
+              class="block text-gray-700 text-sm font-bold mb-2"
+              for="classes"
+            >
+              classes
+            </label>
+            <input
+              class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              id="classes"
+              type="text"
+              [formControlName]="'classes'"
+            />
+          </div>
         </div>
 
         <div formGroupName="validation">
@@ -91,6 +106,7 @@ export class PropertiesComponent implements OnInit {
       props: new FormGroup({
         label: new FormControl(),
         name: new FormControl(),
+        classes: new FormControl()
       }),
       validation: new FormGroup({
         required: new FormControl(),
