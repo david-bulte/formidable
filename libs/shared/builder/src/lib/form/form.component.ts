@@ -101,13 +101,11 @@ export class FormComponent implements OnInit {
                 this.addControl(form, item);
             });
         } else {
-            // todo BUG
             // todo defaultValue
             const defaultValue = null;
             form.addControl(
                 item.props.name,
-                new FormControl(defaultValue, this.getValidators(item))
-                // new FormControl(defaultValue, this.getValidators(item), this.getAsyncValidators(item))
+                new FormControl(defaultValue, this.getValidators(item), this.getAsyncValidators(item))
             );
         }
     }
