@@ -26,9 +26,6 @@
       "tags": [],
       "implicitDependencies": ["console"]
     },
-    "shared-builder": {
-      "tags": []
-    },
     "shared-layout": {
       "tags": []
     },
@@ -36,6 +33,9 @@
       "tags": []
     },
     "shared-drag-n-drop": {
+      "tags": []
+    },
+    "shared-renderer": {
       "tags": []
     }
   }

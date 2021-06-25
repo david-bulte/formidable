@@ -7,10 +7,10 @@ import { LayoutItem } from '../../model';
   template: `
     <!--    <div class="{{ item?.props?.classes }}">-->
     <ng-container
-        *ngFor="let child of item.children"
-        formidableDynamicField
-        [item]="child"
-        [group]="parent"
+      *ngFor="let child of item.children"
+      formidableDynamicField
+      [item]="child"
+      [group]="parent"
     >
     </ng-container>
     <!--    </div>-->

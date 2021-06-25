@@ -3,21 +3,16 @@ import { FormItem } from '@formidable/shared/builder';
 
 @Component({
   selector: 'formidable-preview',
-  template: `
-    <formidable-form [item]="item"></formidable-form> `,
+  template: ` <formidable-form [item]="item"></formidable-form> `,
   styles: [],
 })
 export class PreviewComponent implements OnInit {
-
   @Input() item: FormItem;
 
   constructor() {}
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 }
-
-
 
 // config: any = {
 //   properties: {},

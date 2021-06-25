@@ -1,5 +1,5 @@
 module.exports = {
-  displayName: 'shared-builder',
+  displayName: 'shared-renderer',
   preset: '../../../jest.preset.js',
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
   globals: {
@@ -14,7 +14,7 @@ module.exports = {
       },
     },
   },
-  coverageDirectory: '../../../coverage/libs/shared/builder',
+  coverageDirectory: '../../../coverage/libs/shared/renderer',
   snapshotSerializers: [
     'jest-preset-angular/build/serializers/no-ng-attributes',
     'jest-preset-angular/build/serializers/ng-snapshot',

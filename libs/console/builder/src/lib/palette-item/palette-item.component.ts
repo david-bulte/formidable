@@ -1,14 +1,14 @@
-import { Component, Input, OnInit, } from '@angular/core';
-import { PaletteItem } from '@formidable/shared/builder';
+import { Component, Input, OnInit } from '@angular/core';
+import { PaletteItem } from '@formidable/shared/renderer';
 import { faGripVertical } from '@fortawesome/free-solid-svg-icons/faGripVertical';
 
 @Component({
   selector: 'formidable-palette-item',
   template: `
     <div
-        class="bg-gray-100 pl-1 pr-2 py-2 my-1 rounded flex flex-col palette-item__container"
-        [dragonDraggable]="true"
-        [dragonData]="item"
+      class="bg-gray-100 pl-1 pr-2 py-2 my-1 rounded flex flex-col palette-item__container"
+      [dragonDraggable]="true"
+      [dragonData]="item"
     >
       <div class="flex flex-row">
         <div class="handle">
@@ -36,7 +36,5 @@ export class PaletteItemComponent implements OnInit {
 
   constructor() {}
 
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }

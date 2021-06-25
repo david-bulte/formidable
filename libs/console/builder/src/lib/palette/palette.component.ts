@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { PaletteItem, Type } from '@formidable/shared/builder';
+import { PaletteItem, Type } from '@formidable/shared/renderer';
 
 @Component({
   selector: 'formidable-palette',

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { guid, ID } from '@datorama/akita';
-import { ControlItem, FormidableItem, Type } from '@formidable/shared/builder';
+import { ControlItem, FormidableItem, Type } from '@formidable/shared/renderer';
 import { FormidableItemStore } from './formidable-item-store.service';
 
 @Injectable({ providedIn: 'root' })
@@ -20,7 +20,11 @@ export class FormidableItemService {
     const controlItem: ControlItem = {
       id: guid(),
       props: { label: null, name: null, classes: null },
-      validation: { required: false, custom: "{\"conditions\":{\"all\":[{\"fact\":\"age\",\"operator\":\"equal\",\"value\":\"10\"}]},\"event\":{\"type\":\"message\",\"params\":{\"data\":\"green\"}}}" },
+      validation: {
+        required: false,
+        custom:
+          '{"conditions":{"all":[{"fact":"age","operator":"equal","value":"10"}]},"event":{"type":"message","params":{"data":"green"}}}',
+      },
       type: item.type,
       parentId: item.parentId,
     };

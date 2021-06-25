@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Type } from '@formidable/shared/builder';
+import { Type } from '@formidable/shared/renderer';
 import { FormidableItemService } from '../state/formidable-item.service';
 
 @Component({

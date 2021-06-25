@@ -18,6 +18,6 @@ import { NumberComponent } from './controls/number/number.component';
     LayoutComponent,
     NumberComponent,
   ],
-  exports: [PreviewComponent]
+  exports: [PreviewComponent],
 })
-export class SharedBuilderModule {}
+export class SharedRendererModule {}

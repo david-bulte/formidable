@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormidableItem } from '@formidable/shared/builder';
+import { FormidableItem } from '@formidable/shared/renderer';
 import { faGripVertical } from '@fortawesome/free-solid-svg-icons/faGripVertical';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
