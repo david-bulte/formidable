@@ -129,6 +129,31 @@
         }
       }
     },
+    "console-builder": {
+      "projectType": "library",
+      "root": "libs/console/builder",
+      "sourceRoot": "libs/console/builder/src",
+      "prefix": "formidable",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/console/builder"],
+          "options": {
+            "jestConfig": "libs/console/builder/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/console/builder/src/**/*.ts",
+              "libs/console/builder/src/**/*.html"
+            ]
+          }
+        }
+      }
+    },
     "console-e2e": {
       "root": "apps/console-e2e",
       "sourceRoot": "apps/console-e2e/src",
@@ -151,6 +176,31 @@
           "builder": "@nrwl/linter:eslint",
           "options": {
             "lintFilePatterns": ["apps/console-e2e/**/*.{js,ts}"]
+          }
+        }
+      }
+    },
+    "shared-dragon": {
+      "projectType": "library",
+      "root": "libs/shared/dragon",
+      "sourceRoot": "libs/shared/dragon/src",
+      "prefix": "formidable",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/shared/dragon"],
+          "options": {
+            "jestConfig": "libs/shared/dragon/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/shared/dragon/src/**/*.ts",
+              "libs/shared/dragon/src/**/*.html"
+            ]
           }
         }
       }
@@ -180,31 +230,6 @@
         }
       }
     },
-    "console-builder": {
-      "projectType": "library",
-      "root": "libs/console/builder",
-      "sourceRoot": "libs/console/builder/src",
-      "prefix": "formidable",
-      "architect": {
-        "test": {
-          "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/console/builder"],
-          "options": {
-            "jestConfig": "libs/console/builder/jest.config.js",
-            "passWithNoTests": true
-          }
-        },
-        "lint": {
-          "builder": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": [
-              "libs/console/builder/src/**/*.ts",
-              "libs/console/builder/src/**/*.html"
-            ]
-          }
-        }
-      }
-    },
     "shared-renderer": {
       "projectType": "library",
       "root": "libs/shared/renderer",
@@ -225,31 +250,6 @@
             "lintFilePatterns": [
               "libs/shared/renderer/src/**/*.ts",
               "libs/shared/renderer/src/**/*.html"
-            ]
-          }
-        }
-      }
-    },
-    "shared-dragon": {
-      "projectType": "library",
-      "root": "libs/shared/dragon",
-      "sourceRoot": "libs/shared/dragon/src",
-      "prefix": "formidable",
-      "architect": {
-        "test": {
-          "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/shared/dragon"],
-          "options": {
-            "jestConfig": "libs/shared/dragon/jest.config.js",
-            "passWithNoTests": true
-          }
-        },
-        "lint": {
-          "builder": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": [
-              "libs/shared/dragon/src/**/*.ts",
-              "libs/shared/dragon/src/**/*.html"
             ]
           }
         }

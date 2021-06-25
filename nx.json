@@ -22,21 +22,21 @@
     "console": {
       "tags": ["scope:console", "type:app"]
     },
+    "console-builder": {
+      "tags": ["scope:console", "type:feature"]
+    },
     "console-e2e": {
       "tags": [],
       "implicitDependencies": ["console"]
     },
+    "shared-dragon": {
+      "tags": ["scope:shared", "type:ui"]
+    },
     "shared-layout": {
       "tags": ["scope:shared", "type:ui"]
     },
-    "console-builder": {
-      "tags": ["scope:console", "type:feature"]
-    },
     "shared-renderer": {
       "tags": ["scope:shared", "type:feature"]
-    },
-    "shared-dragon": {
-      "tags": ["scope:shared", "type:ui"]
     }
   }
 }

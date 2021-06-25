@@ -15,10 +15,10 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@formidable/shared/layout": ["libs/shared/layout/src/index.ts"],
       "@formidable/console/builder": ["libs/console/builder/src/index.ts"],
-      "@formidable/shared/renderer": ["libs/shared/renderer/src/index.ts"],
-      "@formidable/shared/dragon": ["libs/shared/dragon/src/index.ts"]
+      "@formidable/shared/dragon": ["libs/shared/dragon/src/index.ts"],
+      "@formidable/shared/layout": ["libs/shared/layout/src/index.ts"],
+      "@formidable/shared/renderer": ["libs/shared/renderer/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
