@@ -5,7 +5,6 @@ import { LayoutItem } from '../../model';
 @Component({
   selector: 'formidable-layout',
   template: `
-    <!--    <div class="{{ item?.props?.classes }}">-->
     <ng-container
       *ngFor="let child of item.children"
       formidableDynamicField
@@ -13,15 +12,7 @@ import { LayoutItem } from '../../model';
       [group]="parent"
     >
     </ng-container>
-    <!--    </div>-->
-  `,
-  styles: [
-    `
-      :host {
-        display: block;
-      }
-    `,
-  ],
+  `
 })
 export class LayoutComponent implements OnInit {
   @Input() parent: FormGroup;
