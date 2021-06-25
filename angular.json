@@ -205,31 +205,6 @@
         }
       }
     },
-    "shared-drag-n-drop": {
-      "projectType": "library",
-      "root": "libs/shared/drag-n-drop",
-      "sourceRoot": "libs/shared/drag-n-drop/src",
-      "prefix": "formidable",
-      "architect": {
-        "test": {
-          "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/shared/drag-n-drop"],
-          "options": {
-            "jestConfig": "libs/shared/drag-n-drop/jest.config.js",
-            "passWithNoTests": true
-          }
-        },
-        "lint": {
-          "builder": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": [
-              "libs/shared/drag-n-drop/src/**/*.ts",
-              "libs/shared/drag-n-drop/src/**/*.html"
-            ]
-          }
-        }
-      }
-    },
     "shared-renderer": {
       "projectType": "library",
       "root": "libs/shared/renderer",
@@ -250,6 +225,31 @@
             "lintFilePatterns": [
               "libs/shared/renderer/src/**/*.ts",
               "libs/shared/renderer/src/**/*.html"
+            ]
+          }
+        }
+      }
+    },
+    "shared-dragon": {
+      "projectType": "library",
+      "root": "libs/shared/dragon",
+      "sourceRoot": "libs/shared/dragon/src",
+      "prefix": "formidable",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/shared/dragon"],
+          "options": {
+            "jestConfig": "libs/shared/dragon/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/shared/dragon/src/**/*.ts",
+              "libs/shared/dragon/src/**/*.html"
             ]
           }
         }

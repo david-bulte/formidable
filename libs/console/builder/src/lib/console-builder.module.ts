@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AkitaNgDevtools } from '@datorama/akita-ngdevtools';
 import { SharedRendererModule } from '@formidable/shared/renderer';
-import { SharedDragNDropModule } from '@formidable/shared/drag-n-drop';
+import { SharedDragonModule } from '@formidable/shared/dragon';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { environment } from '../../../../../apps/console/src/environments/environment';
 import { BuildPageComponent } from './build-page/build-page.component';
@@ -21,7 +21,7 @@ import { FormidableItemComponent } from './formidable-item/formidable-item.compo
     ReactiveFormsModule,
     // todo
     environment.production ? [] : AkitaNgDevtools.forRoot(),
-    SharedDragNDropModule,
+    SharedDragonModule,
   ],
   declarations: [
     BuildPageComponent,

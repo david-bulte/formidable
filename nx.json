@@ -32,10 +32,10 @@
     "console-builder": {
       "tags": []
     },
-    "shared-drag-n-drop": {
+    "shared-renderer": {
       "tags": []
     },
-    "shared-renderer": {
+    "shared-dragon": {
       "tags": []
     }
   }
