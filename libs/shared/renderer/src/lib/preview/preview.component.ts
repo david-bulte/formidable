@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormItem } from '@formidable/shared/builder';
+import { FormItem } from '../model';
 
 @Component({
   selector: 'formidable-preview',

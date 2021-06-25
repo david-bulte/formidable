@@ -1,6 +1,6 @@
 import { Component, HostBinding, Input, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { ControlItem } from '@formidable/shared/builder';
+import { ControlItem } from '../../model';
 
 @Component({
   selector: 'formidable-number',

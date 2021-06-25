@@ -5,7 +5,6 @@ import { AkitaNgDevtools } from '@datorama/akita-ngdevtools';
 import { SharedRendererModule } from '@formidable/shared/renderer';
 import { SharedDragonModule } from '@formidable/shared/dragon';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { environment } from '../../../../../apps/console/src/environments/environment';
 import { BuildPageComponent } from './build-page/build-page.component';
 import { CanvasComponent } from './canvas/canvas.component';
 import { PaletteItemComponent } from './palette-item/palette-item.component';
@@ -19,8 +18,6 @@ import { FormidableItemComponent } from './formidable-item/formidable-item.compo
     SharedRendererModule,
     FontAwesomeModule,
     ReactiveFormsModule,
-    // todo
-    environment.production ? [] : AkitaNgDevtools.forRoot(),
     SharedDragonModule,
   ],
   declarations: [

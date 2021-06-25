@@ -20,23 +20,23 @@
   },
   "projects": {
     "console": {
-      "tags": []
+      "tags": ["scope:console", "type:app"]
     },
     "console-e2e": {
       "tags": [],
       "implicitDependencies": ["console"]
     },
     "shared-layout": {
-      "tags": []
+      "tags": ["scope:shared", "type:ui"]
     },
     "console-builder": {
-      "tags": []
+      "tags": ["scope:console", "type:feature"]
     },
     "shared-renderer": {
-      "tags": []
+      "tags": ["scope:shared", "type:feature"]
     },
     "shared-dragon": {
-      "tags": []
+      "tags": ["scope:shared", "type:ui"]
     }
   }
 }

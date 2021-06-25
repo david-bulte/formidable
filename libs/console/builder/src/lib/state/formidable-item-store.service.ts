@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ActiveState, EntityState, EntityStore, StoreConfig, } from '@datorama/akita';
-import { FormidableItem } from '@formidable/shared/builder';
+import { FormidableItem } from '@formidable/shared/renderer';
 
 export interface FormidableItemScheme
     extends EntityState<FormidableItem>, ActiveState {

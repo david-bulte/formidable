@@ -1,11 +1,13 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
+import { AkitaNgDevtools } from '@datorama/akita-ngdevtools';
 import {
   BuildPageComponent,
   ConsoleBuilderModule,
 } from '@formidable/console/builder';
 import { SharedLayoutModule } from '@formidable/shared/layout';
+import { environment } from '../environments/environment';
 
 import { AppComponent } from './app.component';
 
@@ -26,6 +28,7 @@ import { AppComponent } from './app.component';
         pathMatch: 'full',
       },
     ]),
+    environment.production ? [] : AkitaNgDevtools.forRoot(),
   ],
   providers: [],
   bootstrap: [AppComponent],
