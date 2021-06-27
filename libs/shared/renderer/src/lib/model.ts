@@ -30,6 +30,7 @@ export class FormidableItem {
     name?: string;
     classes?: string;
     rows?: number;
+    defaultValue?: any;
   };
   validation?: {
     required?: boolean | undefined;

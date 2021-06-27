@@ -20,7 +20,7 @@ export const paletteItems: PaletteItem[] = [
         props: {
           name: 'props',
         },
-        children: [input('label', true), input('name', true), input('classes')],
+        children: [input('label', true), input('name', true), input('classes'), input('defaultValue')],
       },
       {
         type: Type.GROUP,
@@ -41,7 +41,7 @@ export const paletteItems: PaletteItem[] = [
         props: {
           name: 'props',
         },
-        children: [input('label', true), input('name', true), input('classes'), number('rows')],
+        children: [input('label', true), input('name', true), input('classes'), number('rows'), input('defaultValue')],
       },
       {
         type: Type.GROUP,
@@ -62,7 +62,7 @@ export const paletteItems: PaletteItem[] = [
         props: {
           name: 'props',
         },
-        children: [input('label', true), input('name', true), input('classes')],
+        children: [input('label', true), input('name', true), input('classes'), input('defaultValue')],
       },
       {
         type: Type.GROUP,

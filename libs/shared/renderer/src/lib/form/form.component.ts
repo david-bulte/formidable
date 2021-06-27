@@ -146,12 +146,10 @@ export class FormComponent implements OnChanges {
         });
         break;
       default:
-        // todo defaultValue
-        defaultValue = null;
         form.addControl(
           item.props.name,
           new FormControl(
-            defaultValue,
+            item.props.defaultValue,
             this.getValidators(item),
             this.getAsyncValidators(item)
           )
