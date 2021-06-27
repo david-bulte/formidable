@@ -8,7 +8,7 @@ import {
   Type,
 } from '@formidable/shared/renderer';
 import { Observable } from 'rxjs';
-import { map, switchMap } from 'rxjs/operators';
+import { distinctUntilChanged, map, switchMap } from 'rxjs/operators';
 import {
   FormidableItemState,
   FormidableItemStore,
@@ -49,13 +49,16 @@ export class FormidableItemQuery extends QueryEntity<FormidableItemState> {
   }
 
   selectActivePropertyDescriptors(): Observable<FormidableItem> {
-    return this.selectActive((active) => {
-      const paletteItem = paletteItems.find(({ type }) => type === active.type);
-      return {
-        type: Type.FORM,
-        props: {},
-        children: paletteItem?.propDescriptors ?? [],
-      };
-    });
+    return this.selectActive(({ type }) => type).pipe(
+      distinctUntilChanged(),
+      map((type) => {
+        const paletteItem = paletteItems.find((item) => item.type === type);
+        return {
+          type: Type.FORM,
+          props: {},
+          children: paletteItem?.propDescriptors ?? [],
+        };
+      })
+    );
   }
 }

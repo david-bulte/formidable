@@ -15,6 +15,7 @@ import {
   ValidatorFn,
   Validators,
 } from '@angular/forms';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { Engine } from 'json-rules-engine';
 import { Observable } from 'rxjs';
 import { fromPromise } from 'rxjs/internal-compatibility';
@@ -28,6 +29,7 @@ import {
   Type,
 } from '../model';
 
+@UntilDestroy()
 @Component({
   selector: 'formidable-form',
   template: `
@@ -67,21 +69,44 @@ export class FormComponent implements OnChanges {
   constructor() {}
 
   ngOnChanges(changes: SimpleChanges): void {
+    console.log("changes['item']", changes['item']?.currentValue);
+    // const change = changes['item'];
+    // console.log("change", change);
+    // if (change?.currentValue && change?.currentValue?.type === change?.previousValue?.type) {
+    //   this.form.reset({}, {emitEvent: false});
+    //
+    //   if (change?.currentValue?.id !== change?.previousValue?.id) {
+    //     this.form.patchValue(this.value, {emitEvent: false});
+    //   }
+    //
+    // } else {
+
+    // todo only redraw when new id?
     // todo little hack -> review
-    this.form = null;
+
+    let change = changes['item'];
+    if (change) {
+      this.form = null;
+    }
 
     setTimeout(() => {
-      let change = changes['item'];
       if (change) {
         this.form = this.createFormGroup(this.item);
+
+        // // if autosubmit
+        this.form.valueChanges
+          .pipe(untilDestroyed(this))
+          .subscribe(() => this.submitForm.emit(this.form.value));
       }
 
       change = changes['value'];
       // todo
       if (change && this.value && this.value.type !== Type.FORM) {
-        this.form.patchValue(this.value);
+        this.form.patchValue(this.value, { emitEvent: false });
       }
     });
+
+    // }
   }
 
   getValidators(item: FormidableItem) {
