@@ -12,45 +12,25 @@ import { FormidableItemService } from '../state/formidable-item.service';
   selector: 'formidable-properties',
   template: `
     <h1 class="mb-4 text-xl font-bold text-gray-700">Properties</h1>
-    <div class="flex flex-col bg-white px-6 py-4 rounded-lg shadow-md">
+    <div
+      class="flex flex-col bg-white px-6 py-4 rounded-lg shadow-md overflow-y-auto properties-container"
+    >
       <formidable-form
         [item]="props$ | async"
         [value]="active$ | async"
         (submitForm)="onSubmitForm($event)"
       ></formidable-form>
-
-      <!--        <div formGroupName="validation">-->
-      <!--          <div class="mb-4">-->
-      <!--            <label class="flex items-center">-->
-      <!--              <input-->
-      <!--                type="checkbox"-->
-      <!--                class="form-checkbox"-->
-      <!--                formControlName="required"-->
-      <!--              />-->
-      <!--              <span class="ml-2">required</span>-->
-      <!--            </label>-->
-      <!--          </div>-->
-
-      <!--          <div class="mb-4">-->
-      <!--            <label-->
-      <!--              class="block text-gray-700 text-sm font-bold mb-2"-->
-      <!--              for="custom"-->
-      <!--            >-->
-      <!--              custom-->
-      <!--            </label>-->
-      <!--            <textarea-->
-      <!--              class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"-->
-      <!--              id="custom"-->
-      <!--              [formControlName]="'custom'"-->
-      <!--            ></textarea>-->
-      <!--          </div>-->
-      <!--        </div>-->
-
-      <!--        <button type="submit">submit</button>-->
-      <!--      </form>-->
     </div>
   `,
-  styles: [``],
+  styles: [
+    `
+      /*todo w/tailwind?*/
+      .properties-container {
+        min-height: 40vh;
+        max-height: 80vh;
+      }
+    `,
+  ],
 })
 export class PropertiesComponent {
   // todo
