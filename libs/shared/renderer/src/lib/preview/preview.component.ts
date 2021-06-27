@@ -3,11 +3,22 @@ import { FormItem } from '../model';
 
 @Component({
   selector: 'formidable-preview',
-  template: ` <formidable-form [item]="item"></formidable-form> `,
+  template: `
+    <formidable-form
+      [item]="item"
+      (submitForm)="value = $event"
+    ></formidable-form>
+
+    <pre>
+        {{ value | json }}
+    </pre
+    >
+  `,
   styles: [],
 })
 export class PreviewComponent implements OnInit {
   @Input() item: FormItem;
+  value: any;
 
   constructor() {}
 

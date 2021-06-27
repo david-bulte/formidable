@@ -31,6 +31,8 @@ export class FormidableItem {
     classes?: string;
     rows?: number;
     defaultValue?: any;
+    // todo
+    autosubmit?: boolean;
   };
   validation?: {
     required?: boolean | undefined;

@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Form } from '@angular/forms';
-import { combineQueries, ID, QueryEntity } from '@datorama/akita';
+import { ID, QueryEntity } from '@datorama/akita';
 import {
   FormidableItem,
   FormItem,
@@ -49,13 +48,14 @@ export class FormidableItemQuery extends QueryEntity<FormidableItemState> {
   }
 
   selectActivePropertyDescriptors(): Observable<FormidableItem> {
+    const form = paletteItems.find((item) => item.type === Type.FORM);
     return this.selectActive(({ type }) => type).pipe(
       distinctUntilChanged(),
       map((type) => {
         const paletteItem = paletteItems.find((item) => item.type === type);
         return {
-          type: Type.FORM,
-          props: {},
+          ...form,
+          props: { ...form.props, autosubmit: true }, // todo => form underneath propdescriptors
           children: paletteItem?.propDescriptors ?? [],
         };
       })

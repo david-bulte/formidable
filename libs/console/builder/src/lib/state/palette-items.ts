@@ -2,6 +2,19 @@ import { PaletteItem, Type } from '@formidable/shared/renderer';
 
 export const paletteItems: PaletteItem[] = [
   {
+    type: Type.FORM,
+    props: {},
+    propDescriptors: [
+      {
+        type: Type.GROUP,
+        props: {
+          name: 'props',
+        },
+        children: [checkbox('autosubmit', false, { defaultValue: true })],
+      },
+    ],
+  },
+  {
     type: Type.ROW,
     props: {},
     propDescriptors: [input('classes')],
@@ -20,7 +33,12 @@ export const paletteItems: PaletteItem[] = [
         props: {
           name: 'props',
         },
-        children: [input('label', true), input('name', true), input('classes'), input('defaultValue')],
+        children: [
+          input('label', true),
+          input('name', true),
+          input('classes'),
+          input('defaultValue'),
+        ],
       },
       {
         type: Type.GROUP,
@@ -28,7 +46,7 @@ export const paletteItems: PaletteItem[] = [
           name: 'validation',
           label: 'validation',
         },
-        children: [checkbox('required'), textarea('custom', false, {rows: 4})],
+        children: [checkbox('required'), textarea('custom', false)],
       },
     ],
   },
@@ -41,7 +59,13 @@ export const paletteItems: PaletteItem[] = [
         props: {
           name: 'props',
         },
-        children: [input('label', true), input('name', true), input('classes'), number('rows'), input('defaultValue')],
+        children: [
+          input('label', true),
+          input('name', true),
+          input('classes'),
+          number('rows'),
+          input('defaultValue'),
+        ],
       },
       {
         type: Type.GROUP,
@@ -49,7 +73,7 @@ export const paletteItems: PaletteItem[] = [
           name: 'validation',
           label: 'validation',
         },
-        children: [checkbox('required'), textarea('custom', false, {rows: 4})],
+        children: [checkbox('required'), textarea('custom', false)],
       },
     ],
   },
@@ -62,7 +86,12 @@ export const paletteItems: PaletteItem[] = [
         props: {
           name: 'props',
         },
-        children: [input('label', true), input('name', true), input('classes'), number('defaultValue')],
+        children: [
+          input('label', true),
+          input('name', true),
+          input('classes'),
+          number('defaultValue'),
+        ],
       },
       {
         type: Type.GROUP,
@@ -102,12 +131,13 @@ function number(labelName, required = false) {
   };
 }
 
-function checkbox(labelName, required = false) {
+function checkbox(labelName, required = false, defaultProps = {}) {
   return {
     type: Type.CHECKBOX,
     props: {
       label: labelName,
       name: labelName,
+      ...defaultProps,
     },
     validation: {
       required,
@@ -121,7 +151,7 @@ function textarea(labelName, required = false, defaultProps = {}) {
     props: {
       label: labelName,
       name: labelName,
-      ...defaultProps
+      ...defaultProps,
     },
     validation: {
       required,

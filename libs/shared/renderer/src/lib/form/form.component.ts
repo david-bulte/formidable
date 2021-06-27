@@ -20,14 +20,7 @@ import { Engine } from 'json-rules-engine';
 import { Observable } from 'rxjs';
 import { fromPromise } from 'rxjs/internal-compatibility';
 import { map } from 'rxjs/operators';
-import {
-  FormidableItem,
-  FormItem,
-  isFormItem,
-  isLayoutItem,
-  LayoutItem,
-  Type,
-} from '../model';
+import { FormidableItem, FormItem, LayoutItem, Type } from '../model';
 
 @UntilDestroy()
 @Component({
@@ -43,6 +36,7 @@ import {
       </ng-container>
 
       <button
+        *ngIf="!autosubmit"
         [disabled]="form.invalid"
         class="h-10 px-5 m-2 text-indigo-100 transition-colors duration-150 bg-indigo-700 rounded-lg focus:shadow-outline hover:bg-indigo-800"
         type="submit"
@@ -68,13 +62,21 @@ export class FormComponent implements OnChanges {
 
   constructor() {}
 
+  get autosubmit() {
+    return this.item?.props?.autosubmit;
+  }
+
   ngOnChanges(changes: SimpleChanges): void {
     let change = changes['item'];
     if (change) {
       this.form = this.createFormGroup(this.item);
-      this.form.valueChanges
-        .pipe(untilDestroyed(this))
-        .subscribe(() => this.submitForm.emit(this.form.value));
+      if (this.autosubmit) {
+        this.form.valueChanges
+          .pipe(untilDestroyed(this))
+          .subscribe(($event) => {
+            this.submitForm.emit(this.form.value);
+          });
+      }
     }
 
     change = changes['value'];
@@ -115,7 +117,9 @@ export class FormComponent implements OnChanges {
   }
 
   onSubmit() {
-    this.submitForm.emit(this.form.value);
+    if (!this.autosubmit) {
+      this.submitForm.emit(this.form.value);
+    }
   }
 
   private createFormGroup(item: FormItem | LayoutItem) {
@@ -125,7 +129,7 @@ export class FormComponent implements OnChanges {
   }
 
   private addControl(form: FormGroup, item: FormidableItem) {
-    let formGroup, defaultValue;
+    let formGroup;
     switch (item.type) {
       case Type.FORM:
       case Type.ROW:

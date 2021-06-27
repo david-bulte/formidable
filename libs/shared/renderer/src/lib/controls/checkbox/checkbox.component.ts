@@ -1,4 +1,4 @@
-import { Component, HostBinding, Input, OnInit } from '@angular/core';
+import { Component, HostBinding, Input } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { ControlItem } from '@formidable/shared/renderer';
 
@@ -26,11 +26,9 @@ import { ControlItem } from '@formidable/shared/renderer';
     `,
   ],
 })
-export class CheckboxComponent implements OnInit {
+export class CheckboxComponent {
   @Input() parent: FormGroup;
   @Input() item: ControlItem;
-
-  id: string;
 
   constructor() {}
 
@@ -39,7 +37,4 @@ export class CheckboxComponent implements OnInit {
     return this.item?.props?.classes;
   }
 
-  ngOnInit(): void {
-    this.id = this.item.props.name + '_' + Math.random();
-  }
 }
