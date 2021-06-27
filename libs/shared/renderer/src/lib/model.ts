@@ -16,6 +16,7 @@ export enum Type {
   INPUT = 'input',
   NUMBER = 'number',
   ROW = 'row',
+  GROUP = 'group',
   COL = 'col',
 }
 
@@ -32,6 +33,7 @@ export class FormidableItem {
     custom?: string;
   };
   parentId?: ID;
+  children?: FormidableItem[];
 }
 
 export class FormItem extends FormidableItem {

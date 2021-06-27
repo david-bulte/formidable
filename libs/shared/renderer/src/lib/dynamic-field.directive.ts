@@ -7,6 +7,7 @@ import {
   ViewContainerRef,
 } from '@angular/core';
 import { FormGroup } from '@angular/forms';
+import { GroupComponent } from './controls/group/group.component';
 import { InputComponent } from './controls/input/input.component';
 import { LayoutComponent } from './controls/layout/layout.component';
 import { NumberComponent } from './controls/number/number.component';
@@ -35,7 +36,7 @@ export class DynamicFieldDirective implements OnInit {
 
     // todo lazy load
     const component: ComponentRef<
-      InputComponent | LayoutComponent | NumberComponent
+      InputComponent | LayoutComponent | NumberComponent | GroupComponent
     > = this.container.createComponent(componentFactory);
     component.instance.item = this.item;
     component.instance.parent = this.group;
@@ -48,6 +49,8 @@ export class DynamicFieldDirective implements OnInit {
         return LayoutComponent;
       case Type.NUMBER:
         return NumberComponent;
+      case Type.GROUP:
+        return GroupComponent;
       default:
         return InputComponent;
     }

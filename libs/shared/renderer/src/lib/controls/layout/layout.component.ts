@@ -18,12 +18,12 @@ export class LayoutComponent implements OnInit {
   @Input() parent: FormGroup;
   @Input() item: LayoutItem;
 
+  constructor() {}
+
   @HostBinding('class')
   public get classes() {
     return this.item?.props?.classes;
   }
-
-  constructor() {}
 
   ngOnInit(): void {}
 }

@@ -79,7 +79,8 @@ export class FormComponent implements OnChanges {
       change = changes['value'];
       // todo
       if (change && this.value && this.value.type !== Type.FORM) {
-        this.form.setValue(this.value.props);
+        console.log('this.value>>>>>>>>>>', this.value);
+        this.form.patchValue(this.value);
       }
     });
   }
@@ -126,21 +127,64 @@ export class FormComponent implements OnChanges {
   }
 
   private addControl(form: FormGroup, item: FormidableItem) {
-    if (isFormItem(item) || isLayoutItem(item)) {
-      item.children.forEach((item) => {
-        this.addControl(form, item);
-      });
-    } else {
-      // todo defaultValue
-      const defaultValue = null;
-      form.addControl(
-        item.props.name,
-        new FormControl(
-          defaultValue,
+    let formGroup, defaultValue;
+    switch (item.type) {
+      case Type.FORM:
+      case Type.ROW:
+      case Type.COL:
+        item.children.forEach((item) => {
+          this.addControl(form, item);
+        });
+        break;
+      case Type.GROUP:
+        formGroup = new FormGroup(
+          {},
           this.getValidators(item),
           this.getAsyncValidators(item)
-        )
-      );
+        );
+        form.addControl(item.props.name, formGroup);
+        item.children.forEach((child) => {
+          this.addControl(formGroup, child);
+        });
+        break;
+      default:
+        // todo defaultValue
+        defaultValue = null;
+        form.addControl(
+          item.props.name,
+          new FormControl(
+            defaultValue,
+            this.getValidators(item),
+            this.getAsyncValidators(item)
+          )
+        );
     }
+
+    // if (isFormItem(item) || isLayoutItem(item)) {
+    //   item.children.forEach((item) => {
+    //     this.addControl(form, item);
+    //   });
+    // } else if (item.type === Type.GROUP) {
+    //   const formGroup = new FormGroup(
+    //     {},
+    //     this.getValidators(item),
+    //     this.getAsyncValidators(item)
+    //   );
+    //   form.addControl(item.props.name, formGroup);
+    //   item.children.forEach((item) => {
+    //     this.addControl(formGroup, item);
+    //   });
+    // } else {
+    //   // todo defaultValue
+    //   const defaultValue = null;
+    //   form.addControl(
+    //     item.props.name,
+    //     new FormControl(
+    //       defaultValue,
+    //       this.getValidators(item),
+    //       this.getAsyncValidators(item)
+    //     )
+    //   );
+    // }
   }
 }

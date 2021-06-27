@@ -66,7 +66,7 @@ export class PropertiesComponent {
     this.formidableItemService.update(
       // todo props => group
       this.formidableItemQuery.getActiveId(),
-      { props: value } as FormidableItem
+      value
     );
   }
 }
