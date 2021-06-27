@@ -28,7 +28,7 @@ export const paletteItems: PaletteItem[] = [
           name: 'validation',
           label: 'validation',
         },
-        children: [checkbox('required'), textarea('custom')],
+        children: [checkbox('required'), textarea('custom', false, {rows: 4})],
       },
     ],
   },
@@ -49,7 +49,7 @@ export const paletteItems: PaletteItem[] = [
           name: 'validation',
           label: 'validation',
         },
-        children: [checkbox('required'), textarea('custom')],
+        children: [checkbox('required'), textarea('custom', false, {rows: 4})],
       },
     ],
   },
@@ -115,12 +115,13 @@ function checkbox(labelName, required = false) {
   };
 }
 
-function textarea(labelName, required = false) {
+function textarea(labelName, required = false, defaultProps = {}) {
   return {
     type: Type.TEXTAREA,
     props: {
       label: labelName,
       name: labelName,
+      ...defaultProps
     },
     validation: {
       required,

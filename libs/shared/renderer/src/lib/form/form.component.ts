@@ -79,7 +79,6 @@ export class FormComponent implements OnChanges {
       change = changes['value'];
       // todo
       if (change && this.value && this.value.type !== Type.FORM) {
-        console.log('this.value>>>>>>>>>>', this.value);
         this.form.patchValue(this.value);
       }
     });
@@ -116,7 +115,6 @@ export class FormComponent implements OnChanges {
   }
 
   onSubmit() {
-    console.log('this.form.value', this.form.value);
     this.submitForm.emit(this.form.value);
   }
 
@@ -159,32 +157,5 @@ export class FormComponent implements OnChanges {
           )
         );
     }
-
-    // if (isFormItem(item) || isLayoutItem(item)) {
-    //   item.children.forEach((item) => {
-    //     this.addControl(form, item);
-    //   });
-    // } else if (item.type === Type.GROUP) {
-    //   const formGroup = new FormGroup(
-    //     {},
-    //     this.getValidators(item),
-    //     this.getAsyncValidators(item)
-    //   );
-    //   form.addControl(item.props.name, formGroup);
-    //   item.children.forEach((item) => {
-    //     this.addControl(formGroup, item);
-    //   });
-    // } else {
-    //   // todo defaultValue
-    //   const defaultValue = null;
-    //   form.addControl(
-    //     item.props.name,
-    //     new FormControl(
-    //       defaultValue,
-    //       this.getValidators(item),
-    //       this.getAsyncValidators(item)
-    //     )
-    //   );
-    // }
   }
 }
