@@ -33,7 +33,7 @@ import {
 @Component({
   selector: 'formidable-form',
   template: `
-    <form [formGroup]="form" (ngSubmit)="onSubmit()" *ngIf="form">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
       <ng-container
         *ngFor="let child of item.children"
         formidableDynamicField
@@ -69,44 +69,19 @@ export class FormComponent implements OnChanges {
   constructor() {}
 
   ngOnChanges(changes: SimpleChanges): void {
-    console.log("changes['item']", changes['item']?.currentValue);
-    // const change = changes['item'];
-    // console.log("change", change);
-    // if (change?.currentValue && change?.currentValue?.type === change?.previousValue?.type) {
-    //   this.form.reset({}, {emitEvent: false});
-    //
-    //   if (change?.currentValue?.id !== change?.previousValue?.id) {
-    //     this.form.patchValue(this.value, {emitEvent: false});
-    //   }
-    //
-    // } else {
-
-    // todo only redraw when new id?
-    // todo little hack -> review
-
     let change = changes['item'];
     if (change) {
-      this.form = null;
+      this.form = this.createFormGroup(this.item);
+      this.form.valueChanges
+        .pipe(untilDestroyed(this))
+        .subscribe(() => this.submitForm.emit(this.form.value));
     }
 
-    setTimeout(() => {
-      if (change) {
-        this.form = this.createFormGroup(this.item);
-
-        // // if autosubmit
-        this.form.valueChanges
-          .pipe(untilDestroyed(this))
-          .subscribe(() => this.submitForm.emit(this.form.value));
-      }
-
-      change = changes['value'];
-      // todo
-      if (change && this.value && this.value.type !== Type.FORM) {
-        this.form.patchValue(this.value, { emitEvent: false });
-      }
-    });
-
-    // }
+    change = changes['value'];
+    // todo
+    if (change && this.value && this.value.type !== Type.FORM) {
+      this.form.patchValue(this.value, { emitEvent: false });
+    }
   }
 
   getValidators(item: FormidableItem) {
