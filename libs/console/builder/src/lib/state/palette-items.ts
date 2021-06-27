@@ -115,7 +115,12 @@ export const paletteItems: PaletteItem[] = [
           name: 'validation',
           label: 'validation',
         },
-        children: [checkbox('required'), textarea('custom')],
+        children: [
+          checkbox('required'),
+          number('min'),
+          number('max'),
+          textarea('custom'),
+        ],
       },
     ],
   },

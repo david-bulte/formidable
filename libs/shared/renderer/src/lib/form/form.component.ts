@@ -88,8 +88,14 @@ export class FormComponent implements OnChanges {
 
   getValidators(item: FormidableItem) {
     const validators: ValidatorFn[] = [];
-    if (item.validation?.required) {
+    if (item.validation?.required !== undefined) {
       validators.push(Validators.required);
+    }
+    if (item.validation?.min !== undefined) {
+      validators.push(Validators.min(item.validation?.min));
+    }
+    if (item.validation?.max !== undefined) {
+      validators.push(Validators.max(item.validation?.max));
     }
     return validators;
   }

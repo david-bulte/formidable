@@ -36,6 +36,8 @@ export class FormidableItem {
   };
   validation?: {
     required?: boolean | undefined;
+    min?: number;
+    max?: number;
     custom?: string;
   };
   parentId?: ID;
