@@ -62,7 +62,7 @@ export const paletteItems: PaletteItem[] = [
         props: {
           name: 'props',
         },
-        children: [input('label', true), input('name', true), input('classes'), input('defaultValue')],
+        children: [input('label', true), input('name', true), input('classes'), number('defaultValue')],
       },
       {
         type: Type.GROUP,
