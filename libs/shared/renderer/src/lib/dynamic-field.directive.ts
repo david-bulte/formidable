@@ -7,10 +7,12 @@ import {
   ViewContainerRef,
 } from '@angular/core';
 import { FormGroup } from '@angular/forms';
+import { CheckboxComponent } from './controls/checkbox/checkbox.component';
 import { GroupComponent } from './controls/group/group.component';
 import { InputComponent } from './controls/input/input.component';
 import { LayoutComponent } from './controls/layout/layout.component';
 import { NumberComponent } from './controls/number/number.component';
+import { TextareaComponent } from './controls/textarea/textarea.component';
 import { FormidableItem, Type } from './model';
 
 @Directive({
@@ -36,7 +38,12 @@ export class DynamicFieldDirective implements OnInit {
 
     // todo lazy load
     const component: ComponentRef<
-      InputComponent | LayoutComponent | NumberComponent | GroupComponent
+      | InputComponent
+      | LayoutComponent
+      | NumberComponent
+      | GroupComponent
+      | CheckboxComponent
+      | TextareaComponent
     > = this.container.createComponent(componentFactory);
     component.instance.item = this.item;
     component.instance.parent = this.group;
@@ -51,6 +58,10 @@ export class DynamicFieldDirective implements OnInit {
         return NumberComponent;
       case Type.GROUP:
         return GroupComponent;
+      case Type.CHECKBOX:
+        return CheckboxComponent;
+      case Type.TEXTAREA:
+        return TextareaComponent;
       default:
         return InputComponent;
     }

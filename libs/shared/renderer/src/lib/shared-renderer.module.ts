@@ -8,6 +8,8 @@ import { FormComponent } from './form/form.component';
 import { PreviewComponent } from './preview/preview.component';
 import { NumberComponent } from './controls/number/number.component';
 import { GroupComponent } from './controls/group/group.component';
+import { CheckboxComponent } from './controls/checkbox/checkbox.component';
+import { TextareaComponent } from './controls/textarea/textarea.component';
 
 @NgModule({
   imports: [CommonModule, ReactiveFormsModule],
@@ -19,6 +21,8 @@ import { GroupComponent } from './controls/group/group.component';
     LayoutComponent,
     NumberComponent,
     GroupComponent,
+    CheckboxComponent,
+    TextareaComponent,
   ],
   exports: [PreviewComponent, FormComponent],
 })

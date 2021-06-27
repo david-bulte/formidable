@@ -4,38 +4,12 @@ export const paletteItems: PaletteItem[] = [
   {
     type: Type.ROW,
     props: {},
-    propDescriptors: [
-      {
-        type: Type.INPUT,
-        props: {
-          label: 'classes',
-          name: 'classes',
-        },
-      },
-    ],
+    propDescriptors: [input('classes')],
   },
   {
     type: Type.GROUP,
     props: {},
-    propDescriptors: [
-      {
-        type: Type.INPUT,
-        props: {
-          label: 'name',
-          name: 'name',
-        },
-        validation: {
-          required: true,
-        },
-      },
-      {
-        type: Type.INPUT,
-        props: {
-          label: 'label',
-          name: 'label',
-        },
-      },
-    ],
+    propDescriptors: [input('name', true), input('label')],
   },
   {
     type: Type.INPUT,
@@ -46,58 +20,36 @@ export const paletteItems: PaletteItem[] = [
         props: {
           name: 'props',
         },
-        children: [
-          {
-            type: Type.INPUT,
-            props: {
-              label: 'label',
-              name: 'label',
-            },
-            validation: {
-              required: true,
-            },
-          },
-          {
-            type: Type.INPUT,
-            props: {
-              label: 'name',
-              name: 'name',
-            },
-            validation: {
-              required: true,
-            },
-          },
-          {
-            type: Type.INPUT,
-            props: {
-              label: 'classes',
-              name: 'classes',
-            },
-          },
-        ],
+        children: [input('label', true), input('name', true), input('classes')],
       },
       {
         type: Type.GROUP,
         props: {
           name: 'validation',
-          label: 'validation'
+          label: 'validation',
         },
-        children: [
-          {
-            type: Type.INPUT,
-            props: {
-              label: 'required',
-              name: 'required',
-            },
-          },
-          // {
-          //   type: Type.TEXTAREA,
-          //   props: {
-          //     label: 'custom',
-          //     name: 'custom',
-          //   },
-          // },
-        ],
+        children: [checkbox('required'), textarea('custom')],
+      },
+    ],
+  },
+  {
+    type: Type.TEXTAREA,
+    props: {},
+    propDescriptors: [
+      {
+        type: Type.GROUP,
+        props: {
+          name: 'props',
+        },
+        children: [input('label', true), input('name', true), input('classes'), number('rows')],
+      },
+      {
+        type: Type.GROUP,
+        props: {
+          name: 'validation',
+          label: 'validation',
+        },
+        children: [checkbox('required'), textarea('custom')],
       },
     ],
   },
@@ -106,68 +58,72 @@ export const paletteItems: PaletteItem[] = [
     props: {},
     propDescriptors: [
       {
-        type: Type.INPUT,
+        type: Type.GROUP,
         props: {
-          label: 'label',
-          name: 'label',
+          name: 'props',
         },
-        validation: {
-          required: true,
-        },
+        children: [input('label', true), input('name', true), input('classes')],
       },
       {
-        type: Type.INPUT,
+        type: Type.GROUP,
         props: {
-          label: 'name',
-          name: 'name',
+          name: 'validation',
+          label: 'validation',
         },
-        validation: {
-          required: true,
-        },
+        children: [checkbox('required'), textarea('custom')],
       },
-      {
-        type: Type.INPUT,
-        props: {
-          label: 'classes',
-          name: 'classes',
-        },
-      },
-      // {
-      //   type: Type.GROUP,
-      //   props: {
-      //     name: 'validation',
-      //   },
-      //   children: [
-      //     {
-      //       type: Type.CHECKBOX,
-      //       props: {
-      //         label: 'required',
-      //         name: 'required',
-      //       },
-      //     },
-      //     {
-      //       type: Type.NUMBER,
-      //       props: {
-      //         label: 'min',
-      //         name: 'min',
-      //       },
-      //     },
-      //     {
-      //       type: Type.NUMBER,
-      //       props: {
-      //         label: 'max',
-      //         name: 'max',
-      //       },
-      //     },
-      //     {
-      //       type: Type.TEXTAREA,
-      //       props: {
-      //         label: 'custom',
-      //         name: 'custom',
-      //       },
-      //     },
-      //   ],
-      // },
     ],
   },
 ];
+
+function input(labelName, required = false) {
+  return {
+    type: Type.INPUT,
+    props: {
+      label: labelName,
+      name: labelName,
+    },
+    validation: {
+      required,
+    },
+  };
+}
+
+function number(labelName, required = false) {
+  return {
+    type: Type.NUMBER,
+    props: {
+      label: labelName,
+      name: labelName,
+    },
+    validation: {
+      required,
+    },
+  };
+}
+
+function checkbox(labelName, required = false) {
+  return {
+    type: Type.CHECKBOX,
+    props: {
+      label: labelName,
+      name: labelName,
+    },
+    validation: {
+      required,
+    },
+  };
+}
+
+function textarea(labelName, required = false) {
+  return {
+    type: Type.TEXTAREA,
+    props: {
+      label: labelName,
+      name: labelName,
+    },
+    validation: {
+      required,
+    },
+  };
+}

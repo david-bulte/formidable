@@ -12,12 +12,14 @@ export class PaletteItem {
 }
 
 export enum Type {
+  CHECKBOX = 'checkbox',
+  COL = 'col',
   FORM = 'form',
+  GROUP = 'group',
   INPUT = 'input',
   NUMBER = 'number',
   ROW = 'row',
-  GROUP = 'group',
-  COL = 'col',
+  TEXTAREA = 'textarea',
 }
 
 export class FormidableItem {
@@ -27,6 +29,7 @@ export class FormidableItem {
     label?: string;
     name?: string;
     classes?: string;
+    rows?: number;
   };
   validation?: {
     required?: boolean | undefined;
