@@ -5,15 +5,18 @@ import {
   FormidableItem,
   FormItem,
   isLayoutItem,
+  Type,
 } from '@formidable/shared/renderer';
+import { Observable } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
 import {
-  FormidableItemScheme,
+  FormidableItemState,
   FormidableItemStore,
 } from './formidable-item-store.service';
+import { paletteItems } from './palette-items';
 
 @Injectable({ providedIn: 'root' })
-export class FormidableItemQuery extends QueryEntity<FormidableItemScheme> {
+export class FormidableItemQuery extends QueryEntity<FormidableItemState> {
   rootChildren$ = this.select('root').pipe(
     switchMap((id) => this.selectEntity(id))
   );
@@ -43,5 +46,16 @@ export class FormidableItemQuery extends QueryEntity<FormidableItemScheme> {
 
   constructor(protected store: FormidableItemStore) {
     super(store);
+  }
+
+  selectActivePropertyDescriptors(): Observable<FormidableItem> {
+    return this.selectActive((active) => {
+      const paletteItem = paletteItems.find(({ type }) => type === active.type);
+      return {
+        type: Type.FORM,
+        props: {},
+        children: paletteItem?.propDescriptors ?? [],
+      };
+    });
   }
 }

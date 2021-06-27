@@ -1,4 +1,11 @@
-import { Component, Input, OnInit } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  Output,
+  SimpleChanges,
+} from '@angular/core';
 import {
   AbstractControl,
   AsyncValidatorFn,
@@ -18,12 +25,13 @@ import {
   isFormItem,
   isLayoutItem,
   LayoutItem,
+  Type,
 } from '../model';
 
 @Component({
   selector: 'formidable-form',
   template: `
-    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" *ngIf="form">
       <ng-container
         *ngFor="let child of item.children"
         formidableDynamicField
@@ -40,8 +48,6 @@ import {
         Submit
       </button>
     </form>
-
-    <div>value: {{ form.value | json }}</div>
   `,
   styles: [
     `
@@ -51,15 +57,31 @@ import {
     `,
   ],
 })
-export class FormComponent implements OnInit {
+export class FormComponent implements OnChanges {
   @Input() item: FormItem;
+  @Input() value: FormidableItem;
+  @Output() submitForm = new EventEmitter();
 
   form: FormGroup;
 
   constructor() {}
 
-  ngOnInit(): void {
-    this.form = this.createFormGroup(this.item);
+  ngOnChanges(changes: SimpleChanges): void {
+    // todo little hack -> review
+    this.form = null;
+
+    setTimeout(() => {
+      let change = changes['item'];
+      if (change) {
+        this.form = this.createFormGroup(this.item);
+      }
+
+      change = changes['value'];
+      // todo
+      if (change && this.value && this.value.type !== Type.FORM) {
+        this.form.setValue(this.value.props);
+      }
+    });
   }
 
   getValidators(item: FormidableItem) {
@@ -93,7 +115,8 @@ export class FormComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log('submitting', this.form.value);
+    console.log('this.form.value', this.form.value);
+    this.submitForm.emit(this.form.value);
   }
 
   private createFormGroup(item: FormItem | LayoutItem) {

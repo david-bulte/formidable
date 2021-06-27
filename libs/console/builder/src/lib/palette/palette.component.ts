@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PaletteItem, Type } from '@formidable/shared/renderer';
+import { paletteItems } from '../state/palette-items';
 
 @Component({
   selector: 'formidable-palette',
@@ -25,11 +26,8 @@ import { PaletteItem, Type } from '@formidable/shared/renderer';
   ],
 })
 export class PaletteComponent implements OnInit {
-  items: PaletteItem[] = [
-    { type: Type.ROW, props: {}, propDescriptors: [] },
-    { type: Type.INPUT, props: {}, propDescriptors: [] },
-    { type: Type.NUMBER, props: {}, propDescriptors: [] },
-  ];
+
+  items = paletteItems;
 
   constructor() {}
 

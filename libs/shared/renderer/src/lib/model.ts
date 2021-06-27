@@ -8,7 +8,7 @@ export class PaletteItem {
     label?: string;
     info?: string;
   };
-  propDescriptors?: PropDescriptor[];
+  propDescriptors?: FormidableItem[];
 }
 
 export enum Type {
@@ -19,8 +19,6 @@ export enum Type {
   COL = 'col',
 }
 
-export interface PropDescriptor {}
-
 export class FormidableItem {
   id?: ID;
   type: Type;
@@ -29,9 +27,9 @@ export class FormidableItem {
     name?: string;
     classes?: string;
   };
-  validation: {
-    required: boolean | undefined;
-    custom: string;
+  validation?: {
+    required?: boolean | undefined;
+    custom?: string;
   };
   parentId?: ID;
 }
