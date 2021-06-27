@@ -35,7 +35,8 @@ export class FormidableItemQuery extends QueryEntity<FormidableItemState> {
     return this.getAll()
       .filter((item) => item.parentId === parentId)
       .map((item) => {
-        if (isLayoutItem(item)) {
+        // todo
+        if ([Type.ROW, Type.COL, Type.GROUP].indexOf(item.type) > -1) {
           return { ...item, children: this.getChildren(item.id) };
         } else {
           return item;

@@ -10,19 +10,35 @@ export const paletteItems: PaletteItem[] = [
         props: {
           name: 'props',
         },
-        children: [checkbox('autosubmit', false, { defaultValue: true })],
+        children: [checkbox('autosubmit', false, { defaultValue: false })],
       },
     ],
   },
   {
     type: Type.ROW,
     props: {},
-    propDescriptors: [input('classes')],
+    propDescriptors: [
+      {
+        type: Type.GROUP,
+        props: {
+          name: 'props',
+        },
+        children: [input('classes')],
+      },
+    ],
   },
   {
     type: Type.GROUP,
     props: {},
-    propDescriptors: [input('name', true), input('label')],
+    propDescriptors: [
+      {
+        type: Type.GROUP,
+        props: {
+          name: 'props',
+        },
+        children: [input('name', true), input('label')],
+      },
+    ],
   },
   {
     type: Type.INPUT,

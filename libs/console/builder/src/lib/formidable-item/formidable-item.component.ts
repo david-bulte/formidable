@@ -35,12 +35,13 @@ import { FormidableItemService } from '../state/formidable-item.service';
           *ngFor="let child of children$ | async"
         ></formidable-item>
 
+<!--        todo-->
         <div
           class="drop-zone w-full h-auto bg-blue-100 pb-5"
           style="min-height: 3rem;"
           [dragonDroppable]="isDroppable"
           (dragonDrop)="onDrop($event)"
-          *ngIf="isDroppable && (item.type === 'row' || item.type === 'form')"
+          *ngIf="isDroppable && (item.type === 'row' || item.type === 'form' || item.type === 'group')"
         ></div>
       </div>
     </div>
@@ -95,6 +96,7 @@ export class FormidableItemComponent implements OnInit {
     });
   }
 
+  // todo group
   onDrop(dragonEvent: { data: FormidableItem }) {
     this.formidableItemService.add({
       ...dragonEvent.data,

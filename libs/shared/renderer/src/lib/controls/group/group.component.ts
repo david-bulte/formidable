@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { LayoutItem } from '@formidable/shared/renderer';
 
@@ -13,7 +13,7 @@ import { LayoutItem } from '@formidable/shared/renderer';
       <ng-container [formGroup]="parent">
         <ng-container [formGroupName]="item.props.name">
           <ng-container
-            *ngFor="let child of item.children"
+            *ngFor="let child of item?.children"
             formidableDynamicField
             [item]="child"
             [group]="parent.get(item.props.name)"
