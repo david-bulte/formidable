@@ -35,6 +35,7 @@ export class FormidableItem {
     // todo
     autosubmit?: boolean;
     tooltip?: string;
+    required?: boolean;
   };
   validation?: {
     required?: boolean | undefined;
