@@ -12,6 +12,7 @@ import { NumberComponent } from './controls/number/number.component';
 import { GroupComponent } from './controls/group/group.component';
 import { CheckboxComponent } from './controls/checkbox/checkbox.component';
 import { TextareaComponent } from './controls/textarea/textarea.component';
+import { LabelComponent } from './controls/label/label.component';
 
 @NgModule({
   imports: [CommonModule, ReactiveFormsModule, FontAwesomeModule, TippyModule],
@@ -25,6 +26,7 @@ import { TextareaComponent } from './controls/textarea/textarea.component';
     GroupComponent,
     CheckboxComponent,
     TextareaComponent,
+    LabelComponent,
   ],
   exports: [PreviewComponent, FormComponent],
 })

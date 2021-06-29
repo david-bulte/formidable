@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { guid, ID } from '@datorama/akita';
+import { applyTransaction, guid, ID } from '@datorama/akita';
 import { ControlItem, FormidableItem, Type } from '@formidable/shared/renderer';
 import { FormidableItemStore } from './formidable-item-store.service';
 
@@ -17,20 +17,11 @@ export class FormidableItemService {
   }
 
   add(item: FormidableItem) {
-    const controlItem: ControlItem = {
-      id: guid(),
-      props: { label: null, name: null, classes: null },
-      validation: {
-        required: false,
-        custom:
-          '{"conditions":{"all":[{"fact":"age","operator":"equal","value":"10"}]},"event":{"type":"message","params":{"data":"green"}}}',
-      },
-      type: item.type,
-      parentId: item.parentId,
-    };
-
-    this.store.add(controlItem);
-    this.store.setActive(controlItem.id);
+    const id = guid();
+    applyTransaction(() => {
+      this.store.add({ ...item, id });
+      this.store.setActive(id);
+    });
   }
 
   setActive(id: ID) {
@@ -38,6 +29,9 @@ export class FormidableItemService {
   }
 
   update(id: ID, item: FormidableItem) {
-    this.store.update(id, { props: item.props, validation: item.validation || {} });
+    this.store.update(id, {
+      props: item.props,
+      validation: item.validation || {},
+    });
   }
 }

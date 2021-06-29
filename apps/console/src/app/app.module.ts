@@ -2,9 +2,16 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 import { AkitaNgDevtools } from '@datorama/akita-ngdevtools';
-import { BuildPageComponent, ConsoleBuilderModule, } from '@formidable/console/builder';
+import {
+  BuildPageComponent,
+  ConsoleBuilderModule,
+} from '@formidable/console/builder';
 import { SharedLayoutModule } from '@formidable/shared/layout';
-import { popperVariation, TippyModule, tooltipVariation } from '@ngneat/helipopper';
+import {
+  popperVariation,
+  TippyModule,
+  tooltipVariation,
+} from '@ngneat/helipopper';
 import { environment } from '../environments/environment';
 
 import { AppComponent } from './app.component';
@@ -27,6 +34,7 @@ import { AppComponent } from './app.component';
       },
     ]),
     environment.production ? [] : AkitaNgDevtools.forRoot(),
+    // todo make this more modular
     TippyModule.forRoot({
       defaultVariation: 'tooltip',
       variations: {

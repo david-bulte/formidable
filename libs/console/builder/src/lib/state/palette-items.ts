@@ -1,5 +1,10 @@
 import { PaletteItem, Type } from '@formidable/shared/renderer';
 
+const tooltips = {
+  customValidation:
+    'for example: {"conditions":{"all":[{"fact":"age","operator":"equal","value":"10"}]},"event":{"type":"message","params":{"data":"green"}}}',
+};
+
 export const paletteItems: PaletteItem[] = [
   {
     type: Type.FORM,
@@ -62,7 +67,10 @@ export const paletteItems: PaletteItem[] = [
           name: 'validation',
           label: 'validation',
         },
-        children: [checkbox('required'), textarea('custom', false)],
+        children: [
+          checkbox('required'),
+          textarea('custom', false, {tooltip: tooltips.customValidation}),
+        ],
       },
     ],
   },
@@ -89,7 +97,10 @@ export const paletteItems: PaletteItem[] = [
           name: 'validation',
           label: 'validation',
         },
-        children: [checkbox('required'), textarea('custom', false)],
+        children: [
+          checkbox('required'),
+          textarea('custom', false, {tooltip: tooltips.customValidation}),
+        ],
       },
     ],
   },
@@ -119,19 +130,20 @@ export const paletteItems: PaletteItem[] = [
           checkbox('required'),
           number('min'),
           number('max'),
-          textarea('custom'),
+          textarea('custom', false, {tooltip: tooltips.customValidation}),
         ],
       },
     ],
   },
 ];
 
-function input(labelName, required = false) {
+function input(labelName, required = false, defaultProps = {}) {
   return {
     type: Type.INPUT,
     props: {
       label: labelName,
       name: labelName,
+      ...defaultProps,
     },
     validation: {
       required,
@@ -139,12 +151,13 @@ function input(labelName, required = false) {
   };
 }
 
-function number(labelName, required = false) {
+function number(labelName, required = false, defaultProps = {}) {
   return {
     type: Type.NUMBER,
     props: {
       label: labelName,
       name: labelName,
+      ...defaultProps
     },
     validation: {
       required,
