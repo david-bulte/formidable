@@ -10,6 +10,7 @@ import { FormGroup } from '@angular/forms';
 import { CheckboxComponent } from './controls/checkbox/checkbox.component';
 import { GroupComponent } from './controls/group/group.component';
 import { InputComponent } from './controls/input/input.component';
+import { LabelComponent } from './controls/label/label.component';
 import { LayoutComponent } from './controls/layout/layout.component';
 import { NumberComponent } from './controls/number/number.component';
 import { TextareaComponent } from './controls/textarea/textarea.component';
@@ -40,6 +41,7 @@ export class DynamicFieldDirective implements OnInit {
     const component: ComponentRef<
       | InputComponent
       | LayoutComponent
+      | LabelComponent
       | NumberComponent
       | GroupComponent
       | CheckboxComponent
@@ -54,6 +56,8 @@ export class DynamicFieldDirective implements OnInit {
       case Type.COL:
       case Type.ROW:
         return LayoutComponent;
+      case Type.LABEL:
+        return LabelComponent;
       case Type.NUMBER:
         return NumberComponent;
       case Type.GROUP:

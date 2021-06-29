@@ -17,6 +17,7 @@ export enum Type {
   FORM = 'form',
   GROUP = 'group',
   INPUT = 'input',
+  LABEL = 'label',
   NUMBER = 'number',
   ROW = 'row',
   TEXTAREA = 'textarea',

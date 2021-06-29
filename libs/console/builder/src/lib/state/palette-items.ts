@@ -69,7 +69,7 @@ export const paletteItems: PaletteItem[] = [
         },
         children: [
           checkbox('required'),
-          textarea('custom', false, {tooltip: tooltips.customValidation}),
+          textarea('custom', false, { tooltip: tooltips.customValidation }),
         ],
       },
     ],
@@ -99,7 +99,7 @@ export const paletteItems: PaletteItem[] = [
         },
         children: [
           checkbox('required'),
-          textarea('custom', false, {tooltip: tooltips.customValidation}),
+          textarea('custom', false, { tooltip: tooltips.customValidation }),
         ],
       },
     ],
@@ -130,8 +130,21 @@ export const paletteItems: PaletteItem[] = [
           checkbox('required'),
           number('min'),
           number('max'),
-          textarea('custom', false, {tooltip: tooltips.customValidation}),
+          textarea('custom', false, { tooltip: tooltips.customValidation }),
         ],
+      },
+    ],
+  },
+  {
+    type: Type.LABEL,
+    props: {},
+    propDescriptors: [
+      {
+        type: Type.GROUP,
+        props: {
+          name: 'props',
+        },
+        children: [input('label', true), input('classes')],
       },
     ],
   },
@@ -157,7 +170,7 @@ function number(labelName, required = false, defaultProps = {}) {
     props: {
       label: labelName,
       name: labelName,
-      ...defaultProps
+      ...defaultProps,
     },
     validation: {
       required,

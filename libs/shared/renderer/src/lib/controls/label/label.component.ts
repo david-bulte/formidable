@@ -25,6 +25,7 @@ import { faInfoCircle } from '@fortawesome/free-solid-svg-icons/faInfoCircle';
   ],
 })
 export class LabelComponent {
+  // todo can be removed
   @Input() parent: FormGroup;
   @Input() item: ControlItem;
 
