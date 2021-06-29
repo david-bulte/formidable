@@ -1,6 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { TippyModule } from '@ngneat/helipopper';
 import { InputComponent } from './controls/input/input.component';
 import { LayoutComponent } from './controls/layout/layout.component';
 import { DynamicFieldDirective } from './dynamic-field.directive';
@@ -12,7 +14,7 @@ import { CheckboxComponent } from './controls/checkbox/checkbox.component';
 import { TextareaComponent } from './controls/textarea/textarea.component';
 
 @NgModule({
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, FontAwesomeModule, TippyModule],
   declarations: [
     PreviewComponent,
     FormComponent,

@@ -43,6 +43,8 @@
     "@fortawesome/angular-fontawesome": "^0.9.0",
     "@fortawesome/fontawesome-svg-core": "^1.2.35",
     "@fortawesome/free-solid-svg-icons": "^5.15.3",
+    "@ngneat/helipopper": "^3.6.0",
+    "@ngneat/overview": "^2.0.2",
     "@ngneat/until-destroy": "^8.0.4",
     "@nrwl/angular": "12.4.0",
     "@tailwindcss/forms": "^0.3.2",

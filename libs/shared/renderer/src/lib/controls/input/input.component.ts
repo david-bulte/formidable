@@ -1,5 +1,6 @@
 import { Component, HostBinding, Input, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
+import { faInfoCircle } from '@fortawesome/free-solid-svg-icons/faInfoCircle';
 import { ControlItem } from '../../model';
 
 @Component({
@@ -12,6 +13,7 @@ import { ControlItem } from '../../model';
           [attr.for]="id"
         >
           {{ item.props.label }}
+          <fa-icon [icon]="faInfo" tippy="test test"></fa-icon>
         </label>
         <!--        todo invalid styling-->
         <input
@@ -38,6 +40,7 @@ export class InputComponent implements OnInit {
   @Input() item: ControlItem;
 
   id: string;
+  faInfo = faInfoCircle;
 
   constructor() {}
 
