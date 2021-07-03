@@ -14,3 +14,9 @@ ng-invalid.ng-dirty {
   //@extend text-red-400
   border-color: rgba(248, 113, 113, var(--tw-text-opacity));
 }
+
+//https://stackoverflow.com/questions/36379184/html5-draggable-hide-original-element
+.draggable--moving {
+  transition: 0.01s;
+  transform: translateX(-9999px);
+}

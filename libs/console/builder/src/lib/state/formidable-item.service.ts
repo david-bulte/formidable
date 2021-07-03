@@ -48,9 +48,9 @@ export class FormidableItemService {
   }
 
   update(id: ID, item: FormidableItem) {
-    this.store.update(id, {
-      props: item.props,
-      validation: item.validation || {},
+    applyTransaction(() => {
+      this.store.update(id, item);
+      this.store.setActive(id);
     });
   }
 }

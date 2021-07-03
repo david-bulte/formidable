@@ -15,7 +15,7 @@ import {
 })
 export class DroppableDirective<T> implements AfterViewInit, OnDestroy {
   @Input('dragonDroppable') enabled = true;
-  @Output() dragonDrop = new EventEmitter<{ data: T }>();
+  @Output() dragonDrop = new EventEmitter<{ data: T; copy: boolean }>();
 
   constructor(
     @Self() private elementRef: ElementRef,
@@ -36,7 +36,8 @@ export class DroppableDirective<T> implements AfterViewInit, OnDestroy {
       this.renderer.removeClass(el, 'drag--over');
       const data = ev.dataTransfer.getData('text/plain');
 
-      this.dragonDrop.emit({ data: JSON.parse(data) });
+      const dataTransferObject: {data, copy} = JSON.parse(data);
+      this.dragonDrop.emit(dataTransferObject);
     });
 
     this.renderer.listen(el, 'dragover', (ev) => {

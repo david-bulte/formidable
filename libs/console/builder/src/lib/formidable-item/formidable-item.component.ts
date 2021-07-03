@@ -14,8 +14,9 @@ import { FormidableItemService } from '../state/formidable-item.service';
       class="bg-gray-100 pl-1 pr-2 py-2 my-1 rounded flex flex-row palette-item__container w-full"
       [dragonDraggable]="isMoveAble || isCopyAble"
       [dragonData]="item"
+      [dragonCopy]="false"
     >
-      <div class="handle">
+      <div class="handle" dragonHandle>
         <fa-icon [icon]="grip" class="mx-1"></fa-icon>
       </div>
       <div class="flex flex-col flex-1 ">
@@ -82,6 +83,9 @@ import { FormidableItemService } from '../state/formidable-item.service';
       .active {
         background-color: yellow;
       }
+
+      .drag--enter {
+      }
     `,
   ],
 })
@@ -121,10 +125,18 @@ export class FormidableItemComponent implements OnInit {
   }
 
   // todo group
-  onDrop(dragonEvent: { data: FormidableItem }) {
-    this.formidableItemService.add({
-      ...dragonEvent.data,
-      parentId: this.item.id,
-    });
+  onDrop(dragonEvent: { data: FormidableItem; copy: boolean }) {
+    console.log('dragonEvent', dragonEvent);
+    if (dragonEvent.copy) {
+      this.formidableItemService.add({
+        ...dragonEvent.data,
+        parentId: this.item.id,
+      });
+    } else {
+      this.formidableItemService.update(dragonEvent.data.id, {
+        ...dragonEvent.data,
+        parentId: this.item.id,
+      });
+    }
   }
 }
