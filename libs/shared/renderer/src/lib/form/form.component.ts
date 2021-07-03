@@ -82,7 +82,7 @@ export class FormComponent implements OnChanges {
     change = changes['value'];
     // todo
     if (change && this.value && this.value.type !== Type.FORM) {
-      this.form.patchValue(this.value, { emitEvent: false });
+      this.form.reset(this.value, {emitEvent: false});
     }
   }
 
