@@ -1,6 +1,6 @@
-import { Component, HostBinding, Input, OnInit } from '@angular/core';
+import { Component, HostBinding, Input } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { LayoutItem } from '../../model';
+import { LayoutItem, Type } from '../../model';
 
 @Component({
   selector: 'formidable-layout',
@@ -12,9 +12,16 @@ import { LayoutItem } from '../../model';
       [group]="parent"
     >
     </ng-container>
-  `
+  `,
+  styles: [
+    `
+      :host {
+        display: flex;
+      }
+    `,
+  ],
 })
-export class LayoutComponent implements OnInit {
+export class LayoutComponent {
   @Input() parent: FormGroup;
   @Input() item: LayoutItem;
 
@@ -22,8 +29,9 @@ export class LayoutComponent implements OnInit {
 
   @HostBinding('class')
   public get classes() {
-    return this.item?.props?.classes;
+    return (
+      (this.item.type === Type.ROW ? ' flex-row gap-4 ' : ' flex-col ') +
+      (this.item?.props?.classes ?? '')
+    );
   }
-
-  ngOnInit(): void {}
 }

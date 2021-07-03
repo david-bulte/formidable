@@ -33,6 +33,19 @@ export const paletteItems: PaletteItem[] = [
     ],
   },
   {
+    type: Type.COL,
+    props: {},
+    propDescriptors: [
+      {
+        type: Type.GROUP,
+        props: {
+          name: 'props',
+        },
+        children: [input('classes')],
+      },
+    ],
+  },
+  {
     type: Type.GROUP,
     props: {},
     propDescriptors: [
