@@ -8,3 +8,9 @@
 @import '~tippy.js/themes/light.css';
 @import '~tippy.js/animations/scale.css';
 
+.ng-invalid.ng-touched,
+ng-invalid.ng-dirty {
+  // todo
+  //@extend text-red-400
+  border-color: rgba(248, 113, 113, var(--tw-text-opacity));
+}

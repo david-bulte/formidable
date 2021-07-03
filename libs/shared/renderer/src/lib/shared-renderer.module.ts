@@ -13,6 +13,7 @@ import { GroupComponent } from './controls/group/group.component';
 import { CheckboxComponent } from './controls/checkbox/checkbox.component';
 import { TextareaComponent } from './controls/textarea/textarea.component';
 import { LabelComponent } from './controls/label/label.component';
+import { InlineErrorComponent } from './controls/inline-error/inline-error.component';
 
 @NgModule({
   imports: [CommonModule, ReactiveFormsModule, FontAwesomeModule, TippyModule],
@@ -27,6 +28,7 @@ import { LabelComponent } from './controls/label/label.component';
     CheckboxComponent,
     TextareaComponent,
     LabelComponent,
+    InlineErrorComponent,
   ],
   exports: [PreviewComponent, FormComponent],
 })

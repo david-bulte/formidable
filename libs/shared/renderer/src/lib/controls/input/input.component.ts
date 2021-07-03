@@ -9,15 +9,17 @@ import { ControlItem } from '../../model';
     <ng-container [formGroup]="parent">
       <div class="mb-4">
         <formidable-label [id]="id" [item]="item"></formidable-label>
-        <!--        todo invalid styling-->
         <input
           class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           [attr.id]="id"
           type="text"
           [formControlName]="item.props.name"
         />
-        <!--        todo valdemort?-->
-        {{ parent.get(item.props.name)?.errors | json }}
+
+        <formidable-inline-error
+          [parent]="parent"
+          [item]="item"
+        ></formidable-inline-error>
       </div>
     </ng-container>
   `,
