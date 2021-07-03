@@ -14,6 +14,7 @@ import { CheckboxComponent } from './controls/checkbox/checkbox.component';
 import { TextareaComponent } from './controls/textarea/textarea.component';
 import { LabelComponent } from './controls/label/label.component';
 import { InlineErrorComponent } from './controls/inline-error/inline-error.component';
+import { FirstErrorPipe } from './controls/inline-error/first-error.pipe';
 
 @NgModule({
   imports: [CommonModule, ReactiveFormsModule, FontAwesomeModule, TippyModule],
@@ -29,6 +30,7 @@ import { InlineErrorComponent } from './controls/inline-error/inline-error.compo
     TextareaComponent,
     LabelComponent,
     InlineErrorComponent,
+    FirstErrorPipe,
   ],
   exports: [PreviewComponent, FormComponent],
 })
