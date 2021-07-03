@@ -32,7 +32,10 @@ import { FormidableItemQuery } from '../state/formidable-item-query.service';
         <formidable-preview [item]="formView"></formidable-preview>
       </div>
 
-      <div class="flex flex-row justify-end mt-4 gap-x-3">
+      <div class="flex flex-row mt-4 gap-x-3">
+        <div class="flex-grow">
+          <span class="text-red-400" *ngIf="(invalid$ | async) === true">invalid</span>
+        </div>
         <button
             (click)="setPreview(false)"
             class="text-blue-500 hover:underline"
@@ -41,6 +44,7 @@ import { FormidableItemQuery } from '../state/formidable-item-query.service';
         </button>
         <button
             (click)="setPreview(true)"
+            [disabled]="(invalid$ | async) === true"
             class="text-blue-500 hover:underline"
         >
           preview
@@ -63,6 +67,7 @@ export class CanvasComponent implements OnInit {
   formView$ = this.previewVisible$$.pipe(
     map((visible) => (visible ? this.formidableItemQuery.getAllAsTree() : null))
   );
+  invalid$ = this.formidableItemQuery.invalid$;
 
   constructor(private formidableItemQuery: FormidableItemQuery) {}
 

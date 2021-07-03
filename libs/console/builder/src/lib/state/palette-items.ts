@@ -9,6 +9,7 @@ export const paletteItems: PaletteItem[] = [
   {
     type: Type.FORM,
     props: {},
+    requiredProps: [],
     propDescriptors: [
       {
         type: Type.GROUP,
@@ -22,6 +23,7 @@ export const paletteItems: PaletteItem[] = [
   {
     type: Type.ROW,
     props: {},
+    requiredProps: [],
     propDescriptors: [
       {
         type: Type.GROUP,
@@ -35,6 +37,7 @@ export const paletteItems: PaletteItem[] = [
   {
     type: Type.COL,
     props: {},
+    requiredProps: [],
     propDescriptors: [
       {
         type: Type.GROUP,
@@ -48,6 +51,7 @@ export const paletteItems: PaletteItem[] = [
   {
     type: Type.GROUP,
     props: {},
+    requiredProps: ['name'],
     propDescriptors: [
       {
         type: Type.GROUP,
@@ -61,6 +65,7 @@ export const paletteItems: PaletteItem[] = [
   {
     type: Type.INPUT,
     props: {},
+    requiredProps: ['name'],
     propDescriptors: [
       {
         type: Type.GROUP,
@@ -90,6 +95,7 @@ export const paletteItems: PaletteItem[] = [
   {
     type: Type.TEXTAREA,
     props: {},
+    requiredProps: ['name'],
     propDescriptors: [
       {
         type: Type.GROUP,
@@ -120,6 +126,7 @@ export const paletteItems: PaletteItem[] = [
   {
     type: Type.NUMBER,
     props: {},
+    requiredProps: ['name'],
     propDescriptors: [
       {
         type: Type.GROUP,
@@ -151,6 +158,7 @@ export const paletteItems: PaletteItem[] = [
   {
     type: Type.LABEL,
     props: {},
+    requiredProps: ['label'],
     propDescriptors: [
       {
         type: Type.GROUP,

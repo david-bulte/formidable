@@ -1,11 +1,13 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormidableItem } from '@formidable/shared/renderer';
+import { faExclamationCircle } from '@fortawesome/free-solid-svg-icons/faExclamationCircle';
 import { faGripVertical } from '@fortawesome/free-solid-svg-icons/faGripVertical';
 import { faTimesCircle } from '@fortawesome/free-solid-svg-icons/faTimesCircle';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { FormidableItemQuery } from '../state/formidable-item-query.service';
 import { FormidableItemService } from '../state/formidable-item.service';
+import { paletteItems } from '../state/palette-items';
 
 @Component({
   selector: 'formidable-item',
@@ -31,6 +33,7 @@ import { FormidableItemService } from '../state/formidable-item.service';
           <button (click)="onRemove()" *ngIf="!!item.parentId">
             <fa-icon [icon]="times"></fa-icon>
           </button>
+          <fa-icon [icon]="exclamation" *ngIf="invalid"></fa-icon>
         </div>
 
         <div
@@ -104,6 +107,13 @@ export class FormidableItemComponent implements OnInit {
 
   grip = faGripVertical;
   times = faTimesCircle;
+  exclamation = faExclamationCircle;
+
+  get invalid() {
+    return paletteItems
+      .find((paletteItem) => paletteItem.type === this.item.type)
+      .requiredProps.some((requiredProp) => !this.item.props[requiredProp]);
+  }
 
   constructor(
     private formidableItemQuery: FormidableItemQuery,

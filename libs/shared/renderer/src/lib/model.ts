@@ -8,6 +8,7 @@ export class PaletteItem {
     label?: string;
     info?: string;
   };
+  requiredProps: string[];
   propDescriptors?: FormidableItem[];
 }
 
@@ -35,7 +36,7 @@ export class FormidableItem {
     // todo
     autosubmit?: boolean;
     tooltip?: string;
-    required?: boolean;
+    // required?: boolean;
   };
   validation?: {
     required?: boolean | undefined;
@@ -53,14 +54,6 @@ export class FormItem extends FormidableItem {
 
 export class LayoutItem extends FormidableItem {
   children: FormidableItem[];
-}
-
-export function isLayoutItem(value: FormidableItem): value is LayoutItem {
-  return new Set([Type.ROW, Type.COL]).has(value.type);
-}
-
-export function isFormItem(value: FormidableItem): value is LayoutItem {
-  return value.type === Type.FORM;
 }
 
 export class ControlItem extends FormidableItem {}
