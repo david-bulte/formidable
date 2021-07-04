@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { TippyModule } from '@ngneat/helipopper';
+import { ControlBaseTemplateComponent } from './controls/control-base/control-base-template.component';
 import { InputComponent } from './controls/input/input.component';
 import { LayoutComponent } from './controls/layout/layout.component';
 import { DynamicFieldDirective } from './dynamic-field.directive';
@@ -31,6 +32,7 @@ import { FirstErrorPipe } from './controls/inline-error/first-error.pipe';
     LabelComponent,
     InlineErrorComponent,
     FirstErrorPipe,
+    ControlBaseTemplateComponent,
   ],
   exports: [PreviewComponent, FormComponent],
 })
