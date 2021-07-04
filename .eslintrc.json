@@ -35,6 +35,7 @@
                 "sourceTag": "type:feature",
                 "onlyDependOnLibsWithTags": [
                   "type:util",
+                  "type:feature",
                   "type:domain",
                   "type:data-access",
                   "type:ui"

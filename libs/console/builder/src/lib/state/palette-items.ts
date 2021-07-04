@@ -169,6 +169,39 @@ export const paletteItems: PaletteItem[] = [
       },
     ],
   },
+  {
+    type: Type.SELECT,
+    props: {},
+    requiredProps: ['name'],
+    propDescriptors: [
+      {
+        type: Type.GROUP,
+        props: {
+          name: 'props',
+        },
+        children: [
+          input('label', true),
+          input('name', true),
+          {
+            type: Type.REPEAT,
+            props: {
+              name: 'options',
+              label: 'options',
+            },
+            children: [
+              {
+                type: Type.GROUP,
+                props: {
+                  name: 'option',
+                },
+                children: [input('label', true), input('value', true)],
+              },
+            ],
+          },
+        ],
+      },
+    ],
+  },
 ];
 
 function input(labelName, required = false, defaultProps = {}) {

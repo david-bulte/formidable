@@ -13,6 +13,8 @@ import { InputComponent } from './controls/input/input.component';
 import { LabelComponent } from './controls/label/label.component';
 import { LayoutComponent } from './controls/layout/layout.component';
 import { NumberComponent } from './controls/number/number.component';
+import { RepeatComponent } from './controls/repeat/repeat.component';
+import { SelectComponent } from './controls/select/select.component';
 import { TextareaComponent } from './controls/textarea/textarea.component';
 import { FormidableItem, Type } from './model';
 
@@ -45,6 +47,7 @@ export class DynamicFieldDirective implements OnInit {
       | NumberComponent
       | GroupComponent
       | CheckboxComponent
+      | SelectComponent
       | TextareaComponent
     > = this.container.createComponent(componentFactory);
     component.instance.item = this.item;
@@ -64,6 +67,10 @@ export class DynamicFieldDirective implements OnInit {
         return GroupComponent;
       case Type.CHECKBOX:
         return CheckboxComponent;
+      case Type.SELECT:
+        return SelectComponent;
+      case Type.REPEAT:
+        return RepeatComponent;
       case Type.TEXTAREA:
         return TextareaComponent;
       default:

@@ -6,20 +6,9 @@ import {
   Output,
   SimpleChanges,
 } from '@angular/core';
-import {
-  AbstractControl,
-  AsyncValidatorFn,
-  FormControl,
-  FormGroup,
-  ValidationErrors,
-  ValidatorFn,
-  Validators,
-} from '@angular/forms';
+import { FormGroup } from '@angular/forms';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import { Engine } from 'json-rules-engine';
-import { Observable } from 'rxjs';
-import { fromPromise } from 'rxjs/internal-compatibility';
-import { map } from 'rxjs/operators';
+import { addControl } from '../form.utils';
 import { FormidableItem, FormItem, LayoutItem, Type } from '../model';
 
 @UntilDestroy()
@@ -44,6 +33,11 @@ import { FormidableItem, FormItem, LayoutItem, Type } from '../model';
         Submit
       </button>
     </form>
+    
+    <h1>result</h1>
+    <pre>
+      {{form.value | json}}
+    </pre>
   `,
   styles: [
     `
@@ -60,8 +54,6 @@ export class FormComponent implements OnChanges {
 
   form: FormGroup;
 
-  constructor() {}
-
   get autosubmit() {
     return this.item?.props?.autosubmit;
   }
@@ -69,6 +61,7 @@ export class FormComponent implements OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
     let change = changes['item'];
     if (change) {
+      // todo set value while creating so we can deal with e.g. dynamically added controls
       this.form = this.createFormGroup(this.item);
       if (this.autosubmit) {
         this.form.valueChanges
@@ -79,48 +72,20 @@ export class FormComponent implements OnChanges {
       }
     }
 
+
+    // todo dynamic stuff
+    // for (let i = 0; i < value?.[item.props.name]?.length ?? 0; i++) {
+    //   addControl(formArray, item.children[0], value);
+    // }
+    // addControl(formArray, item.children[0], value);
+
     change = changes['value'];
+
     // todo
-    if (change && this.value && this.value.type !== Type.FORM) {
-      this.form.reset(this.value, {emitEvent: false});
+    if (change && this.value && this.value.type !== Type.FORM && change.previousValue?.id !== change.currentValue?.id) {
+      console.log("this.value", this.value);
+      this.form.reset(this.value, { emitEvent: false });
     }
-  }
-
-  getValidators(item: FormidableItem) {
-    const validators: ValidatorFn[] = [];
-
-    if (item.validation?.required === true) {
-      validators.push(Validators.required);
-    }
-    if (item.validation?.min !== undefined) {
-      validators.push(Validators.min(item.validation?.min));
-    }
-    if (item.validation?.max !== undefined) {
-      validators.push(Validators.max(item.validation?.max));
-    }
-    return validators;
-  }
-
-  getAsyncValidators(item: FormidableItem) {
-    const validators: AsyncValidatorFn[] = [];
-    if (item.validation?.custom) {
-      validators.push(this.getCustomValidator(item));
-    }
-    return validators;
-  }
-
-  getCustomValidator(item: FormidableItem): AsyncValidatorFn {
-    return (control: AbstractControl): Observable<ValidationErrors | null> => {
-      const engine = new Engine();
-      const rules = JSON.parse(item.validation.custom);
-      const facts = { [item.props.name]: control.value };
-      return fromPromise(engine.addRule(rules).run(facts)).pipe(
-        map(({ events }) => {
-          const fail = !events.find((event) => event.params.data === 'green');
-          return fail ? { 'custom-error': true } : null;
-        })
-      );
-    };
   }
 
   onSubmit() {
@@ -131,40 +96,7 @@ export class FormComponent implements OnChanges {
 
   private createFormGroup(item: FormItem | LayoutItem) {
     const group = new FormGroup({});
-    item.children.forEach((item) => this.addControl(group, item));
+    item.children.forEach((item) => addControl(group, item));
     return group;
-  }
-
-  private addControl(form: FormGroup, item: FormidableItem) {
-    let formGroup;
-    switch (item.type) {
-      case Type.FORM:
-      case Type.ROW:
-      case Type.COL:
-        item.children.forEach((item) => {
-          this.addControl(form, item);
-        });
-        break;
-      case Type.GROUP:
-        formGroup = new FormGroup(
-          {},
-          this.getValidators(item),
-          this.getAsyncValidators(item)
-        );
-        form.addControl(item.props.name, formGroup);
-        item.children.forEach((child) => {
-          this.addControl(formGroup, child);
-        });
-        break;
-      default:
-        form.addControl(
-          item.props.name,
-          new FormControl(
-            item.props.defaultValue,
-            this.getValidators(item),
-            this.getAsyncValidators(item)
-          )
-        );
-    }
   }
 }

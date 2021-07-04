@@ -16,6 +16,8 @@ import { TextareaComponent } from './controls/textarea/textarea.component';
 import { LabelComponent } from './controls/label/label.component';
 import { InlineErrorComponent } from './controls/inline-error/inline-error.component';
 import { FirstErrorPipe } from './controls/inline-error/first-error.pipe';
+import { RepeatComponent } from './controls/repeat/repeat.component';
+import { SelectComponent } from './controls/select/select.component';
 
 @NgModule({
   imports: [CommonModule, ReactiveFormsModule, FontAwesomeModule, TippyModule],
@@ -33,6 +35,8 @@ import { FirstErrorPipe } from './controls/inline-error/first-error.pipe';
     InlineErrorComponent,
     FirstErrorPipe,
     ControlBaseTemplateComponent,
+    RepeatComponent,
+    SelectComponent,
   ],
   exports: [PreviewComponent, FormComponent],
 })

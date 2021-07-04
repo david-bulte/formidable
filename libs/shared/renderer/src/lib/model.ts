@@ -17,8 +17,10 @@ export enum Type {
   COL = 'col',
   FORM = 'form',
   GROUP = 'group',
+  REPEAT = 'repeat',
   INPUT = 'input',
   LABEL = 'label',
+  SELECT = 'select',
   NUMBER = 'number',
   ROW = 'row',
   TEXTAREA = 'textarea',
@@ -36,6 +38,7 @@ export class FormidableItem {
     // todo
     autosubmit?: boolean;
     tooltip?: string;
+    options?: {key: string, val: string}[]
     // required?: boolean;
   };
   validation?: {
