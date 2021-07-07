@@ -3,6 +3,7 @@ import { ID } from '@datorama/akita';
 export class PaletteItem {
   id?: ID;
   type: Type;
+  group?: PaletteGroup;
   props: {
     icon?: string;
     label?: string;
@@ -10,6 +11,11 @@ export class PaletteItem {
   };
   requiredProps: string[];
   propDescriptors?: FormidableItem[];
+}
+
+export enum PaletteGroup {
+  BASIC = "basic",
+  LAYOUT = "layout"
 }
 
 export enum Type {
@@ -47,6 +53,9 @@ export class FormidableItem {
     max?: number;
     custom?: string;
   };
+  visibility?: {
+    custom?: string;
+  }
   parentId?: ID;
   children?: FormidableItem[];
 }

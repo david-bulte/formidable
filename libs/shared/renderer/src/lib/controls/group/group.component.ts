@@ -6,7 +6,7 @@ import { LayoutItem } from '@formidable/shared/renderer';
   selector: 'formidable-group',
   template: `
     <div>
-      <!--      todo label?-->
+      <!--      todo label => css?-->
       <label class="block text-gray-700 text-sm font-bold mb-2">
         {{ item.props.label }}
       </label>
@@ -29,5 +29,4 @@ export class GroupComponent {
   @Input() item: LayoutItem;
 
   constructor() {}
-
 }

@@ -1,4 +1,4 @@
-import { PaletteItem, Type } from '@formidable/shared/renderer';
+import { PaletteGroup, PaletteItem, Type } from '@formidable/shared/renderer';
 
 const tooltips = {
   customValidation:
@@ -22,6 +22,7 @@ export const paletteItems: PaletteItem[] = [
   },
   {
     type: Type.ROW,
+    group: PaletteGroup.LAYOUT,
     props: {},
     requiredProps: [],
     propDescriptors: [
@@ -36,6 +37,7 @@ export const paletteItems: PaletteItem[] = [
   },
   {
     type: Type.COL,
+    group: PaletteGroup.LAYOUT,
     props: {},
     requiredProps: [],
     propDescriptors: [
@@ -50,6 +52,7 @@ export const paletteItems: PaletteItem[] = [
   },
   {
     type: Type.GROUP,
+    group: PaletteGroup.BASIC,
     props: {},
     requiredProps: ['name'],
     propDescriptors: [
@@ -64,6 +67,7 @@ export const paletteItems: PaletteItem[] = [
   },
   {
     type: Type.INPUT,
+    group: PaletteGroup.BASIC,
     props: {},
     requiredProps: ['name'],
     propDescriptors: [
@@ -94,6 +98,7 @@ export const paletteItems: PaletteItem[] = [
   },
   {
     type: Type.TEXTAREA,
+    group: PaletteGroup.BASIC,
     props: {},
     requiredProps: ['name'],
     propDescriptors: [
@@ -125,6 +130,7 @@ export const paletteItems: PaletteItem[] = [
   },
   {
     type: Type.NUMBER,
+    group: PaletteGroup.BASIC,
     props: {},
     requiredProps: ['name'],
     propDescriptors: [
@@ -157,6 +163,7 @@ export const paletteItems: PaletteItem[] = [
   },
   {
     type: Type.LABEL,
+    group: PaletteGroup.BASIC,
     props: {},
     requiredProps: ['label'],
     propDescriptors: [
@@ -171,6 +178,7 @@ export const paletteItems: PaletteItem[] = [
   },
   {
     type: Type.SELECT,
+    group: PaletteGroup.BASIC,
     props: {},
     requiredProps: ['name'],
     propDescriptors: [
