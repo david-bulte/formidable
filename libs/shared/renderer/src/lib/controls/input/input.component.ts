@@ -25,6 +25,7 @@ import { ControlItem } from '../../model';
           *ngIf="parent.contains(item.props.name)"
         />
 
+        <!-- todo does it work with visibility check *ngIf="parent.contains(item.props.name)"-->
         <formidable-inline-error
           [parent]="parent"
           [item]="item"
