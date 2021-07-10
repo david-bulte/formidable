@@ -14,8 +14,8 @@ export class PaletteItem {
 }
 
 export enum PaletteGroup {
-  BASIC = "basic",
-  LAYOUT = "layout"
+  BASIC = 'basic',
+  LAYOUT = 'layout',
 }
 
 export enum Type {
@@ -44,7 +44,8 @@ export class FormidableItem {
     // todo
     autosubmit?: boolean;
     tooltip?: string;
-    options?: {key: string, val: string}[]
+    mode?: 'radio' | 'dropdown';
+    options?: { key: string; val: string }[];
     // required?: boolean;
   };
   validation?: {
@@ -55,7 +56,7 @@ export class FormidableItem {
   };
   visibility?: {
     custom?: string;
-  }
+  };
   parentId?: ID;
   children?: FormidableItem[];
 }

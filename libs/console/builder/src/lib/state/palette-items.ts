@@ -94,6 +94,14 @@ export const paletteItems: PaletteItem[] = [
           textarea('custom', false, { tooltip: tooltips.customValidation }),
         ],
       },
+      {
+        type: Type.GROUP,
+        props: {
+          name: 'visibility',
+          label: 'visibility',
+        },
+        children: [textarea('custom', false)],
+      },
     ],
   },
   {
@@ -205,6 +213,16 @@ export const paletteItems: PaletteItem[] = [
         children: [
           input('label', true),
           input('name', true),
+          select(
+            'mode',
+            'radio',
+            [
+              { value: 'radio', label: 'radio' },
+              { value: 'dropdown', label: 'dropdown' },
+            ],
+            true,
+            { defaultValue: 'dropdown' }
+          ),
           {
             type: Type.REPEAT,
             props: {
@@ -233,6 +251,28 @@ function input(labelName, required = false, defaultProps = {}) {
     props: {
       label: labelName,
       name: labelName,
+      ...defaultProps,
+    },
+    validation: {
+      required,
+    },
+  };
+}
+
+function select(
+  labelName,
+  mode: 'dropdown' | 'radio',
+  options: { value: any; label: string }[] = [],
+  required = false,
+  defaultProps = {}
+) {
+  return {
+    type: Type.SELECT,
+    props: {
+      label: labelName,
+      name: labelName,
+      mode,
+      options,
       ...defaultProps,
     },
     validation: {
