@@ -9,7 +9,7 @@ import { FormidableItemQuery } from '../state/formidable-item-query.service';
   selector: 'formidable-canvas',
   template: `
     <div class="flex items-center justify-between">
-      <h1 class="text-xl font-bold text-gray-700 item">Canvas</h1>
+      <h1 class="item">Canvas</h1>
     </div>
 
     <div class="mt-4 overflow-y-auto h-screen pr-4">

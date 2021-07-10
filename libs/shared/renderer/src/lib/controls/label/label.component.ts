@@ -6,7 +6,7 @@ import { faInfoCircle } from '@fortawesome/free-solid-svg-icons/faInfoCircle';
 @Component({
   selector: 'formidable-label',
   template: `
-    <label class="block text-gray-700 text-sm font-bold mb-2" [attr.for]="id">
+    <label [attr.for]="id">
       {{ item.props?.label }} <span class="text-red-400" *ngIf="item.validation?.required">*</span>
       <fa-icon
         [icon]="faInfo"

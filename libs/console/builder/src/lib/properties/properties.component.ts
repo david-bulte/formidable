@@ -11,7 +11,7 @@ import { FormidableItemService } from '../state/formidable-item.service';
 @Component({
   selector: 'formidable-properties',
   template: `
-    <h1 class="mb-4 text-xl font-bold text-gray-700">Properties</h1>
+    <h1 class="mb-4">Properties</h1>
     <div
       class="flex flex-col bg-white px-6 py-4 rounded-lg shadow-md overflow-y-auto properties-container"
     >

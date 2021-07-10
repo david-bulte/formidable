@@ -27,7 +27,7 @@ import { FormidableItem, FormItem, LayoutItem } from '../model';
       <button
         *ngIf="!autosubmit"
         [disabled]="form.invalid"
-        class="h-10 px-5 m-2 text-indigo-100 transition-colors duration-150 bg-indigo-700 rounded-lg focus:shadow-outline hover:bg-indigo-800"
+        class="btn-primary"
         type="submit"
       >
         Submit
