@@ -9,15 +9,15 @@ import {
 import { FormGroup } from '@angular/forms';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { addControl } from '../form.utils';
-import { FormidableItem, FormItem, LayoutItem, Type } from '../model';
+import { FormidableItem, FormItem, LayoutItem } from '../model';
 
 @UntilDestroy()
 @Component({
   selector: 'formidable-form',
   template: `
-    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" *ngIf="form">
       <ng-container
-        *ngFor="let child of item.children"
+        *ngFor="let child of formDescription.children"
         formidableDynamicField
         [item]="child"
         [group]="form"
@@ -33,11 +33,12 @@ import { FormidableItem, FormItem, LayoutItem, Type } from '../model';
         Submit
       </button>
     </form>
-    
+
     <h1>result</h1>
     <pre>
-      {{form.value | json}}
-    </pre>
+      {{ form?.value | json }}
+    </pre
+    >
   `,
   styles: [
     `
@@ -48,30 +49,43 @@ import { FormidableItem, FormItem, LayoutItem, Type } from '../model';
   ],
 })
 export class FormComponent implements OnChanges {
-  @Input() item: FormItem;
+  @Input() formDescription: FormItem;
   @Input() value: FormidableItem;
   @Output() submitForm = new EventEmitter();
 
   form: FormGroup;
 
   get autosubmit() {
-    return this.item?.props?.autosubmit;
+    return this.formDescription?.props?.autosubmit;
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    let change = changes['item'];
-    if (change) {
-      // todo set value while creating so we can deal with e.g. dynamically added controls
-      this.form = this.createFormGroup(this.item);
-      if (this.autosubmit) {
-        this.form.valueChanges
-          .pipe(untilDestroyed(this))
-          .subscribe(($event) => {
-            this.submitForm.emit(this.form.value);
-          });
-      }
-    }
+    const formItemChange = changes['formItem'];
+    const formValueChange = changes['value'];
+    if (
+      formItemChange ||
+      !formValueChange ||
+      formValueChange.previousValue?.id !== formValueChange.currentValue?.id
+    ) {
+      this.form = null;
 
+      setTimeout(() => {
+        // todo set value while creating so we can deal with e.g. dynamically added controls
+        this.form = this.createFormGroup(
+          this.formDescription,
+          formValueChange?.currentValue
+        );
+        if (this.autosubmit) {
+          this.form.valueChanges
+            .pipe(untilDestroyed(this))
+            .subscribe(($event) => {
+              console.log('$event', $event);
+
+              this.submitForm.emit(this.form.value);
+            });
+        }
+      });
+    }
 
     // todo dynamic stuff
     // for (let i = 0; i < value?.[item.props.name]?.length ?? 0; i++) {
@@ -79,13 +93,13 @@ export class FormComponent implements OnChanges {
     // }
     // addControl(formArray, item.children[0], value);
 
-    change = changes['value'];
-
-    // todo
-    if (change && this.value && this.value.type !== Type.FORM && change.previousValue?.id !== change.currentValue?.id) {
-      console.log("this.value", this.value);
-      this.form.reset(this.value, { emitEvent: false });
-    }
+    // const change = changes['value'];
+    //
+    // // todo
+    // if (change && this.value && this.value.type !== Type.FORM && change.previousValue?.id !== change.currentValue?.id) {
+    //   console.log("this.value", this.value);
+    //   this.form.reset(this.value, { emitEvent: false });
+    // }
   }
 
   onSubmit() {
@@ -94,9 +108,21 @@ export class FormComponent implements OnChanges {
     }
   }
 
-  private createFormGroup(item: FormItem | LayoutItem) {
+  private createFormGroup(formItem: FormItem | LayoutItem, formValue: any) {
     const group = new FormGroup({});
-    item.children.forEach((item) => addControl(group, item));
+    formItem.children.forEach((controlItem) =>
+      addControl(group, controlItem, formValue)
+    );
     return group;
   }
 }
+
+// build along with value
+//
+//
+// before creating form group:
+//   checkVisibility: remove or do not create
+//
+// formarray:
+//    remove or create
+//

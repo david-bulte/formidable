@@ -1,6 +1,5 @@
 import {
   AfterContentInit,
-  AfterViewInit,
   Component,
   ContentChild,
   ElementRef,
@@ -8,18 +7,14 @@ import {
   Input,
   Renderer2,
 } from '@angular/core';
-import {
-  FormControlDirective,
-  FormControlName,
-  FormGroup,
-} from '@angular/forms';
+import { FormControlName, FormGroup } from '@angular/forms';
 import { ControlItem } from '@formidable/shared/renderer';
 
 @Component({
   selector: 'formidable-control-base',
   template: `
     <ng-container *ngIf="item">
-      <div class="mb-4">
+      <div class="mb-4" *ngIf="parent.contains(item.props.name)">
         <formidable-label [id]="id" [item]="item"></formidable-label>
         <ng-content></ng-content>
         <formidable-inline-error

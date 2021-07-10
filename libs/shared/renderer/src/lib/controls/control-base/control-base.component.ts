@@ -7,6 +7,7 @@ import {
 } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { ControlItem } from '@formidable/shared/renderer';
+import { FormComponent } from '../../form/form.component';
 import { ControlBaseTemplateComponent } from './control-base-template.component';
 
 @Directive()
@@ -43,8 +44,28 @@ export class ControlBaseComponent implements OnInit {
     return this.item?.props?.classes;
   }
 
+  constructor(private formComponent: FormComponent) {}
+
   ngOnInit(): void {
-    const id = this.item.props.name + '_' + Math.random();
+    const id = this.formControlName + '_' + Math.random();
     this.controlBaseTemplateComponent.id = id;
+
+    if (this._item.visibility?.custom) {
+      const control = this.parent.get(this.formControlName);
+      this.formComponent.form.valueChanges.subscribe((val) => {
+        // todo eval expre
+        if (+val.age === 10) {
+          if (this.parent.contains(this.formControlName)) {
+            this.parent.removeControl(this.item.props.name);
+            control.reset();
+          }
+        } else {
+          if (!this.parent.contains(this.formControlName)) {
+            this.parent.addControl(this.formControlName, control);
+            control.updateValueAndValidity();
+          }
+        }
+      });
+    }
   }
 }

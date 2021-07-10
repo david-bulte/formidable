@@ -1,11 +1,19 @@
 import { Component, HostBinding, Input, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { faInfoCircle } from '@fortawesome/free-solid-svg-icons/faInfoCircle';
+import { FormComponent } from '../../form/form.component';
 import { ControlItem } from '../../model';
 
 @Component({
-  selector: 'formidable-input',
   template: `
+    <!--      <formidable-control-base [formGroup]="parent">-->
+    <!--          <input-->
+    <!--                  class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"-->
+    <!--                  type="text"-->
+    <!--                  [formControlName]="formControlName"-->
+    <!--          />-->
+    <!--      </formidable-control-base>-->
+
     <ng-container [formGroup]="parent">
       <div class="mb-4">
         <formidable-label [id]="id" [item]="item"></formidable-label>
@@ -14,6 +22,7 @@ import { ControlItem } from '../../model';
           [attr.id]="id"
           type="text"
           [formControlName]="item.props.name"
+          *ngIf="parent.contains(item.props.name)"
         />
 
         <formidable-inline-error
@@ -38,7 +47,7 @@ export class InputComponent implements OnInit {
   id: string;
   faInfo = faInfoCircle;
 
-  constructor() {}
+  constructor(private formComponent: FormComponent) {}
 
   @HostBinding('class')
   public get classes() {
@@ -47,5 +56,24 @@ export class InputComponent implements OnInit {
 
   ngOnInit(): void {
     this.id = this.item.props.name + '_' + Math.random();
+
+    if (this.item.visibility?.custom) {
+      const formControlName = this.item.props.name;
+      const control = this.parent.get(formControlName);
+      this.formComponent.form.valueChanges.subscribe((val) => {
+        // todo eval expre
+        if (+val.a === 10) {
+          if (this.parent.contains(formControlName)) {
+            this.parent.removeControl(this.item.props.name);
+            control.reset();
+          }
+        } else {
+          if (!this.parent.contains(formControlName)) {
+            this.parent.addControl(formControlName, control);
+            control.updateValueAndValidity();
+          }
+        }
+      });
+    }
   }
 }

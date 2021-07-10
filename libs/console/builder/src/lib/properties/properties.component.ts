@@ -16,7 +16,7 @@ import { FormidableItemService } from '../state/formidable-item.service';
       class="flex flex-col bg-white px-6 py-4 rounded-lg shadow-md overflow-y-auto properties-container"
     >
       <formidable-form
-        [item]="props$ | async"
+        [formDescription]="props$ | async"
         [value]="active$ | async"
         (submitForm)="onSubmitForm($event)"
       ></formidable-form>
