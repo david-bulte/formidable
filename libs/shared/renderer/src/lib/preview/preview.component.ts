@@ -4,10 +4,10 @@ import { FormItem } from '../model';
 @Component({
   selector: 'formidable-preview',
   template: `
-    <formidable-form
-      [item]="item"
-      (submitForm)="value = $event"
-    ></formidable-form>
+      <formidable-form
+              [formDescription]="item"
+              (submitForm)="value = $event"
+      ></formidable-form>
 
     <pre>
         {{ value | json }}

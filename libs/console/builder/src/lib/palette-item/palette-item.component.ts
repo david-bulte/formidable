@@ -10,6 +10,7 @@ import { faGripVertical } from '@fortawesome/free-solid-svg-icons/faGripVertical
       [dragonDraggable]="true"
       [dragonData]="item"
     >
+      <!--      todo move type-->
       <div class="flex flex-row">
         <div class="handle">
           <fa-icon [icon]="grip" class="mx-1"></fa-icon>

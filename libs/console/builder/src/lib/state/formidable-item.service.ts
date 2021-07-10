@@ -23,7 +23,7 @@ export class FormidableItemService {
   add(item: FormidableItem) {
     const id = guid();
     applyTransaction(() => {
-      this.store.add({ ...item, id });
+      this.store.add({ id, type: item.type, props: {}, parentId: item.parentId });
       this.store.setActive(id);
     });
   }

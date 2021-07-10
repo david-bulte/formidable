@@ -134,9 +134,7 @@ export class FormidableItemComponent implements OnInit {
     });
   }
 
-  // todo group
   onDrop(dragonEvent: { data: FormidableItem; copy: boolean }) {
-    console.log('dragonEvent', dragonEvent);
     if (dragonEvent.copy) {
       this.formidableItemService.add({
         ...dragonEvent.data,

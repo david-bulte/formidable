@@ -54,7 +54,7 @@ export class RepeatComponent {
   }
 
   onPlus() {
-    addControl(this.fa, this.item.children[0]);
+    addControl(this.fa, this.item.children[0], null);
   }
 
   onMinus(index) {
