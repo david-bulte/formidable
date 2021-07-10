@@ -45,7 +45,7 @@ export function addControl(
         addControl(
           formGroup,
           child,
-          isFormArray(form) ? formValue : formValue[controlItem.props.name]
+          isFormArray(form) ? formValue : formValue?.[controlItem.props.name]
         );
       });
       break;

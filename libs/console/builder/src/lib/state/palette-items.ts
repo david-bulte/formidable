@@ -177,6 +177,21 @@ export const paletteItems: PaletteItem[] = [
     ],
   },
   {
+    type: Type.CHECKBOX,
+    group: PaletteGroup.BASIC,
+    props: {},
+    requiredProps: ['label', 'name'],
+    propDescriptors: [
+      {
+        type: Type.GROUP,
+        props: {
+          name: 'props',
+        },
+        children: [input('label', true), input('name', true)],
+      },
+    ],
+  },
+  {
     type: Type.SELECT,
     group: PaletteGroup.BASIC,
     props: {},
