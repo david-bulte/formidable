@@ -38,5 +38,13 @@
     "shared-renderer": {
       "tags": ["scope:shared", "type:feature"]
     }
+  },
+  "targetDependencies": {
+    "build": [
+      {
+        "target": "build",
+        "projects": "dependencies"
+      }
+    ]
   }
 }
