@@ -10,7 +10,7 @@ export class PaletteItem {
     info?: string;
   };
   requiredProps: string[];
-  propDescriptors?: FormidableItem[];
+  formDescription?: FormidableItem;
 }
 
 export enum PaletteGroup {
@@ -45,7 +45,7 @@ export class FormidableItem {
     autosubmit?: boolean;
     tooltip?: string;
     mode?: 'radio' | 'dropdown';
-    options?: { key: string; val: string }[];
+    options?: { value: string; label: string }[];
     // required?: boolean;
   };
   validation?: {

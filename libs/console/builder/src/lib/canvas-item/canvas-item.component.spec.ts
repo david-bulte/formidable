@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { FormidableItemComponent } from './formidable-item.component';
+import { CanvasItemComponent } from './canvas-item.component';
 
 describe('FormidableItemComponent', () => {
-  let component: FormidableItemComponent;
-  let fixture: ComponentFixture<FormidableItemComponent>;
+  let component: CanvasItemComponent;
+  let fixture: ComponentFixture<CanvasItemComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ FormidableItemComponent ]
+      declarations: [ CanvasItemComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(FormidableItemComponent);
+    fixture = TestBed.createComponent(CanvasItemComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

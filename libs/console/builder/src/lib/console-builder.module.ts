@@ -10,7 +10,7 @@ import { CanvasComponent } from './canvas/canvas.component';
 import { PaletteItemComponent } from './palette-item/palette-item.component';
 import { PaletteComponent } from './palette/palette.component';
 import { PropertiesComponent } from './properties/properties.component';
-import { FormidableItemComponent } from './formidable-item/formidable-item.component';
+import { CanvasItemComponent } from './canvas-item/canvas-item.component';
 
 @NgModule({
   imports: [
@@ -26,7 +26,7 @@ import { FormidableItemComponent } from './formidable-item/formidable-item.compo
     PaletteItemComponent,
     CanvasComponent,
     PropertiesComponent,
-    FormidableItemComponent,
+    CanvasItemComponent,
   ],
   exports: [BuildPageComponent, PaletteComponent, CanvasComponent],
 })

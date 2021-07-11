@@ -8,44 +8,44 @@ import { FormidableItemQuery } from '../state/formidable-item-query.service';
 @Component({
   selector: 'formidable-canvas',
   template: `
-    <div class="flex items-center justify-between">
-      <h1 class="text-xl font-bold text-gray-700 item">Canvas</h1>
+    <div class='flex items-center justify-between'>
+      <h1 class='text-xl font-bold text-gray-700 item'>Canvas</h1>
     </div>
 
-    <div class="mt-4 overflow-y-auto h-screen pr-4">
+    <div class='mt-4 overflow-y-auto h-screen pr-4'>
       <div
-          class="flex flex-col bg-white px-6 py-4 rounded-lg shadow-md"
-          *ngIf="!(previewVisible$$ | async)"
+        class='flex flex-col bg-white px-6 py-4 rounded-lg shadow-md'
+        *ngIf='!(previewVisible$$ | async)'
       >
-        <formidable-item
-            [item]="root"
-            [isMoveAble]="false"
-            [isDroppable]="true"
-            *ngIf="root$ | async as root"
-        ></formidable-item>
+        <formidable-canvas-item
+          [item]='root'
+          [isMoveAble]='false'
+          [isDroppable]='true'
+          *ngIf='root$ | async as root'
+        ></formidable-canvas-item>
       </div>
 
       <div
-          class="flex flex-col bg-white px-6 py-4 rounded-lg shadow-md"
-          *ngIf="(formView$ | async) as formView"
+        class='flex flex-col bg-white px-6 py-4 rounded-lg shadow-md'
+        *ngIf='(formView$ | async) as formView'
       >
-        <formidable-preview [item]="formView"></formidable-preview>
+        <formidable-preview [item]='formView'></formidable-preview>
       </div>
 
-      <div class="flex flex-row mt-4 gap-x-3">
-        <div class="flex-grow">
-          <span class="text-red-400" *ngIf="(invalid$ | async) === true">invalid</span>
+      <div class='flex flex-row mt-4 gap-x-3'>
+        <div class='flex-grow'>
+          <span class='text-red-400' *ngIf='(invalid$ | async) === true'>invalid</span>
         </div>
         <button
-            (click)="setPreview(false)"
-            class="text-blue-500 hover:underline"
+          (click)='setPreview(false)'
+          class='text-blue-500 hover:underline'
         >
           edit
         </button>
         <button
-            (click)="setPreview(true)"
-            [disabled]="(invalid$ | async) === true"
-            class="text-blue-500 hover:underline"
+          (click)='setPreview(true)'
+          [disabled]='(invalid$ | async) === true'
+          class='text-blue-500 hover:underline'
         >
           preview
         </button>

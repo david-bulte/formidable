@@ -10,48 +10,48 @@ import { FormidableItemService } from '../state/formidable-item.service';
 import { paletteItems } from '../state/palette-items';
 
 @Component({
-  selector: 'formidable-item',
+  selector: 'formidable-canvas-item',
   template: `
     <div
-      class="bg-gray-100 pl-1 pr-2 py-2 my-1 rounded flex flex-row palette-item__container w-full"
-      [dragonDraggable]="isMoveAble || isCopyAble"
-      [dragonData]="item"
-      [dragonCopy]="false"
+      class='bg-gray-100 pl-1 pr-2 py-2 my-1 rounded flex flex-row palette-item__container w-full'
+      [dragonDraggable]='isMoveAble || isCopyAble'
+      [dragonData]='item'
+      [dragonCopy]='false'
     >
-      <div class="handle" dragonHandle>
-        <fa-icon [icon]="grip" class="mx-1"></fa-icon>
+      <div class='handle' dragonHandle>
+        <fa-icon [icon]='grip' class='mx-1'></fa-icon>
       </div>
-      <div class="flex flex-col flex-1 ">
+      <div class='flex flex-col flex-1 '>
         <div
-          class="flex flex-row"
-          (click)="onSelect()"
-          [class.active]="isActive$ | async"
+          class='flex flex-row'
+          (click)='onSelect()'
+          [class.active]='isActive$ | async'
         >
-          <div class="label">
+          <div class='label'>
             {{ item.type }} ({{ item.id }}, {{ item.props?.label }})
           </div>
-          <button (click)="onRemove()" *ngIf="!!item.parentId">
-            <fa-icon [icon]="times"></fa-icon>
+          <button (click)='onRemove()' *ngIf='!!item.parentId'>
+            <fa-icon [icon]='times'></fa-icon>
           </button>
-          <fa-icon [icon]="exclamation" *ngIf="invalid"></fa-icon>
+          <fa-icon [icon]='exclamation' *ngIf='invalid'></fa-icon>
         </div>
 
         <div
-          class="flex w-full"
+          class='flex w-full'
           [class.flex-row]="item.type === 'row'"
           [class.flex-col]="item.type !== 'row'"
         >
-          <formidable-item
-            [item]="child"
-            [isMoveAble]="true"
-            [isDroppable]="true"
-            *ngFor="let child of children$ | async"
-          ></formidable-item>
+          <formidable-canvas-item
+            [item]='child'
+            [isMoveAble]='true'
+            [isDroppable]='true'
+            *ngFor='let child of children$ | async'
+          ></formidable-canvas-item>
 
           <div
-            class="drop-zone w-full h-auto bg-blue-100 pb-5"
-            [dragonDroppable]="isDroppable"
-            (dragonDrop)="onDrop($event)"
+            class='drop-zone w-full h-auto bg-blue-100 pb-5'
+            [dragonDroppable]='isDroppable'
+            (dragonDrop)='onDrop($event)'
             *ngIf="
               isDroppable &&
               (item.type === 'row' ||
@@ -92,7 +92,7 @@ import { paletteItems } from '../state/palette-items';
     `,
   ],
 })
-export class FormidableItemComponent implements OnInit {
+export class CanvasItemComponent implements OnInit {
   @Input() item: FormidableItem;
   @Input() isCopyAble = false;
   @Input() isMoveAble = false;

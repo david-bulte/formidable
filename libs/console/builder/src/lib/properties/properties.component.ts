@@ -35,7 +35,7 @@ import { FormidableItemService } from '../state/formidable-item.service';
 export class PropertiesComponent {
   // todo
   active$ = this.formidableItemQuery.selectActive();
-  props$ = this.formidableItemQuery.selectActivePropertyDescriptors();
+  props$ = this.formidableItemQuery.selectActiveFormDescription();
 
   constructor(
     private formidableItemQuery: FormidableItemQuery,
