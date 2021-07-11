@@ -13,17 +13,17 @@ export class FormElementQuery extends QueryEntity<FormElementState> {
   );
 
   root$ = this.selectAll({
-    filterBy: (item: FormElement) => item.parentId === null,
+    filterBy: (element: FormElement) => element.parentId === null,
   }).pipe(map((result) => result?.[0] ?? null));
 
   invalid$ = this.selectAll().pipe(
     map((elements) => {
-      return elements.some((item) => {
+      return elements.some((element) => {
         const paletteItem = paletteItems.find(
-          (paletteItem) => item.type === paletteItem.type
+          (paletteItem) => element.type === paletteItem.type
         );
         return paletteItem.requiredProps.some(
-          (requiredProp) => !item.props[requiredProp]
+          (requiredProp) => !element.props[requiredProp]
         );
       });
     })
@@ -35,7 +35,7 @@ export class FormElementQuery extends QueryEntity<FormElementState> {
 
   getComposition(): FormElement {
     const root: FormElement = this.getAll().find(
-      (item) => item.parentId === null
+      (element) => element.parentId === null
     );
     return { ...root, children: this.getChildren(root.id) };
   }
@@ -44,7 +44,7 @@ export class FormElementQuery extends QueryEntity<FormElementState> {
     return this.selectAll().pipe(
       map((all) => {
         const root: FormElement = all.find(
-          (item) => item.parentId === null
+          (element) => element.parentId === null
         );
         return { ...root, children: this.getChildren(root.id) };
       })
@@ -61,15 +61,15 @@ export class FormElementQuery extends QueryEntity<FormElementState> {
     );
   }
 
-  private getChildren(parentId: ID) {
+  private getChildren(parentId: ID): FormElement[] {
     return this.getAll()
-      .filter((item) => item.parentId === parentId)
-      .map((item) => {
+      .filter((element) => element.parentId === parentId)
+      .map((element) => {
         // todo
-        if ([FormElementType.ROW, FormElementType.COL, FormElementType.GROUP].indexOf(item.type) > -1) {
-          return { ...item, children: this.getChildren(item.id) };
+        if ([FormElementType.ROW, FormElementType.COL, FormElementType.GROUP].indexOf(element.type) > -1) {
+          return { ...element, children: this.getChildren(element.id) };
         } else {
-          return item;
+          return element;
         }
       });
   }

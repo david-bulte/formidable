@@ -1,6 +1,6 @@
 import { Component, HostBinding, Input } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { FormElement } from '@formidable/shared/renderer';
+import { FormElement } from '../../model';
 
 @Component({
   selector: 'formidable-checkbox',
@@ -11,9 +11,9 @@ import { FormElement } from '@formidable/shared/renderer';
           <input
             type="checkbox"
             class="form-checkbox"
-            [formControlName]="item.props.name"
+            [formControlName]="formElement.props.name"
           />
-          <span class="ml-2">{{ item.props.label }}</span>
+          <span class="ml-2">{{ formElement.props.label }}</span>
         </label>
       </div>
     </ng-container>
@@ -28,12 +28,12 @@ import { FormElement } from '@formidable/shared/renderer';
 })
 export class CheckboxComponent {
   @Input() parent: FormGroup;
-  @Input() item: FormElement;
+  @Input() formElement: FormElement;
 
   constructor() {}
 
   @HostBinding('class')
   public get classes() {
-    return this.item?.props?.classes;
+    return this.formElement?.props?.classes;
   }
 }

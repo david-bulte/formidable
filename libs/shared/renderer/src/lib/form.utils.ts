@@ -8,7 +8,7 @@ import {
   ValidatorFn,
   Validators,
 } from '@angular/forms';
-import { FormElement, FormElementType } from '@formidable/shared/renderer';
+import { FormElement, FormElementType } from './model';
 import { Engine } from 'json-rules-engine';
 import { Observable } from 'rxjs';
 import { fromPromise } from 'rxjs/internal-compatibility';
@@ -16,36 +16,36 @@ import { map } from 'rxjs/operators';
 
 export function addControl(
   form: FormGroup | FormArray,
-  controlItem: FormElement,
+  formElement: FormElement,
   formValue: any
 ) {
   let formControl, formGroup, formArray, options;
-  switch (controlItem.type) {
+  switch (formElement.type) {
     case FormElementType.FORM:
     case FormElementType.ROW:
     case FormElementType.COL:
       // handle children
-      controlItem.children.forEach((item) => {
-        addControl(form, item, formValue);
+      formElement.children.forEach((element) => {
+        addControl(form, element, formValue);
       });
       break;
     case FormElementType.GROUP:
       // create AbstractFormControl
       formGroup = new FormGroup(
         {},
-        getValidators(controlItem),
-        getAsyncValidators(controlItem)
+        getValidators(formElement),
+        getAsyncValidators(formElement)
       );
       // add to parent control
       isFormArray(form)
         ? form.push(formGroup)
-        : form.addControl(controlItem.props.name, formGroup);
+        : form.addControl(formElement.props.name, formGroup);
       // handle children
-      controlItem.children.forEach((child) => {
+      formElement.children.forEach((child) => {
         addControl(
           formGroup,
           child,
-          isFormArray(form) ? formValue : formValue?.[controlItem.props.name]
+          isFormArray(form) ? formValue : formValue?.[formElement.props.name]
         );
       });
       break;
@@ -53,34 +53,34 @@ export function addControl(
       // create AbstractFormControl
       formArray = new FormArray(
         [],
-        getValidators(controlItem),
-        getAsyncValidators(controlItem)
+        getValidators(formElement),
+        getAsyncValidators(formElement)
       );
       // add to parent control
       isFormArray(form)
         ? form.push(formArray)
-        : form.addControl(controlItem.props.name, formArray);
+        : form.addControl(formElement.props.name, formArray);
       // handle children
-      options = formValue[controlItem.props.name];
+      options = formValue[formElement.props.name];
       if (options?.length > 0) {
         options.forEach((option) => {
-          addControl(formArray, controlItem.children[0], option);
+          addControl(formArray, formElement.children[0], option);
         });
       } else {
-        addControl(formArray, controlItem.children[0], null);
+        addControl(formArray, formElement.children[0], null);
       }
       break;
     default:
       // create AbstractFormControl
       formControl = new FormControl(
-        formValue?.[controlItem.props.name] || controlItem.props.defaultValue,
-        getValidators(controlItem),
-        getAsyncValidators(controlItem)
+        formValue?.[formElement.props.name] || formElement.props.defaultValue,
+        getValidators(formElement),
+        getAsyncValidators(formElement)
       );
       // add to parent control
       isFormArray(form)
         ? form.push(formControl)
-        : form.addControl(controlItem.props.name, formControl);
+        : form.addControl(formElement.props.name, formControl);
   }
 }
 
@@ -88,34 +88,34 @@ function isFormArray(obj): obj is FormArray {
   return obj['push'] !== undefined;
 }
 
-function getValidators(item: FormElement) {
+function getValidators(formElement: FormElement) {
   const validators: ValidatorFn[] = [];
 
-  if (item.validation?.required === true) {
+  if (formElement.validation?.required === true) {
     validators.push(Validators.required);
   }
-  if (item.validation?.min !== undefined) {
-    validators.push(Validators.min(item.validation?.min));
+  if (formElement.validation?.min !== undefined) {
+    validators.push(Validators.min(formElement.validation?.min));
   }
-  if (item.validation?.max !== undefined) {
-    validators.push(Validators.max(item.validation?.max));
+  if (formElement.validation?.max !== undefined) {
+    validators.push(Validators.max(formElement.validation?.max));
   }
   return validators;
 }
 
-function getAsyncValidators(item: FormElement) {
+function getAsyncValidators(formElement: FormElement) {
   const validators: AsyncValidatorFn[] = [];
-  if (item.validation?.custom) {
-    validators.push(getCustomValidator(item));
+  if (formElement.validation?.custom) {
+    validators.push(getCustomValidator(formElement));
   }
   return validators;
 }
 
-function getCustomValidator(item: FormElement): AsyncValidatorFn {
+function getCustomValidator(formElement: FormElement): AsyncValidatorFn {
   return (control: AbstractControl): Observable<ValidationErrors | null> => {
     const engine = new Engine();
-    const rules = JSON.parse(item.validation.custom);
-    const facts = { [item.props.name]: control.value };
+    const rules = JSON.parse(formElement.validation.custom);
+    const facts = { [formElement.props.name]: control.value };
     return fromPromise(engine.addRule(rules).run(facts)).pipe(
       map(({ events }) => {
         const fail = !events.find((event) => event.params.data === 'green');

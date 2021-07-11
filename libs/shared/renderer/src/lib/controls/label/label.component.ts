@@ -1,19 +1,19 @@
 import { Component, HostBinding, Input } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { FormElement } from '@formidable/shared/renderer';
+import { FormElement } from '../../model';
 import { faInfoCircle } from '@fortawesome/free-solid-svg-icons/faInfoCircle';
 
 @Component({
   selector: 'formidable-label',
   template: `
-    <label class="block text-gray-700 text-sm font-bold mb-2" [attr.for]="id">
-      {{ item.props?.label }}
-      <span class="text-red-400" *ngIf="item.validation?.required">*</span>
+    <label class='block text-gray-700 text-sm font-bold mb-2' [attr.for]='id'>
+      {{ formElement.props?.label }}
+      <span class='text-red-400' *ngIf='formElement.validation?.required'>*</span>
       <fa-icon
-        [icon]="faInfo"
-        [tippy]="item.props.tooltip"
-        [interactive]="true"
-        *ngIf="item.props?.tooltip !== undefined"
+        [icon]='faInfo'
+        [tippy]='formElement.props.tooltip'
+        [interactive]='true'
+        *ngIf='formElement.props?.tooltip !== undefined'
       ></fa-icon>
     </label>
   `,
@@ -28,15 +28,13 @@ import { faInfoCircle } from '@fortawesome/free-solid-svg-icons/faInfoCircle';
 export class LabelComponent {
   // todo can be removed
   @Input() parent: FormGroup;
-  @Input() item: FormElement;
+  @Input() formElement: FormElement;
 
   @Input() id: string;
   faInfo = faInfoCircle;
 
-  constructor() {}
-
   @HostBinding('class')
   public get classes() {
-    return this.item?.props?.classes;
+    return this.formElement?.props?.classes;
   }
 }

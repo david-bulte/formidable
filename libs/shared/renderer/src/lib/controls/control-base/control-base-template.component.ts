@@ -13,13 +13,13 @@ import { FormElement } from '@formidable/shared/renderer';
 @Component({
   selector: 'formidable-control-base',
   template: `
-    <ng-container *ngIf="item">
-      <div class="mb-4" *ngIf="parent.contains(item.props.name)">
-        <formidable-label [id]="id" [item]="item"></formidable-label>
+    <ng-container *ngIf='formElement'>
+      <div class='mb-4' *ngIf='parent.contains(formElement.props.name)'>
+        <formidable-label [id]='id' [formElement]='formElement'></formidable-label>
         <ng-content></ng-content>
         <formidable-inline-error
-          [parent]="parent"
-          [item]="item"
+          [parent]='parent'
+          [formElement]='formElement'
         ></formidable-inline-error>
       </div>
     </ng-container>
@@ -34,14 +34,14 @@ import { FormElement } from '@formidable/shared/renderer';
 })
 export class ControlBaseTemplateComponent implements AfterContentInit {
   @Input() parent: FormGroup;
-  @Input() item: FormElement;
+  @Input() formElement: FormElement;
   @Input() id: string;
 
   @ContentChild(FormControlName, { read: ElementRef }) controlEl: ElementRef;
 
   @HostBinding('class')
   public get classes() {
-    return this.item?.props?.classes;
+    return this.formElement?.props?.classes;
   }
 
   constructor(private renderer: Renderer2) {}

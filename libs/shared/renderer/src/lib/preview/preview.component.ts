@@ -5,8 +5,8 @@ import { FormElement } from '../model';
   selector: 'formidable-preview',
   template: `
     <formidable-form
-      [formElement]="item"
-      (submitForm)="value = $event"
+      [formElement]='formElement'
+      (submitForm)='value = $event'
     ></formidable-form>
 
     <pre>
@@ -17,7 +17,7 @@ import { FormElement } from '../model';
   styles: [],
 })
 export class PreviewComponent {
-  @Input() item: FormElement;
+  @Input() formElement: FormElement;
   value: any;
 }
 

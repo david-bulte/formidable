@@ -20,10 +20,10 @@ export class FormElementService {
     });
   }
 
-  add(item: FormElement) {
+  add(formElement: FormElement) {
     const id = guid();
     applyTransaction(() => {
-      this.store.add({ id, type: item.type, props: {}, parentId: item.parentId });
+      this.store.add({ id, type: formElement.type, props: {}, parentId: formElement.parentId });
       this.store.setActive(id);
     });
   }
@@ -36,20 +36,20 @@ export class FormElementService {
     applyTransaction(() => {
       this.store.remove(id);
       this.query
-        .getAll({ filterBy: (item) => item.parentId === id })
+        .getAll({ filterBy: (element) => element.parentId === id })
         .forEach((child) => {
           this.remove(child.id);
         });
       if (!this.query.getActiveId()) {
-        const root = this.query.getAll().find((item) => !item.parentId);
+        const root = this.query.getAll().find((element) => !element.parentId);
         this.store.setActive(root.id);
       }
     });
   }
 
-  update(id: ID, item: FormElement) {
+  update(id: ID, formElement: FormElement) {
     applyTransaction(() => {
-      this.store.update(id, item);
+      this.store.update(id, formElement);
       this.store.setActive(id);
     });
   }

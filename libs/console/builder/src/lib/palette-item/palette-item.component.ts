@@ -6,16 +6,16 @@ import { faGripVertical } from '@fortawesome/free-solid-svg-icons/faGripVertical
   selector: 'formidable-palette-item',
   template: `
     <div
-      class="bg-gray-100 pl-1 pr-2 py-2 my-1 rounded flex flex-col palette-item__container"
-      [dragonDraggable]="true"
-      [dragonData]="item"
+      class='bg-gray-100 pl-1 pr-2 py-2 my-1 rounded flex flex-col palette-item__container'
+      [dragonDraggable]='true'
+      [dragonData]='paletteItem'
     >
       <!--      todo move type-->
-      <div class="flex flex-row">
-        <div class="handle">
-          <fa-icon [icon]="grip" class="mx-1"></fa-icon>
+      <div class='flex flex-row'>
+        <div class='handle'>
+          <fa-icon [icon]='grip' class='mx-1'></fa-icon>
         </div>
-        <div class="label">{{ item.type }}</div>
+        <div class='label'>{{ paletteItem.type }}</div>
       </div>
     </div>
   `,
@@ -32,7 +32,7 @@ import { faGripVertical } from '@fortawesome/free-solid-svg-icons/faGripVertical
   ],
 })
 export class PaletteItemComponent implements OnInit {
-  @Input() item: PaletteItem;
+  @Input() paletteItem: PaletteItem;
   grip = faGripVertical;
 
   constructor() {}

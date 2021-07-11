@@ -23,7 +23,7 @@ import { FormElement, FormElementType } from './model';
 })
 export class DynamicFieldDirective implements OnInit {
   @Input()
-  item: FormElement;
+  formElement: FormElement;
 
   @Input()
   group: FormGroup;
@@ -50,12 +50,12 @@ export class DynamicFieldDirective implements OnInit {
       | SelectComponent
       | TextareaComponent
     > = this.container.createComponent(componentFactory);
-    component.instance.item = this.item;
+    component.instance.formElement = this.formElement;
     component.instance.parent = this.group;
   }
 
   getComponentType() {
-    switch (this.item.type) {
+    switch (this.formElement.type) {
       case FormElementType.COL:
       case FormElementType.ROW:
         return LayoutComponent;

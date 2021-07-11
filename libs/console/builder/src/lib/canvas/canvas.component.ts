@@ -18,7 +18,7 @@ import { FormElementQuery } from '../state/form-element-query.service';
         *ngIf='!(previewVisible$$ | async)'
       >
         <formidable-canvas-item
-          [item]='root'
+          [formElement]='root'
           [isMoveAble]='false'
           [isDroppable]='true'
           *ngIf='root$ | async as root'
@@ -29,7 +29,7 @@ import { FormElementQuery } from '../state/form-element-query.service';
         class='flex flex-col bg-white px-6 py-4 rounded-lg shadow-md'
         *ngIf='(formView$ | async) as formView'
       >
-        <formidable-preview [item]='formView'></formidable-preview>
+        <formidable-preview [formElement]='formView'></formidable-preview>
       </div>
 
       <div class='flex flex-row mt-4 gap-x-3'>
@@ -56,7 +56,7 @@ import { FormElementQuery } from '../state/form-element-query.service';
     </pre>
 
     </div>
-    
+
   `,
   styles: [
     `

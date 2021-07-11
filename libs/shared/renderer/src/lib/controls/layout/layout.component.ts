@@ -6,10 +6,10 @@ import { FormElement, FormElementType } from '../../model';
   selector: 'formidable-layout',
   template: `
     <ng-container
-      *ngFor="let child of item.children"
+      *ngFor='let child of formElement.children'
       formidableDynamicField
-      [item]="child"
-      [group]="parent"
+      [formElement]='child'
+      [group]='parent'
     >
     </ng-container>
   `,
@@ -23,16 +23,16 @@ import { FormElement, FormElementType } from '../../model';
 })
 export class LayoutComponent {
   @Input() parent: FormGroup;
-  @Input() item: FormElement;
+  @Input() formElement: FormElement;
 
   constructor() {}
 
   @HostBinding('class')
   public get classes() {
     return (
-      (this.item.type === FormElementType.ROW
+      (this.formElement.type === FormElementType.ROW
         ? ' flex-row gap-4 '
-        : ' flex-col ') + (this.item?.props?.classes ?? '')
+        : ' flex-col ') + (this.formElement?.props?.classes ?? '')
     );
   }
 }

@@ -15,20 +15,20 @@ import { FormElement } from '../model';
 @Component({
   selector: 'formidable-form',
   template: `
-    <form [formGroup]="form" (ngSubmit)="onSubmit()" *ngIf="form">
+    <form [formGroup]='form' (ngSubmit)='onSubmit()' *ngIf='form'>
       <ng-container
-        *ngFor="let child of formElement.children"
+        *ngFor='let child of formElement.children'
         formidableDynamicField
-        [item]="child"
-        [group]="form"
+        [formElement]='child'
+        [group]='form'
       >
       </ng-container>
 
       <button
-        *ngIf="!autosubmit"
-        [disabled]="form.invalid"
-        class="h-10 px-5 m-2 text-indigo-100 transition-colors duration-150 bg-indigo-700 rounded-lg focus:shadow-outline hover:bg-indigo-800"
-        type="submit"
+        *ngIf='!autosubmit'
+        [disabled]='form.invalid'
+        class='h-10 px-5 m-2 text-indigo-100 transition-colors duration-150 bg-indigo-700 rounded-lg focus:shadow-outline hover:bg-indigo-800'
+        type='submit'
       >
         Submit
       </button>
@@ -108,9 +108,9 @@ export class FormComponent implements OnChanges {
     }
   }
 
-  private createFormGroup(formItem: FormElement, formValue: any) {
+  private createFormGroup(element: FormElement, formValue: any) {
     const group = new FormGroup({});
-    formItem.children.forEach((controlItem) =>
+    element.children.forEach((controlItem) =>
       addControl(group, controlItem, formValue)
     );
     return group;

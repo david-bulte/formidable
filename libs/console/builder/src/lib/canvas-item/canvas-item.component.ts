@@ -13,51 +13,51 @@ import { paletteItems } from '../state/palette-items';
   selector: 'formidable-canvas-item',
   template: `
     <div
-      class="bg-gray-100 pl-1 pr-2 py-2 my-1 rounded flex flex-row palette-item__container w-full"
-      [dragonDraggable]="isMoveAble || isCopyAble"
-      [dragonData]="item"
-      [dragonCopy]="false"
+      class='bg-gray-100 pl-1 pr-2 py-2 my-1 rounded flex flex-row palette-item__container w-full'
+      [dragonDraggable]='isMoveAble || isCopyAble'
+      [dragonData]='formElement'
+      [dragonCopy]='false'
     >
-      <div class="handle" dragonHandle>
-        <fa-icon [icon]="grip" class="mx-1"></fa-icon>
+      <div class='handle' dragonHandle>
+        <fa-icon [icon]='grip' class='mx-1'></fa-icon>
       </div>
-      <div class="flex flex-col flex-1 ">
+      <div class='flex flex-col flex-1 '>
         <div
-          class="flex flex-row"
-          (click)="onSelect()"
-          [class.active]="isActive$ | async"
+          class='flex flex-row'
+          (click)='onSelect()'
+          [class.active]='isActive$ | async'
         >
-          <div class="label">
-            {{ item.type }} ({{ item.id }}, {{ item.props?.label }})
+          <div class='label'>
+            {{ formElement.type }} ({{ formElement.id }}, {{ formElement.props?.label }})
           </div>
-          <button (click)="onRemove()" *ngIf="!!item.parentId">
-            <fa-icon [icon]="times"></fa-icon>
+          <button (click)='onRemove()' *ngIf='!!formElement.parentId'>
+            <fa-icon [icon]='times'></fa-icon>
           </button>
-          <fa-icon [icon]="exclamation" *ngIf="invalid"></fa-icon>
+          <fa-icon [icon]='exclamation' *ngIf='invalid'></fa-icon>
         </div>
 
         <div
-          class="flex w-full"
-          [class.flex-row]="item.type === 'row'"
-          [class.flex-col]="item.type !== 'row'"
+          class='flex w-full'
+          [class.flex-row]="formElement.type === 'row'"
+          [class.flex-col]="formElement.type !== 'row'"
         >
           <formidable-canvas-item
-            [item]="child"
-            [isMoveAble]="true"
-            [isDroppable]="true"
-            *ngFor="let child of children$ | async"
+            [formElement]="child"
+            [isMoveAble]='true'
+            [isDroppable]='true'
+            *ngFor='let child of children$ | async'
           ></formidable-canvas-item>
 
           <div
-            class="drop-zone w-full h-auto bg-blue-100 pb-5"
-            [dragonDroppable]="isDroppable"
-            (dragonDrop)="onDrop($event)"
+            class='drop-zone w-full h-auto bg-blue-100 pb-5'
+            [dragonDroppable]='isDroppable'
+            (dragonDrop)='onDrop($event)'
             *ngIf="
               isDroppable &&
-              (item.type === 'row' ||
-                item.type === 'col' ||
-                item.type === 'form' ||
-                item.type === 'group')
+              (formElement.type === 'row' ||
+                formElement.type === 'col' ||
+                formElement.type === 'form' ||
+                formElement.type === 'group')
             "
           ></div>
         </div>
@@ -93,7 +93,7 @@ import { paletteItems } from '../state/palette-items';
   ],
 })
 export class CanvasItemComponent implements OnInit {
-  @Input() item: FormElement;
+  @Input() formElement: FormElement;
   @Input() isCopyAble = false;
   @Input() isMoveAble = false;
   @Input() isDraggable = false;
@@ -103,7 +103,7 @@ export class CanvasItemComponent implements OnInit {
   children$: Observable<FormElement[]>;
   isActive$ = this.formElementQuery
     .selectActiveId()
-    .pipe(map((activeId) => activeId === this.item.id));
+    .pipe(map((activeId) => activeId === this.formElement.id));
 
   grip = faGripVertical;
   times = faTimesCircle;
@@ -116,21 +116,21 @@ export class CanvasItemComponent implements OnInit {
 
   get invalid() {
     return paletteItems
-      .find((paletteItem) => paletteItem.type === this.item.type)
-      .requiredProps.some((requiredProp) => !this.item.props[requiredProp]);
+      .find((paletteItem) => paletteItem.type === this.formElement.type)
+      .requiredProps.some((requiredProp) => !this.formElement.props[requiredProp]);
   }
 
   onSelect() {
-    this.formElementService.setActive(this.item.id);
+    this.formElementService.setActive(this.formElement.id);
   }
 
   onRemove() {
-    this.formElementService.remove(this.item.id);
+    this.formElementService.remove(this.formElement.id);
   }
 
   ngOnInit(): void {
     this.children$ = this.formElementQuery.selectAll({
-      filterBy: (item: FormElement) => item.parentId === this.item.id,
+      filterBy: (element: FormElement) => element.parentId === this.formElement.id,
     });
   }
 
@@ -138,12 +138,12 @@ export class CanvasItemComponent implements OnInit {
     if (dragonEvent.copy) {
       this.formElementService.add({
         ...dragonEvent.data,
-        parentId: this.item.id,
+        parentId: this.formElement.id,
       });
     } else {
       this.formElementService.update(dragonEvent.data.id, {
         ...dragonEvent.data,
-        parentId: this.item.id,
+        parentId: this.formElement.id,
       });
     }
   }

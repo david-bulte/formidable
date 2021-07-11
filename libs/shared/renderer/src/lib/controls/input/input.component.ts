@@ -14,21 +14,21 @@ import { FormElement } from '../../model';
     <!--          />-->
     <!--      </formidable-control-base>-->
 
-    <ng-container [formGroup]="parent">
-      <div class="mb-4">
-        <formidable-label [id]="id" [item]="item"></formidable-label>
+    <ng-container [formGroup]='parent'>
+      <div class='mb-4'>
+        <formidable-label [id]='id' [formElement]='formElement'></formidable-label>
         <input
-          class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-          [attr.id]="id"
-          type="text"
-          [formControlName]="item.props.name"
-          *ngIf="parent.contains(item.props.name)"
+          class='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
+          [attr.id]='id'
+          type='text'
+          [formControlName]='formElement.props.name'
+          *ngIf='parent.contains(formElement.props.name)'
         />
 
         <!-- todo does it work with visibility check *ngIf="parent.contains(item.props.name)"-->
         <formidable-inline-error
-          [parent]="parent"
-          [item]="item"
+          [parent]='parent'
+          [formElement]='formElement'
         ></formidable-inline-error>
       </div>
     </ng-container>
@@ -43,7 +43,7 @@ import { FormElement } from '../../model';
 })
 export class InputComponent implements OnInit {
   @Input() parent: FormGroup;
-  @Input() item: FormElement;
+  @Input() formElement: FormElement;
 
   id: string;
   faInfo = faInfoCircle;
@@ -52,20 +52,20 @@ export class InputComponent implements OnInit {
 
   @HostBinding('class')
   public get classes() {
-    return this.item?.props?.classes;
+    return this.formElement?.props?.classes;
   }
 
   ngOnInit(): void {
-    this.id = this.item.props.name + '_' + Math.random();
+    this.id = this.formElement.props.name + '_' + Math.random();
 
-    if (this.item.visibility?.custom) {
-      const formControlName = this.item.props.name;
+    if (this.formElement.visibility?.custom) {
+      const formControlName = this.formElement.props.name;
       const control = this.parent.get(formControlName);
       this.formComponent.form.valueChanges.subscribe((val) => {
         // todo eval expre
         if (+val.a === 10) {
           if (this.parent.contains(formControlName)) {
-            this.parent.removeControl(this.item.props.name);
+            this.parent.removeControl(this.formElement.props.name);
             control.reset();
           }
         } else {
