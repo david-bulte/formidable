@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UntilDestroy } from '@ngneat/until-destroy';
 import { BehaviorSubject } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { FormidableItemQuery } from '../state/formidable-item-query.service';
+import { FormElementQuery } from '../state/form-element-query.service';
 
 @UntilDestroy()
 @Component({
@@ -68,16 +68,16 @@ import { FormidableItemQuery } from '../state/formidable-item-query.service';
 })
 export class CanvasComponent implements OnInit {
   items = [];
-  root$ = this.formidableItemQuery.root$;
+  root$ = this.formElementQuery.root$;
   previewVisible$$ = new BehaviorSubject(false);
   formView$ = this.previewVisible$$.pipe(
-    map((visible) => (visible ? this.formidableItemQuery.getAllAsTree() : null))
+    map((visible) => (visible ? this.formElementQuery.getComposition() : null))
   );
-  invalid$ = this.formidableItemQuery.invalid$;
+  invalid$ = this.formElementQuery.invalid$;
 
-  debug$ = this.formidableItemQuery.selectAllAsTree();
+  debug$ = this.formElementQuery.selectComposition();
 
-  constructor(private formidableItemQuery: FormidableItemQuery) {}
+  constructor(private formElementQuery: FormElementQuery) {}
 
   ngOnInit(): void {}
 

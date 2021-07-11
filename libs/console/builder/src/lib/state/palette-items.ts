@@ -1,4 +1,4 @@
-import { PaletteGroup, PaletteItem, Type } from '@formidable/shared/renderer';
+import { PaletteGroup, PaletteItem, FormElementType } from '@formidable/shared/renderer';
 import {
   checkbox,
   form,
@@ -17,42 +17,42 @@ const tooltips = {
 
 export const paletteItems: PaletteItem[] = [
   {
-    type: Type.FORM,
+    type: FormElementType.FORM,
     props: {},
     requiredProps: [],
-    formDescription: form([
+    formComposition: form([
       group('props', [checkbox('autosubmit', false, { defaultValue: false })]),
     ]),
   },
   {
-    type: Type.ROW,
+    type: FormElementType.ROW,
     group: PaletteGroup.LAYOUT,
     props: {},
     requiredProps: [],
-    formDescription: form([group('props', [input('classes')])]),
+    formComposition: form([group('props', [input('classes')])]),
   },
   {
-    type: Type.COL,
+    type: FormElementType.COL,
     group: PaletteGroup.LAYOUT,
     props: {},
     requiredProps: [],
-    formDescription: form([group('props', [input('classes')])]),
+    formComposition: form([group('props', [input('classes')])]),
   },
   {
-    type: Type.GROUP,
+    type: FormElementType.GROUP,
     group: PaletteGroup.BASIC,
     props: {},
     requiredProps: ['name'],
-    formDescription: form([
+    formComposition: form([
       group('props', [input('name', true), input('label')]),
     ]),
   },
   {
-    type: Type.INPUT,
+    type: FormElementType.INPUT,
     group: PaletteGroup.BASIC,
     props: {},
     requiredProps: ['name'],
-    formDescription: form([
+    formComposition: form([
       group('props', [
         input('label', true),
         input('name', true),
@@ -75,11 +75,11 @@ export const paletteItems: PaletteItem[] = [
     ]),
   },
   {
-    type: Type.TEXTAREA,
+    type: FormElementType.TEXTAREA,
     group: PaletteGroup.BASIC,
     props: {},
     requiredProps: ['name'],
-    formDescription: form([
+    formComposition: form([
       group('props', [
         input('label', true),
         input('name', true),
@@ -100,11 +100,11 @@ export const paletteItems: PaletteItem[] = [
     ]),
   },
   {
-    type: Type.NUMBER,
+    type: FormElementType.NUMBER,
     group: PaletteGroup.BASIC,
     props: {},
     requiredProps: ['name'],
-    formDescription: form([
+    formComposition: form([
       group('props', [
         input('label', true),
         input('name', true),
@@ -126,29 +126,29 @@ export const paletteItems: PaletteItem[] = [
     ]),
   },
   {
-    type: Type.LABEL,
+    type: FormElementType.LABEL,
     group: PaletteGroup.BASIC,
     props: {},
     requiredProps: ['label'],
-    formDescription: form([
+    formComposition: form([
       group('props', [input('label', true), input('classes')]),
     ]),
   },
   {
-    type: Type.CHECKBOX,
+    type: FormElementType.CHECKBOX,
     group: PaletteGroup.BASIC,
     props: {},
     requiredProps: ['label', 'name'],
-    formDescription: form([
+    formComposition: form([
       group('props', [input('label', true), input('name', true)]),
     ]),
   },
   {
-    type: Type.SELECT,
+    type: FormElementType.SELECT,
     group: PaletteGroup.BASIC,
     props: {},
     requiredProps: ['name'],
-    formDescription: form([
+    formComposition: form([
       group('props', [
         input('label', true),
         input('name', true),

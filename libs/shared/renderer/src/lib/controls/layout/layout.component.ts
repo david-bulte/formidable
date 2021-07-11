@@ -1,6 +1,6 @@
 import { Component, HostBinding, Input } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { LayoutItem, Type } from '../../model';
+import { FormElement, FormElementType } from '../../model';
 
 @Component({
   selector: 'formidable-layout',
@@ -23,15 +23,16 @@ import { LayoutItem, Type } from '../../model';
 })
 export class LayoutComponent {
   @Input() parent: FormGroup;
-  @Input() item: LayoutItem;
+  @Input() item: FormElement;
 
   constructor() {}
 
   @HostBinding('class')
   public get classes() {
     return (
-      (this.item.type === Type.ROW ? ' flex-row gap-4 ' : ' flex-col ') +
-      (this.item?.props?.classes ?? '')
+      (this.item.type === FormElementType.ROW
+        ? ' flex-row gap-4 '
+        : ' flex-col ') + (this.item?.props?.classes ?? '')
     );
   }
 }

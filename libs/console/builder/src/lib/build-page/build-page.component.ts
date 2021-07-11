@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormidableItemService } from '../state/formidable-item.service';
+import { FormElementService } from '../state/form-element.service';
 
 @Component({
   selector: 'formidable-build-page',
@@ -21,7 +21,7 @@ import { FormidableItemService } from '../state/formidable-item.service';
   styles: [],
 })
 export class BuildPageComponent implements OnInit {
-  constructor(private formSchemeService: FormidableItemService) {}
+  constructor(private formSchemeService: FormElementService) {}
 
   ngOnInit(): void {
     this.createForm();

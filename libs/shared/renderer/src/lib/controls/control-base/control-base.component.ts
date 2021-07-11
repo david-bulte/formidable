@@ -6,7 +6,7 @@ import {
   ViewChild,
 } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { ControlItem } from '@formidable/shared/renderer';
+import { FormElement } from '@formidable/shared/renderer';
 import { FormComponent } from '../../form/form.component';
 import { ControlBaseTemplateComponent } from './control-base-template.component';
 
@@ -15,7 +15,7 @@ export class ControlBaseComponent implements OnInit {
   @ViewChild(ControlBaseTemplateComponent, { static: true })
   controlBaseTemplateComponent: ControlBaseTemplateComponent;
   private _parent: FormGroup;
-  private _item: ControlItem;
+  private _item: FormElement;
 
   get parent() {
     return this._parent;
@@ -30,7 +30,7 @@ export class ControlBaseComponent implements OnInit {
     return this._item;
   }
 
-  @Input() set item(item: ControlItem) {
+  @Input() set item(item: FormElement) {
     this._item = item;
     this.controlBaseTemplateComponent.item = this.item;
   }

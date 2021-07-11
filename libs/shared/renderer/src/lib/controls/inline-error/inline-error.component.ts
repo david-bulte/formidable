@@ -1,6 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { ControlItem } from '@formidable/shared/renderer';
+import { FormElement } from '@formidable/shared/renderer';
 import { UntilDestroy } from '@ngneat/until-destroy';
 
 // todo showFirst option?
@@ -12,15 +12,17 @@ import { UntilDestroy } from '@ngneat/until-destroy';
   selector: 'formidable-inline-error',
   template: `
     <div [class.text-red-400]="parent.get(this.item.props.name).touched">
-      {{ parent.get(this.item.props.name)?.errors | firstError:this.item.props.name }}
+      {{
+        parent.get(this.item.props.name)?.errors
+          | firstError: this.item.props.name
+      }}
     </div>
   `,
   styles: [],
 })
 export class InlineErrorComponent {
   @Input() parent: FormGroup;
-  @Input() item: ControlItem;
+  @Input() item: FormElement;
 
   constructor() {}
-
 }

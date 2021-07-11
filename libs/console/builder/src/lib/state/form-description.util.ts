@@ -1,13 +1,13 @@
-import { FormidableItem, Type } from '@formidable/shared/renderer';
+import { FormElement, FormElementType } from '@formidable/shared/renderer';
 
 type DefaultProps = { [key: string]: any };
 
 export function form(
-  children: FormidableItem[],
+  children: FormElement[],
   defaultProps: DefaultProps = {}
-): FormidableItem {
+): FormElement {
   return {
-    type: Type.FORM,
+    type: FormElementType.FORM,
     props: {
       autosubmit: true,
       ...defaultProps,
@@ -18,11 +18,11 @@ export function form(
 
 export function group(
   name: string,
-  children: FormidableItem[],
+  children: FormElement[],
   defaultProps: DefaultProps = {}
-): FormidableItem {
+): FormElement {
   return {
-    type: Type.GROUP,
+    type: FormElementType.GROUP,
     props: {
       name,
       ...defaultProps,
@@ -35,9 +35,9 @@ export function input(
   labelName,
   required = false,
   defaultProps: DefaultProps = {}
-): FormidableItem {
+): FormElement {
   return {
-    type: Type.INPUT,
+    type: FormElementType.INPUT,
     props: {
       label: labelName,
       name: labelName,
@@ -55,9 +55,9 @@ export function select(
   options: { value: any; label: string }[] = [],
   required = false,
   defaultProps: DefaultProps = {}
-): FormidableItem {
+): FormElement {
   return {
-    type: Type.SELECT,
+    type: FormElementType.SELECT,
     props: {
       label: labelName,
       name: labelName,
@@ -75,9 +75,9 @@ export function number(
   labelName,
   required = false,
   defaultProps: DefaultProps = {}
-): FormidableItem {
+): FormElement {
   return {
-    type: Type.NUMBER,
+    type: FormElementType.NUMBER,
     props: {
       label: labelName,
       name: labelName,
@@ -93,9 +93,9 @@ export function checkbox(
   labelName,
   required = false,
   defaultProps: DefaultProps = {}
-): FormidableItem {
+): FormElement {
   return {
-    type: Type.CHECKBOX,
+    type: FormElementType.CHECKBOX,
     props: {
       label: labelName,
       name: labelName,
@@ -111,9 +111,9 @@ export function textarea(
   labelName,
   required = false,
   defaultProps: DefaultProps = {}
-): FormidableItem {
+): FormElement {
   return {
-    type: Type.TEXTAREA,
+    type: FormElementType.TEXTAREA,
     props: {
       label: labelName,
       name: labelName,
@@ -127,11 +127,11 @@ export function textarea(
 
 export function repeat(
   labelName,
-  children: FormidableItem[],
+  children: FormElement[],
   defaultProps: DefaultProps = {}
-): FormidableItem {
+): FormElement {
   return {
-    type: Type.REPEAT,
+    type: FormElementType.REPEAT,
     props: {
       name: labelName,
       label: labelName,

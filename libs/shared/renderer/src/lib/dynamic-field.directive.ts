@@ -16,14 +16,14 @@ import { NumberComponent } from './controls/number/number.component';
 import { RepeatComponent } from './controls/repeat/repeat.component';
 import { SelectComponent } from './controls/select/select.component';
 import { TextareaComponent } from './controls/textarea/textarea.component';
-import { FormidableItem, Type } from './model';
+import { FormElement, FormElementType } from './model';
 
 @Directive({
   selector: '[formidableDynamicField]',
 })
 export class DynamicFieldDirective implements OnInit {
   @Input()
-  item: FormidableItem;
+  item: FormElement;
 
   @Input()
   group: FormGroup;
@@ -56,22 +56,22 @@ export class DynamicFieldDirective implements OnInit {
 
   getComponentType() {
     switch (this.item.type) {
-      case Type.COL:
-      case Type.ROW:
+      case FormElementType.COL:
+      case FormElementType.ROW:
         return LayoutComponent;
-      case Type.LABEL:
+      case FormElementType.LABEL:
         return LabelComponent;
-      case Type.NUMBER:
+      case FormElementType.NUMBER:
         return NumberComponent;
-      case Type.GROUP:
+      case FormElementType.GROUP:
         return GroupComponent;
-      case Type.CHECKBOX:
+      case FormElementType.CHECKBOX:
         return CheckboxComponent;
-      case Type.SELECT:
+      case FormElementType.SELECT:
         return SelectComponent;
-      case Type.REPEAT:
+      case FormElementType.REPEAT:
         return RepeatComponent;
-      case Type.TEXTAREA:
+      case FormElementType.TEXTAREA:
         return TextareaComponent;
       default:
         return InputComponent;

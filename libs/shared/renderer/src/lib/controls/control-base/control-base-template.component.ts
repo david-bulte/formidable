@@ -8,7 +8,7 @@ import {
   Renderer2,
 } from '@angular/core';
 import { FormControlName, FormGroup } from '@angular/forms';
-import { ControlItem } from '@formidable/shared/renderer';
+import { FormElement } from '@formidable/shared/renderer';
 
 @Component({
   selector: 'formidable-control-base',
@@ -34,7 +34,7 @@ import { ControlItem } from '@formidable/shared/renderer';
 })
 export class ControlBaseTemplateComponent implements AfterContentInit {
   @Input() parent: FormGroup;
-  @Input() item: ControlItem;
+  @Input() item: FormElement;
   @Input() id: string;
 
   @ContentChild(FormControlName, { read: ElementRef }) controlEl: ElementRef;

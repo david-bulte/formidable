@@ -8,7 +8,7 @@ import {
   ValidatorFn,
   Validators,
 } from '@angular/forms';
-import { FormidableItem, Type } from '@formidable/shared/renderer';
+import { FormElement, FormElementType } from '@formidable/shared/renderer';
 import { Engine } from 'json-rules-engine';
 import { Observable } from 'rxjs';
 import { fromPromise } from 'rxjs/internal-compatibility';
@@ -16,20 +16,20 @@ import { map } from 'rxjs/operators';
 
 export function addControl(
   form: FormGroup | FormArray,
-  controlItem: FormidableItem,
+  controlItem: FormElement,
   formValue: any
 ) {
   let formControl, formGroup, formArray, options;
   switch (controlItem.type) {
-    case Type.FORM:
-    case Type.ROW:
-    case Type.COL:
+    case FormElementType.FORM:
+    case FormElementType.ROW:
+    case FormElementType.COL:
       // handle children
       controlItem.children.forEach((item) => {
         addControl(form, item, formValue);
       });
       break;
-    case Type.GROUP:
+    case FormElementType.GROUP:
       // create AbstractFormControl
       formGroup = new FormGroup(
         {},
@@ -49,7 +49,7 @@ export function addControl(
         );
       });
       break;
-    case Type.REPEAT:
+    case FormElementType.REPEAT:
       // create AbstractFormControl
       formArray = new FormArray(
         [],
@@ -88,7 +88,7 @@ function isFormArray(obj): obj is FormArray {
   return obj['push'] !== undefined;
 }
 
-function getValidators(item: FormidableItem) {
+function getValidators(item: FormElement) {
   const validators: ValidatorFn[] = [];
 
   if (item.validation?.required === true) {
@@ -103,7 +103,7 @@ function getValidators(item: FormidableItem) {
   return validators;
 }
 
-function getAsyncValidators(item: FormidableItem) {
+function getAsyncValidators(item: FormElement) {
   const validators: AsyncValidatorFn[] = [];
   if (item.validation?.custom) {
     validators.push(getCustomValidator(item));
@@ -111,7 +111,7 @@ function getAsyncValidators(item: FormidableItem) {
   return validators;
 }
 
-function getCustomValidator(item: FormidableItem): AsyncValidatorFn {
+function getCustomValidator(item: FormElement): AsyncValidatorFn {
   return (control: AbstractControl): Observable<ValidationErrors | null> => {
     const engine = new Engine();
     const rules = JSON.parse(item.validation.custom);

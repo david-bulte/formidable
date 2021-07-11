@@ -2,7 +2,7 @@ import { ID } from '@datorama/akita';
 
 export class PaletteItem {
   id?: ID;
-  type: Type;
+  type: FormElementType;
   group?: PaletteGroup;
   props: {
     icon?: string;
@@ -10,7 +10,7 @@ export class PaletteItem {
     info?: string;
   };
   requiredProps: string[];
-  formDescription?: FormidableItem;
+  formComposition?: FormElement;
 }
 
 export enum PaletteGroup {
@@ -18,7 +18,7 @@ export enum PaletteGroup {
   LAYOUT = 'layout',
 }
 
-export enum Type {
+export enum FormElementType {
   CHECKBOX = 'checkbox',
   COL = 'col',
   FORM = 'form',
@@ -32,9 +32,9 @@ export enum Type {
   TEXTAREA = 'textarea',
 }
 
-export class FormidableItem {
+export class FormElement {
   id?: ID;
-  type: Type;
+  type: FormElementType;
   props: {
     label?: string;
     name?: string;
@@ -58,15 +58,5 @@ export class FormidableItem {
     custom?: string;
   };
   parentId?: ID;
-  children?: FormidableItem[];
+  children?: FormElement[];
 }
-
-export class FormItem extends FormidableItem {
-  children: FormidableItem[];
-}
-
-export class LayoutItem extends FormidableItem {
-  children: FormidableItem[];
-}
-
-export class ControlItem extends FormidableItem {}

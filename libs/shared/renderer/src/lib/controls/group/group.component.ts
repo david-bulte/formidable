@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { LayoutItem } from '@formidable/shared/renderer';
+import { FormElement } from '@formidable/shared/renderer';
 
 @Component({
   selector: 'formidable-group',
@@ -26,7 +26,7 @@ import { LayoutItem } from '@formidable/shared/renderer';
 })
 export class GroupComponent {
   @Input() parent: FormGroup;
-  @Input() item: LayoutItem;
+  @Input() item: FormElement;
 
   constructor() {}
 }

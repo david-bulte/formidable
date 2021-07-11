@@ -1,26 +1,26 @@
 import { Injectable } from '@angular/core';
 import { applyTransaction, guid, ID } from '@datorama/akita';
-import { FormidableItem, Type } from '@formidable/shared/renderer';
-import { FormidableItemQuery } from './formidable-item-query.service';
-import { FormidableItemStore } from './formidable-item-store.service';
+import { FormElement, FormElementType } from '@formidable/shared/renderer';
+import { FormElementQuery } from './form-element-query.service';
+import { FormElementStore } from './form-element-store.service';
 
 @Injectable({ providedIn: 'root' })
-export class FormidableItemService {
+export class FormElementService {
   constructor(
-    private store: FormidableItemStore,
-    private query: FormidableItemQuery
+    private store: FormElementStore,
+    private query: FormElementQuery
   ) {}
 
   createForm() {
     this.add({
-      type: Type.FORM,
+      type: FormElementType.FORM,
       props: {},
       validation: { required: false, custom: null },
       parentId: null,
     });
   }
 
-  add(item: FormidableItem) {
+  add(item: FormElement) {
     const id = guid();
     applyTransaction(() => {
       this.store.add({ id, type: item.type, props: {}, parentId: item.parentId });
@@ -47,7 +47,7 @@ export class FormidableItemService {
     });
   }
 
-  update(id: ID, item: FormidableItem) {
+  update(id: ID, item: FormElement) {
     applyTransaction(() => {
       this.store.update(id, item);
       this.store.setActive(id);

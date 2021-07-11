@@ -1,13 +1,14 @@
 import { Component, HostBinding, Input } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { ControlItem } from '@formidable/shared/renderer';
+import { FormElement } from '@formidable/shared/renderer';
 import { faInfoCircle } from '@fortawesome/free-solid-svg-icons/faInfoCircle';
 
 @Component({
   selector: 'formidable-label',
   template: `
     <label class="block text-gray-700 text-sm font-bold mb-2" [attr.for]="id">
-      {{ item.props?.label }} <span class="text-red-400" *ngIf="item.validation?.required">*</span>
+      {{ item.props?.label }}
+      <span class="text-red-400" *ngIf="item.validation?.required">*</span>
       <fa-icon
         [icon]="faInfo"
         [tippy]="item.props.tooltip"
@@ -27,7 +28,7 @@ import { faInfoCircle } from '@fortawesome/free-solid-svg-icons/faInfoCircle';
 export class LabelComponent {
   // todo can be removed
   @Input() parent: FormGroup;
-  @Input() item: ControlItem;
+  @Input() item: FormElement;
 
   @Input() id: string;
   faInfo = faInfoCircle;

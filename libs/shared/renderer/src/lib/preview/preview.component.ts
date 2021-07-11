@@ -1,11 +1,11 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { FormItem } from '../model';
+import { Component, Input } from '@angular/core';
+import { FormElement } from '../model';
 
 @Component({
   selector: 'formidable-preview',
   template: `
     <formidable-form
-      [formDescription]="item"
+      [formElement]="item"
       (submitForm)="value = $event"
     ></formidable-form>
 
@@ -16,13 +16,9 @@ import { FormItem } from '../model';
   `,
   styles: [],
 })
-export class PreviewComponent implements OnInit {
-  @Input() item: FormItem;
+export class PreviewComponent {
+  @Input() item: FormElement;
   value: any;
-
-  constructor() {}
-
-  ngOnInit(): void {}
 }
 
 // config: any = {

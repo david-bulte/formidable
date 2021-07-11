@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { FormArray, FormGroup } from '@angular/forms';
-import { ControlItem } from '@formidable/shared/renderer';
+import { FormElement } from '@formidable/shared/renderer';
 import { faMinusCircle } from '@fortawesome/free-solid-svg-icons/faMinusCircle';
 import { faPlusCircle } from '@fortawesome/free-solid-svg-icons/faPlusCircle';
 import { addControl } from '../../form.utils';
@@ -44,7 +44,7 @@ import { addControl } from '../../form.utils';
 })
 export class RepeatComponent {
   @Input() parent: FormGroup;
-  @Input() item: ControlItem;
+  @Input() item: FormElement;
 
   plus = faPlusCircle;
   minus = faMinusCircle;

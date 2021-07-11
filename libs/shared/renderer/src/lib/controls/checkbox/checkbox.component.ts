@@ -1,6 +1,6 @@
 import { Component, HostBinding, Input } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { ControlItem } from '@formidable/shared/renderer';
+import { FormElement } from '@formidable/shared/renderer';
 
 @Component({
   selector: 'formidable-checkbox',
@@ -28,7 +28,7 @@ import { ControlItem } from '@formidable/shared/renderer';
 })
 export class CheckboxComponent {
   @Input() parent: FormGroup;
-  @Input() item: ControlItem;
+  @Input() item: FormElement;
 
   constructor() {}
 
@@ -36,5 +36,4 @@ export class CheckboxComponent {
   public get classes() {
     return this.item?.props?.classes;
   }
-
 }

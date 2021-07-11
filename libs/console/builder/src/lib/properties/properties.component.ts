@@ -1,24 +1,20 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
-import { FormidableItem, Type } from '@formidable/shared/renderer';
-import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import { map } from 'rxjs/operators';
-import { FormComponent } from '../../../../../shared/renderer/src/lib/form/form.component';
-import { FormidableItemQuery } from '../state/formidable-item-query.service';
-import { FormidableItemService } from '../state/formidable-item.service';
+import { Component } from '@angular/core';
+import { UntilDestroy } from '@ngneat/until-destroy';
+import { FormElementQuery } from '../state/form-element-query.service';
+import { FormElementService } from '../state/form-element.service';
 
 @UntilDestroy()
 @Component({
   selector: 'formidable-properties',
   template: `
-    <h1 class="mb-4 text-xl font-bold text-gray-700">Properties</h1>
+    <h1 class='mb-4 text-xl font-bold text-gray-700'>Properties</h1>
     <div
-      class="flex flex-col bg-white px-6 py-4 rounded-lg shadow-md overflow-y-auto properties-container"
+      class='flex flex-col bg-white px-6 py-4 rounded-lg shadow-md overflow-y-auto properties-container'
     >
       <formidable-form
-        [formDescription]="props$ | async"
-        [value]="active$ | async"
-        (submitForm)="onSubmitForm($event)"
+        [formElement]='props$ | async'
+        [value]='active$ | async'
+        (submitForm)='onSubmitForm($event)'
       ></formidable-form>
     </div>
   `,
@@ -34,18 +30,18 @@ import { FormidableItemService } from '../state/formidable-item.service';
 })
 export class PropertiesComponent {
   // todo
-  active$ = this.formidableItemQuery.selectActive();
-  props$ = this.formidableItemQuery.selectActiveFormDescription();
+  active$ = this.formElementQuery.selectActive();
+  props$ = this.formElementQuery.selectActiveFormDescription();
 
   constructor(
-    private formidableItemQuery: FormidableItemQuery,
-    private formidableItemService: FormidableItemService
+    private formElementQuery: FormElementQuery,
+    private formElementService: FormElementService
   ) {}
 
   onSubmitForm(value) {
-    this.formidableItemService.update(
+    this.formElementService.update(
       // todo props => group
-      this.formidableItemQuery.getActiveId(),
+      this.formElementQuery.getActiveId(),
       value
     );
   }

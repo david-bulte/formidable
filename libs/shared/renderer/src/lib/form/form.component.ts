@@ -9,7 +9,7 @@ import {
 import { FormGroup } from '@angular/forms';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { addControl } from '../form.utils';
-import { FormidableItem, FormItem, LayoutItem } from '../model';
+import { FormElement } from '../model';
 
 @UntilDestroy()
 @Component({
@@ -17,7 +17,7 @@ import { FormidableItem, FormItem, LayoutItem } from '../model';
   template: `
     <form [formGroup]="form" (ngSubmit)="onSubmit()" *ngIf="form">
       <ng-container
-        *ngFor="let child of formDescription.children"
+        *ngFor="let child of formElement.children"
         formidableDynamicField
         [item]="child"
         [group]="form"
@@ -49,14 +49,14 @@ import { FormidableItem, FormItem, LayoutItem } from '../model';
   ],
 })
 export class FormComponent implements OnChanges {
-  @Input() formDescription: FormItem;
-  @Input() value: FormidableItem;
+  @Input() formElement: FormElement;
+  @Input() value: FormElement;
   @Output() submitForm = new EventEmitter();
 
   form: FormGroup;
 
   get autosubmit() {
-    return this.formDescription?.props?.autosubmit;
+    return this.formElement?.props?.autosubmit;
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -72,7 +72,7 @@ export class FormComponent implements OnChanges {
       setTimeout(() => {
         // todo set value while creating so we can deal with e.g. dynamically added controls
         this.form = this.createFormGroup(
-          this.formDescription,
+          this.formElement,
           formValueChange?.currentValue
         );
         if (this.autosubmit) {
@@ -108,7 +108,7 @@ export class FormComponent implements OnChanges {
     }
   }
 
-  private createFormGroup(formItem: FormItem | LayoutItem, formValue: any) {
+  private createFormGroup(formItem: FormElement, formValue: any) {
     const group = new FormGroup({});
     formItem.children.forEach((controlItem) =>
       addControl(group, controlItem, formValue)
