@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Form } from '@angular/forms';
 import { ID, QueryEntity } from '@datorama/akita';
 import { FormidableItem, FormItem, Type } from '@formidable/shared/renderer';
 import { Observable } from 'rxjs';
@@ -41,6 +42,15 @@ export class FormidableItemQuery extends QueryEntity<FormidableItemState> {
       (item) => item.parentId === null
     ) as FormItem;
     return { ...root, children: this.getChildren(root.id) };
+  }
+
+  selectAllAsTree(): Observable<FormItem> {
+    return this.selectAll().pipe(map(all => {
+      const root: FormItem = all.find(
+        (item) => item.parentId === null
+      ) as FormItem;
+      return { ...root, children: this.getChildren(root.id) };
+    }));
   }
 
   selectActiveFormDescription(): Observable<FormidableItem> {

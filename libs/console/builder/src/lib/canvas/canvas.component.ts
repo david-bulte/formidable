@@ -50,7 +50,13 @@ import { FormidableItemQuery } from '../state/formidable-item-query.service';
           preview
         </button>
       </div>
+
+      <pre>
+    json = {{debug$ | async | json}}
+    </pre>
+
     </div>
+    
   `,
   styles: [
     `
@@ -68,6 +74,8 @@ export class CanvasComponent implements OnInit {
     map((visible) => (visible ? this.formidableItemQuery.getAllAsTree() : null))
   );
   invalid$ = this.formidableItemQuery.invalid$;
+
+  debug$ = this.formidableItemQuery.selectAllAsTree();
 
   constructor(private formidableItemQuery: FormidableItemQuery) {}
 
