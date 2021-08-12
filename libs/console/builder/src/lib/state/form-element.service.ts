@@ -11,21 +11,29 @@ export class FormElementService {
     private query: FormElementQuery
   ) {}
 
-  createForm() {
-    this.add({
+  createForm(name: string, id?: ID) {
+    const formElement = {
+      id,
       type: FormElementType.FORM,
-      props: {},
+      props: { name },
       validation: { required: false, custom: null },
       parentId: null,
-    });
+    };
+    return this.add(formElement);
   }
 
   add(formElement: FormElement) {
-    const id = guid();
     applyTransaction(() => {
-      this.store.add({ id, type: formElement.type, props: {}, parentId: formElement.parentId });
-      this.store.setActive(id);
+      formElement = {
+        id: formElement.id || guid(),
+        type: formElement.type,
+        props: {},
+        parentId: formElement.parentId,
+      };
+      this.store.add(formElement);
+      this.store.setActive(formElement.id);
     });
+    return formElement;
   }
 
   setActive(id: ID) {

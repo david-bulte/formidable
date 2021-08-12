@@ -20,7 +20,7 @@ export const paletteItems: PaletteItem[] = [
     type: FormElementType.FORM,
     props: {},
     requiredProps: [],
-    formComposition: form([
+    propsForm: form([
       group('props', [checkbox('autosubmit', false, { defaultValue: false })]),
     ]),
   },
@@ -29,21 +29,21 @@ export const paletteItems: PaletteItem[] = [
     group: PaletteGroup.LAYOUT,
     props: {},
     requiredProps: [],
-    formComposition: form([group('props', [input('classes')])]),
+    propsForm: form([group('props', [input('classes')])]),
   },
   {
     type: FormElementType.COL,
     group: PaletteGroup.LAYOUT,
     props: {},
     requiredProps: [],
-    formComposition: form([group('props', [input('classes')])]),
+    propsForm: form([group('props', [input('classes')])]),
   },
   {
     type: FormElementType.GROUP,
     group: PaletteGroup.BASIC,
     props: {},
     requiredProps: ['name'],
-    formComposition: form([
+    propsForm: form([
       group('props', [input('name', true), input('label')]),
     ]),
   },
@@ -52,7 +52,7 @@ export const paletteItems: PaletteItem[] = [
     group: PaletteGroup.BASIC,
     props: {},
     requiredProps: ['name'],
-    formComposition: form([
+    propsForm: form([
       group('props', [
         input('label', true),
         input('name', true),
@@ -79,7 +79,7 @@ export const paletteItems: PaletteItem[] = [
     group: PaletteGroup.BASIC,
     props: {},
     requiredProps: ['name'],
-    formComposition: form([
+    propsForm: form([
       group('props', [
         input('label', true),
         input('name', true),
@@ -104,7 +104,7 @@ export const paletteItems: PaletteItem[] = [
     group: PaletteGroup.BASIC,
     props: {},
     requiredProps: ['name'],
-    formComposition: form([
+    propsForm: form([
       group('props', [
         input('label', true),
         input('name', true),
@@ -130,7 +130,7 @@ export const paletteItems: PaletteItem[] = [
     group: PaletteGroup.BASIC,
     props: {},
     requiredProps: ['label'],
-    formComposition: form([
+    propsForm: form([
       group('props', [input('label', true), input('classes')]),
     ]),
   },
@@ -139,7 +139,7 @@ export const paletteItems: PaletteItem[] = [
     group: PaletteGroup.BASIC,
     props: {},
     requiredProps: ['label', 'name'],
-    formComposition: form([
+    propsForm: form([
       group('props', [input('label', true), input('name', true)]),
     ]),
   },
@@ -148,7 +148,7 @@ export const paletteItems: PaletteItem[] = [
     group: PaletteGroup.BASIC,
     props: {},
     requiredProps: ['name'],
-    formComposition: form([
+    propsForm: form([
       group('props', [
         input('label', true),
         input('name', true),

@@ -10,7 +10,7 @@ export class PaletteItem {
     info?: string;
   };
   requiredProps: string[];
-  formComposition?: FormElement;
+  propsForm?: FormElement;
 }
 
 export enum PaletteGroup {

@@ -14,21 +14,23 @@ import { FormElement } from '../../model';
     <!--          />-->
     <!--      </formidable-control-base>-->
 
-    <ng-container [formGroup]='parent'>
-      <div class='mb-4'>
-        <formidable-label [id]='id' [formElement]='formElement'></formidable-label>
+    <ng-container [formGroup]="parent">
+      <div class="mb-4">
+        <formidable-label
+          [id]="id"
+          [formElement]="formElement"
+        ></formidable-label>
         <input
-          class='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
-          [attr.id]='id'
-          type='text'
-          [formControlName]='formElement.props.name'
-          *ngIf='parent.contains(formElement.props.name)'
+          [attr.id]="id"
+          type="text"
+          [formControlName]="formElement.props.name"
+          *ngIf="parent.contains(formElement.props.name)"
         />
 
         <!-- todo does it work with visibility check *ngIf="parent.contains(item.props.name)"-->
         <formidable-inline-error
-          [parent]='parent'
-          [formElement]='formElement'
+          [parent]="parent"
+          [formElement]="formElement"
         ></formidable-inline-error>
       </div>
     </ng-container>

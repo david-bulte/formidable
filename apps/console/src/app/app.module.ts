@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
 import { AkitaNgDevtools } from '@datorama/akita-ngdevtools';
 import {
@@ -12,6 +12,9 @@ import {
   TippyModule,
   tooltipVariation,
 } from '@ngneat/helipopper';
+import { TeleportModule } from '@ngneat/overview';
+import { EmptyStateComponent } from '../../../../libs/console/builder/src/lib/empty-state/empty-state.component';
+import { ProjectComponent } from '../../../../libs/console/builder/src/lib/project/project.component';
 import { environment } from '../environments/environment';
 
 import { AppComponent } from './app.component';
@@ -19,13 +22,23 @@ import { AppComponent } from './app.component';
 @NgModule({
   declarations: [AppComponent],
   imports: [
-    BrowserModule,
+    BrowserAnimationsModule,
     SharedLayoutModule,
     ConsoleBuilderModule,
     RouterModule.forRoot([
       {
         path: 'build',
         component: BuildPageComponent,
+        children: [
+          {
+            path: ':id',
+            component: ProjectComponent
+          },
+          {
+            path: '',
+            component: EmptyStateComponent
+          }
+        ]
       },
       {
         path: '',
@@ -42,6 +55,7 @@ import { AppComponent } from './app.component';
         popper: popperVariation,
       },
     }),
+    TeleportModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

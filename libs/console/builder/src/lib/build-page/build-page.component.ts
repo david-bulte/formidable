@@ -1,34 +1,52 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormElementService } from '../state/form-element.service';
+import { ProjectQuery } from '../state/project-query.service';
+import { ProjectService } from '../state/project.service';
 
 @Component({
   selector: 'formidable-build-page',
   template: `
-    <div class="flex justify-between h-screen">
-      <div class="w-4/12 mr-8 mt-6">
-        <formidable-palette></formidable-palette>
-      </div>
+    <button
+      class="btn-primary"
+      *teleportTo="'navButton'"
+      (click)="onCreate('dummy')"
+    >
+      create project
+    </button>
 
-      <div class="w-full mt-6 ">
-        <formidable-canvas></formidable-canvas>
-      </div>
+    <div class="overflow-y-hidden flex flex-row h-full">
 
-      <div class="w-4/12 ml-4 mt-6">
-        <formidable-properties></formidable-properties>
+      <nav class="flex flex-col mx-6">
+        <div class="mt-6 ml-2">
+          <formidable-projects
+            [projects]="projects$ | async"
+          ></formidable-projects>
+        </div>
+      </nav>
+
+      <div class="w-full">
+        <router-outlet></router-outlet>
       </div>
     </div>
   `,
-  styles: [],
-})
-export class BuildPageComponent implements OnInit {
-  constructor(private formSchemeService: FormElementService) {}
-
-  ngOnInit(): void {
-    this.createForm();
+  styles: [`
+  .nav {
+      width: 10rem;
   }
+  
+  `],
+})
+export class BuildPageComponent {
+  projects$ = this.projectQuery.selectAll();
 
-  createForm() {
-    // todo first ask in popup
-    this.formSchemeService.createForm();
+  constructor(
+    private formElementService: FormElementService,
+    private projectService: ProjectService,
+    private projectQuery: ProjectQuery
+  ) {}
+
+  onCreate(name: string) {
+    const project = this.projectService.add({ name });
+    this.formElementService.createForm(name, project.id);
   }
 }

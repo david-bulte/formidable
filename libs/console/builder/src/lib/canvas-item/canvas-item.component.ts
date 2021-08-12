@@ -1,10 +1,18 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  OnInit,
+  Output,
+  SimpleChanges,
+} from '@angular/core';
 import { FormElement } from '@formidable/shared/renderer';
 import { faExclamationCircle } from '@fortawesome/free-solid-svg-icons/faExclamationCircle';
 import { faGripVertical } from '@fortawesome/free-solid-svg-icons/faGripVertical';
 import { faTimesCircle } from '@fortawesome/free-solid-svg-icons/faTimesCircle';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { BehaviorSubject, Observable, of, Subject } from 'rxjs';
+import { map, switchMap, tap } from 'rxjs/operators';
 import { FormElementQuery } from '../state/form-element-query.service';
 import { FormElementService } from '../state/form-element.service';
 import { paletteItems } from '../state/palette-items';
@@ -13,45 +21,46 @@ import { paletteItems } from '../state/palette-items';
   selector: 'formidable-canvas-item',
   template: `
     <div
-      class='bg-gray-100 pl-1 pr-2 py-2 my-1 rounded flex flex-row palette-item__container w-full'
-      [dragonDraggable]='isMoveAble || isCopyAble'
-      [dragonData]='formElement'
-      [dragonCopy]='false'
+      class="bg-gray-100 pl-1 pr-2 py-2 my-1 rounded flex flex-row palette-item__container w-full"
+      [dragonDraggable]="isMoveAble || isCopyAble"
+      [dragonData]="formElement"
+      [dragonCopy]="false"
     >
-      <div class='handle' dragonHandle>
-        <fa-icon [icon]='grip' class='mx-1'></fa-icon>
+      <div class="handle" dragonHandle>
+        <fa-icon [icon]="grip" class="mx-1"></fa-icon>
       </div>
-      <div class='flex flex-col flex-1 '>
+      <div class="flex flex-col flex-1 ">
         <div
-          class='flex flex-row'
-          (click)='onSelect()'
-          [class.active]='isActive$ | async'
+          class="flex flex-row"
+          (click)="onSelect()"
+          [class.active]="isActive$ | async"
         >
-          <div class='label'>
-            {{ formElement.type }} ({{ formElement.id }}, {{ formElement.props?.label }})
+          <div class="label">
+            {{ formElement.type }} ({{ formElement.id }},
+            {{ formElement.props?.label }})
           </div>
-          <button (click)='onRemove()' *ngIf='!!formElement.parentId'>
-            <fa-icon [icon]='times'></fa-icon>
+          <button (click)="onRemove()" *ngIf="!!formElement.parentId">
+            <fa-icon [icon]="times"></fa-icon>
           </button>
-          <fa-icon [icon]='exclamation' *ngIf='invalid'></fa-icon>
+          <fa-icon [icon]="exclamation" *ngIf="invalid"></fa-icon>
         </div>
 
         <div
-          class='flex w-full'
+          class="flex w-full"
           [class.flex-row]="formElement.type === 'row'"
           [class.flex-col]="formElement.type !== 'row'"
         >
           <formidable-canvas-item
             [formElement]="child"
-            [isMoveAble]='true'
-            [isDroppable]='true'
-            *ngFor='let child of children$ | async'
+            [isMoveAble]="true"
+            [isDroppable]="true"
+            *ngFor="let child of children$ | async"
           ></formidable-canvas-item>
 
           <div
-            class='drop-zone w-full h-auto bg-blue-100 pb-5'
-            [dragonDroppable]='isDroppable'
-            (dragonDrop)='onDrop($event)'
+            class="drop-zone w-full h-auto bg-blue-100 pb-5"
+            [dragonDroppable]="isDroppable"
+            (dragonDrop)="onDrop($event)"
             *ngIf="
               isDroppable &&
               (formElement.type === 'row' ||
@@ -92,7 +101,7 @@ import { paletteItems } from '../state/palette-items';
     `,
   ],
 })
-export class CanvasItemComponent implements OnInit {
+export class CanvasItemComponent implements OnInit, OnChanges {
   @Input() formElement: FormElement;
   @Input() isCopyAble = false;
   @Input() isMoveAble = false;
@@ -109,6 +118,8 @@ export class CanvasItemComponent implements OnInit {
   times = faTimesCircle;
   exclamation = faExclamationCircle;
 
+  private formElementIdSubj = new BehaviorSubject(null);
+
   constructor(
     private formElementQuery: FormElementQuery,
     private formElementService: FormElementService
@@ -117,7 +128,9 @@ export class CanvasItemComponent implements OnInit {
   get invalid() {
     return paletteItems
       .find((paletteItem) => paletteItem.type === this.formElement.type)
-      .requiredProps.some((requiredProp) => !this.formElement.props[requiredProp]);
+      .requiredProps.some(
+        (requiredProp) => !this.formElement.props[requiredProp]
+      );
   }
 
   onSelect() {
@@ -128,10 +141,22 @@ export class CanvasItemComponent implements OnInit {
     this.formElementService.remove(this.formElement.id);
   }
 
+  ngOnChanges(changes: SimpleChanges): void {
+    const change = changes['formElement'];
+    if (change) {
+      this.formElementIdSubj.next(this.formElement?.id);
+    }
+  }
+
   ngOnInit(): void {
-    this.children$ = this.formElementQuery.selectAll({
-      filterBy: (element: FormElement) => element.parentId === this.formElement.id,
-    });
+    this.children$ = this.formElementIdSubj.pipe(
+      switchMap((formElementId) =>
+        this.formElementQuery.selectAll({
+          filterBy: (element: FormElement) =>
+            element.parentId === formElementId,
+        })
+      )
+    );
   }
 
   onDrop(dragonEvent: { data: FormElement; copy: boolean }) {
