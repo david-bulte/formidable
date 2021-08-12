@@ -11,7 +11,6 @@ import { FormElementQuery } from '../state/form-element-query.service';
   template: `
     <div class="flex items-center justify-between">
       <h1>
-        <fa-icon [icon]="chalk"></fa-icon>
         Canvas
       </h1>
     </div>
@@ -71,9 +70,7 @@ import { FormElementQuery } from '../state/form-element-query.service';
     `,
   ],
 })
-export class CanvasComponent implements OnInit {
-  chalk = faChalkboard;
-
+export class CanvasComponent {
   items = [];
   root$ = this.formElementQuery.root$;
   previewVisible$$ = new BehaviorSubject(false);
@@ -85,8 +82,6 @@ export class CanvasComponent implements OnInit {
   debug$ = this.formElementQuery.selectProject();
 
   constructor(private formElementQuery: FormElementQuery) {}
-
-  ngOnInit(): void {}
 
   setPreview(preview) {
     this.previewVisible$$.next(preview);

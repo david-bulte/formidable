@@ -7,7 +7,6 @@ import { paletteItems } from '../state/palette-items';
   selector: 'formidable-palette',
   template: `
     <h1 class="mb-4">
-      <fa-icon [icon]="palette"></fa-icon>
       Palette
     </h1>
 
@@ -37,7 +36,6 @@ import { paletteItems } from '../state/palette-items';
   ],
 })
 export class PaletteComponent {
-  palette = faPalette;
   layoutItems = filter(paletteItems, PaletteGroup.LAYOUT);
   basicItems = filter(paletteItems, PaletteGroup.BASIC);
 }
