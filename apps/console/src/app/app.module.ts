@@ -4,7 +4,7 @@ import { RouterModule } from '@angular/router';
 import { AkitaNgDevtools } from '@datorama/akita-ngdevtools';
 import {
   BuildPageComponent,
-  ConsoleBuilderModule,
+  ConsoleBuilderModule, EmptyStateComponent, ProjectComponent
 } from '@formidable/console/builder';
 import { SharedLayoutModule } from '@formidable/shared/layout';
 import {
@@ -13,8 +13,6 @@ import {
   tooltipVariation,
 } from '@ngneat/helipopper';
 import { TeleportModule } from '@ngneat/overview';
-import { EmptyStateComponent } from '../../../../libs/console/builder/src/lib/empty-state/empty-state.component';
-import { ProjectComponent } from '../../../../libs/console/builder/src/lib/project/project.component';
 import { environment } from '../environments/environment';
 
 import { AppComponent } from './app.component';
