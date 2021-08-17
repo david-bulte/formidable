@@ -23,6 +23,4 @@ import { UntilDestroy } from '@ngneat/until-destroy';
 export class InlineErrorComponent {
   @Input() parent: FormGroup;
   @Input() formElement: FormElement;
-
-  constructor() {}
 }

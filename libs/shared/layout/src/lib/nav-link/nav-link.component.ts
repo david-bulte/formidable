@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'formidable-nav-link',
@@ -11,10 +11,6 @@ import { Component, Input, OnInit } from '@angular/core';
   `,
   styles: [],
 })
-export class NavLinkComponent implements OnInit {
-  @Input() path:string = undefined;
-
-  constructor() {}
-
-  ngOnInit(): void {}
+export class NavLinkComponent {
+  @Input() path: string = undefined;
 }

@@ -30,8 +30,6 @@ export class CheckboxComponent {
   @Input() parent: FormGroup;
   @Input() formElement: FormElement;
 
-  constructor() {}
-
   @HostBinding('class')
   public get classes() {
     return this.formElement?.props?.classes;

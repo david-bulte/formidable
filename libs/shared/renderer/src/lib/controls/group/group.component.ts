@@ -27,6 +27,4 @@ import { FormElement } from '../../model';
 export class GroupComponent {
   @Input() parent: FormGroup;
   @Input() formElement: FormElement;
-
-  constructor() {}
 }

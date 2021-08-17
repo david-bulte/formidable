@@ -26,7 +26,8 @@
     "workspace-generator": "nx workspace-generator",
     "dep-graph": "nx dep-graph",
     "help": "nx help",
-    "analyze": "ng build --stats-json && npx webpack-bundle-analyzer dist/apps/console/stats.json"
+    "custom:analyze": "ng build --stats-json && npx webpack-bundle-analyzer dist/apps/console/stats.json",
+    "custom:all:lint": "nx run-many --all --target lint"
   },
   "private": true,
   "dependencies": {

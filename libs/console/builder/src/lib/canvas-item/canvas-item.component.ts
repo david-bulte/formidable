@@ -1,18 +1,16 @@
 import {
   Component,
-  EventEmitter,
   Input,
   OnChanges,
   OnInit,
-  Output,
   SimpleChanges,
 } from '@angular/core';
 import { FormElement } from '@formidable/shared/renderer';
 import { faExclamationCircle } from '@fortawesome/free-solid-svg-icons/faExclamationCircle';
 import { faGripVertical } from '@fortawesome/free-solid-svg-icons/faGripVertical';
 import { faTimesCircle } from '@fortawesome/free-solid-svg-icons/faTimesCircle';
-import { BehaviorSubject, Observable, of, Subject } from 'rxjs';
-import { map, switchMap, tap } from 'rxjs/operators';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { map, switchMap } from 'rxjs/operators';
 import { FormElementQuery } from '../state/form-element-query.service';
 import { FormElementService } from '../state/form-element.service';
 import { paletteItems } from '../state/palette-items';
@@ -107,7 +105,6 @@ export class CanvasItemComponent implements OnInit, OnChanges {
   @Input() isMoveAble = false;
   @Input() isDraggable = false;
   @Input() isDroppable = false;
-  @Output() select = new EventEmitter();
 
   children$: Observable<FormElement[]>;
   isActive$ = this.formElementQuery

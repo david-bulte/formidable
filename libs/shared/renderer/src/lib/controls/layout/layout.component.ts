@@ -25,8 +25,6 @@ export class LayoutComponent {
   @Input() parent: FormGroup;
   @Input() formElement: FormElement;
 
-  constructor() {}
-
   @HostBinding('class')
   public get classes() {
     return (

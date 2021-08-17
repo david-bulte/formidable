@@ -8,7 +8,7 @@ import {
   Renderer2,
 } from '@angular/core';
 import { FormControlName, FormGroup } from '@angular/forms';
-import { FormElement } from '@formidable/shared/renderer';
+import { FormElement } from '../../model';
 
 @Component({
   selector: 'formidable-control-base',

@@ -4,7 +4,6 @@ import {
   Directive,
   ElementRef,
   Input,
-  OnDestroy,
   Renderer2,
   Self,
 } from '@angular/core';
@@ -13,7 +12,7 @@ import { DraghandleDirective } from './draghandle.directive';
 @Directive({
   selector: '[dragonDraggable]',
 })
-export class DraggableDirective<T> implements AfterViewInit, OnDestroy {
+export class DraggableDirective<T> implements AfterViewInit {
   @Input('dragonDraggable') enabled = true;
   @Input() dragonCopy = true;
   @Input() dragonData: T;
@@ -78,6 +77,4 @@ export class DraggableDirective<T> implements AfterViewInit, OnDestroy {
       el.addEventListener('dragend', ondragend);
     }
   }
-
-  ngOnDestroy(): void {}
 }

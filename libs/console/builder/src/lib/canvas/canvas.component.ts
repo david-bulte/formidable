@@ -1,5 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { faChalkboard } from '@fortawesome/free-solid-svg-icons/faChalkboard';
+import { Component } from '@angular/core';
 import { UntilDestroy } from '@ngneat/until-destroy';
 import { BehaviorSubject } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -18,7 +17,7 @@ import { FormElementQuery } from '../state/form-element-query.service';
     <div class="mt-4 overflow-y-auto h-screen pr-4">
       <div
         class="flex flex-col bg-white px-6 py-4 rounded-lg shadow-md"
-        *ngIf="!(previewVisible$$ | async)"
+        *ngIf="(previewVisible$$ | async) === false"
       >
         <formidable-canvas-item
           [formElement]="root"

@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { PaletteGroup } from '@formidable/shared/renderer';
-import { faPalette } from '@fortawesome/free-solid-svg-icons/faPalette';
 import { paletteItems } from '../state/palette-items';
 
 @Component({

@@ -1,19 +1,9 @@
-import {
-  AfterViewInit,
-  Directive,
-  ElementRef,
-  EventEmitter,
-  Input,
-  OnDestroy,
-  Output,
-  Renderer2,
-  Self,
-} from '@angular/core';
+import { AfterViewInit, Directive, ElementRef, EventEmitter, Input, Output, Renderer2, Self } from '@angular/core';
 
 @Directive({
   selector: '[dragonDroppable]',
 })
-export class DroppableDirective<T> implements AfterViewInit, OnDestroy {
+export class DroppableDirective<T> implements AfterViewInit {
   @Input('dragonDroppable') enabled = true;
   @Output() dragonDrop = new EventEmitter<{ data: T; copy: boolean }>();
 
@@ -52,6 +42,4 @@ export class DroppableDirective<T> implements AfterViewInit, OnDestroy {
       this.renderer.removeClass(el, 'drag--over');
     });
   }
-
-  ngOnDestroy(): void {}
 }

@@ -1,6 +1,6 @@
 import { ID } from '@datorama/akita';
 
-export class PaletteItem {
+export interface PaletteItem {
   id?: ID;
   type: FormElementType;
   group?: PaletteGroup;
@@ -32,7 +32,7 @@ export enum FormElementType {
   TEXTAREA = 'textarea',
 }
 
-export class FormElement {
+export interface FormElement {
   id?: ID;
   type: FormElementType;
   props: {

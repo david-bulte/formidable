@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'formidable-nav',
@@ -21,8 +21,5 @@ import { Component, OnInit } from '@angular/core';
   `,
   styles: [],
 })
-export class NavComponent implements OnInit {
-  constructor() {}
-
-  ngOnInit(): void {}
+export class NavComponent {
 }
