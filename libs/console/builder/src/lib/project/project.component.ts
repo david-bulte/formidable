@@ -56,7 +56,10 @@ export class ProjectComponent implements OnInit {
             })
           )
         ),
-        tap(() => this.formElementService.setActive(null)),
+        tap(() => {
+          // this.formElementService.setActive(null)
+          this.formElementService.clear();
+        }),
         untilDestroyed(this)
       )
       .subscribe();
