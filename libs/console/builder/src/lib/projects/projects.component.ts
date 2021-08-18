@@ -1,5 +1,9 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { faPlusSquare } from '@fortawesome/free-solid-svg-icons/faPlusSquare';
+import { FormElementService } from '../state/form-element.service';
 import { Project } from '../state/project.model';
+import { ProjectService } from '../state/project.service';
 
 @Component({
   selector: 'formidable-projects',
@@ -7,7 +11,16 @@ import { Project } from '../state/project.model';
     <h1 class="mb-4">Projects</h1>
     <ul>
       <li *ngFor="let comp of projects">
-        <a [routerLink]="comp.id" [routerLinkActive]="'text-indigo-600'">{{ comp.name }}</a>
+        <a [routerLink]="comp.id" [routerLinkActive]="'text-indigo-600'">{{
+          comp.name
+        }}</a>
+      </li>
+      <li>
+        <formidable-inline-edit-button
+          [icon]="faPlus"
+          [placeholder]="'enter project name'"
+          (save)="onSave($event)"
+        ></formidable-inline-edit-button>
       </li>
     </ul>
   `,
@@ -16,10 +29,16 @@ import { Project } from '../state/project.model';
       :host {
         display: block;
       }
-      
     `,
   ],
 })
 export class ProjectsComponent {
-  @Input() projects: Project[];
+  @Input() projects: Project[] = [];
+  @Output() create = new EventEmitter();
+
+  faPlus = faPlusSquare;
+
+  onSave(projectName: string) {
+    this.create.emit(projectName);
+  }
 }

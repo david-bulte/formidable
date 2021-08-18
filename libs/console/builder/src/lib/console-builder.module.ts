@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { SharedDragonModule } from '@formidable/shared/dragon';
+import { SharedLayoutModule } from '@formidable/shared/layout';
 import { SharedRendererModule } from '@formidable/shared/renderer';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { TeleportModule } from '@ngneat/overview';
@@ -27,6 +28,7 @@ import { ProjectComponent } from './project/project.component';
     SharedDragonModule,
     TeleportModule,
     RouterModule,
+    SharedLayoutModule,
   ],
   declarations: [
     BuildPageComponent,

@@ -1,10 +1,13 @@
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
+import { persistState } from '@datorama/akita';
 import { AkitaNgDevtools } from '@datorama/akita-ngdevtools';
 import {
   BuildPageComponent,
-  ConsoleBuilderModule, EmptyStateComponent, ProjectComponent
+  ConsoleBuilderModule,
+  EmptyStateComponent,
+  ProjectComponent,
 } from '@formidable/console/builder';
 import { SharedLayoutModule } from '@formidable/shared/layout';
 import {
@@ -30,13 +33,13 @@ import { AppComponent } from './app.component';
         children: [
           {
             path: ':id',
-            component: ProjectComponent
+            component: ProjectComponent,
           },
           {
             path: '',
-            component: EmptyStateComponent
-          }
-        ]
+            component: EmptyStateComponent,
+          },
+        ],
       },
       {
         path: '',
@@ -55,7 +58,7 @@ import { AppComponent } from './app.component';
     }),
     TeleportModule,
   ],
-  providers: [],
+  providers: [{ provide: 'persistStorage', useValue: persistState() }],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
