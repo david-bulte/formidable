@@ -16,7 +16,6 @@ export class ProjectService {
   ) {}
 
   get(id: ID) {
-    console.log('id', id);
     if (this.projectQuery.hasEntity(id)) {
       this.projectStore.setActive(id);
       return of(this.projectQuery.getEntity(id));

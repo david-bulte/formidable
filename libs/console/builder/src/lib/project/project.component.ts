@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { of } from 'rxjs';
-import { catchError, switchMap } from 'rxjs/operators';
+import { catchError, switchMap, tap } from 'rxjs/operators';
+import { FormElementService } from '../state/form-element.service';
 import { ProjectQuery } from '../state/project-query.service';
 import { ProjectService } from '../state/project.service';
 
@@ -27,10 +28,10 @@ import { ProjectService } from '../state/project.service';
   `,
   styles: [
     `
-    :host {
+      :host {
         display: block;
-    }
-    `
+      }
+    `,
   ],
 })
 @UntilDestroy()
@@ -40,7 +41,8 @@ export class ProjectComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private projectService: ProjectService,
-    private projectQuery: ProjectQuery
+    private projectQuery: ProjectQuery,
+    private formElementService: FormElementService
   ) {}
 
   ngOnInit(): void {
@@ -54,6 +56,7 @@ export class ProjectComponent implements OnInit {
             })
           )
         ),
+        tap(() => this.formElementService.setActive(null)),
         untilDestroyed(this)
       )
       .subscribe();

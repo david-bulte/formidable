@@ -36,7 +36,7 @@ export class FormElementService {
     return formElement;
   }
 
-  setActive(id: ID) {
+  setActive(id: ID | null) {
     this.store.setActive(id);
   }
 
