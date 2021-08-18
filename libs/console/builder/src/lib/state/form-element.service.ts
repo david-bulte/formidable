@@ -61,4 +61,9 @@ export class FormElementService {
       this.store.setActive(id);
     });
   }
+
+  clear(): void {
+    this.store.reset();
+    this.store.setActive(null);
+  }
 }

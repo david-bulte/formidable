@@ -53,7 +53,9 @@ export class FormElementQuery extends QueryEntity<FormElementState> {
     return this.projectQuery.selectActiveId().pipe(
       switchMap((activeId) => this.selectEntity(activeId)),
       map((root) =>
-        root ? { ...root, children: this.getChildren(root.id) } : { ...root, children: []}
+        root
+          ? { ...root, children: this.getChildren(root.id) }
+          : { ...root, children: [] }
       )
     );
     // return this.selectAll().pipe(
@@ -66,12 +68,17 @@ export class FormElementQuery extends QueryEntity<FormElementState> {
     // );
   }
 
-  selectActiveFormDescription(): Observable<FormElement> {
-    return this.selectActive(({ type }) => type).pipe(
+  selectActiveFormDescription(): Observable<FormElement | null | undefined> {
+    return this.selectActive().pipe(
+      map((formElement) => formElement?.type),
       distinctUntilChanged(),
       map((type) => {
-        const paletteItem = paletteItems.find((item) => item.type === type);
-        return paletteItem.propsForm;
+        if (type) {
+          const paletteItem = paletteItems.find((item) => item.type === type);
+          return paletteItem?.propsForm;
+        } else {
+          return null;
+        }
       })
     );
   }
