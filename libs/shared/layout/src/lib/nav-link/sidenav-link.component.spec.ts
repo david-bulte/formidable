@@ -1,20 +1,19 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { NavLinkComponent } from './nav-link.component';
+import { SidenavLinkComponent } from './sidenav-link.component';
 
 describe('NavLinkComponent', () => {
-  let component: NavLinkComponent;
-  let fixture: ComponentFixture<NavLinkComponent>;
+  let component: SidenavLinkComponent;
+  let fixture: ComponentFixture<SidenavLinkComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ NavLinkComponent ]
-    })
-    .compileComponents();
+      declarations: [SidenavLinkComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(NavLinkComponent);
+    fixture = TestBed.createComponent(SidenavLinkComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

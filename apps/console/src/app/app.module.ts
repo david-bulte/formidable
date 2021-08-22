@@ -10,6 +10,7 @@ import {
   ProjectComponent,
 } from '@formidable/console/builder';
 import { SharedLayoutModule } from '@formidable/shared/layout';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import {
   popperVariation,
   TippyModule,
@@ -57,6 +58,7 @@ import { AppComponent } from './app.component';
       },
     }),
     TeleportModule,
+    FontAwesomeModule,
   ],
   providers: [{ provide: 'persistStorage', useValue: persistState() }],
   bootstrap: [AppComponent],

@@ -1,21 +1,30 @@
 import { Component } from '@angular/core';
+import { faHome } from '@fortawesome/free-solid-svg-icons/faHome';
+import { faShapes } from '@fortawesome/free-solid-svg-icons/faShapes';
 
 @Component({
   selector: 'formidable-root',
   template: `
-    <div class="bg-gray-100 overflow-x-hidden h-screen flex flex-col formidable-build-page__container">
-      <formidable-nav>
-        <span brand>Formidable</span>
-        <formidable-nav-link [path]="'build'">builder</formidable-nav-link>
-        <div alignRight>
-          <ng-container teleportOutlet="navButton"></ng-container>
-        </div>
-      </formidable-nav>
+    <div class="overflow-y-hidden flex flex-row h-full">
+      <nav class="flex flex-col mx-6 pt-20">
+        <formidable-sidenav-link [path]="'home'">
+          <fa-icon [icon]="home"></fa-icon>
+        </formidable-sidenav-link>
+        <formidable-sidenav-link [path]="'build'">
+          <fa-icon [icon]="shapes"></fa-icon>
+        </formidable-sidenav-link>
+      </nav>
 
-      <div class="overflow-y-hidden flex-1">
-        <router-outlet></router-outlet>
+      <div class="w-full">
+        <ng-container teleportOutlet="nav"></ng-container>
+        <div class="border-l-8 border-t-8 border-green-200 rounded-tl-2xl">
+          <router-outlet></router-outlet>
+        </div>
       </div>
     </div>
   `,
 })
-export class AppComponent {}
+export class AppComponent {
+  home = faHome;
+  shapes = faShapes;
+}

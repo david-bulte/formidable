@@ -7,13 +7,12 @@ import { ProjectService } from '../state/project.service';
 @Component({
   selector: 'formidable-build-page',
   template: `
-    <button
-      class="btn-primary"
-      *teleportTo="'navButton'"
-      (click)="onCreate('dummy')"
-    >
-      create project
-    </button>
+    <formidable-nav *teleportTo="'nav'">
+      <span title>builder</span>
+      <div alignRight>
+        <button (click)="onCreate('dummy')">create project</button>
+      </div>
+    </formidable-nav>
 
     <div class="overflow-y-hidden flex flex-row h-full">
       <nav class="flex flex-col mx-6">
