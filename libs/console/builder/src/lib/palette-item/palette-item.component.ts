@@ -6,11 +6,10 @@ import { faGripVertical } from '@fortawesome/free-solid-svg-icons/faGripVertical
   selector: 'formidable-palette-item',
   template: `
     <div
-      class="bg-gray-100 pl-1 pr-2 py-2 my-1 rounded flex flex-col palette-item__container"
+      class="palette-item"
       [dragonDraggable]="true"
       [dragonData]="formElementDescriptor"
     >
-      <!--      todo move type-->
       <div class="flex flex-row">
         <div class="handle">
           <fa-icon [icon]="grip" class="mx-1"></fa-icon>
@@ -23,10 +22,6 @@ import { faGripVertical } from '@fortawesome/free-solid-svg-icons/faGripVertical
     `
       :host {
         display: block;
-      }
-
-      .handle {
-        cursor: move;
       }
     `,
   ],

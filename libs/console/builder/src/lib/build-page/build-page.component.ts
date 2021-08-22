@@ -8,13 +8,13 @@ import { ProjectService } from '../state/project.service';
   selector: 'formidable-build-page',
   template: `
     <formidable-nav *teleportTo="'nav'">
-      <span title>builder</span>
+      <h1 title>builder</h1>
       <div alignRight>
         <button (click)="onCreate('dummy')">create project</button>
       </div>
     </formidable-nav>
 
-    <div class="overflow-y-hidden flex flex-row h-full">
+    <div class="overflow-y-hidden flex flex-row">
       <nav class="flex flex-col mx-6">
         <div class="mt-6 ml-2">
           <formidable-projects

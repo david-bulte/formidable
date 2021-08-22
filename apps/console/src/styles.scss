@@ -9,11 +9,11 @@
 @import '~tippy.js/animations/scale.css';
 
 body {
-  @apply overflow-y-hidden;
+  @apply overflow-y-hidden overflow-x-hidden;
 }
 
 h1 {
-  @apply text-xl font-bold text-gray-700;
+  @apply text-xl font-bold text-gray-300;
 }
 
 label {
@@ -26,6 +26,35 @@ label {
 
 input {
   @apply shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight;
+}
+
+.card {
+  @apply flex flex-col rounded-tl-2xl px-6 py-4 border-green-200 border-8 shadow-md;
+}
+
+.canvas-item, .palette-item {
+  @apply pl-1 pr-2 py-2 my-1 rounded flex flex-row w-full border-green-100 border-2 bg-white;
+}
+
+.drop-zone {
+  @apply text-gray-300;
+}
+
+.drop-zone.drag--over {
+  @apply bg-green-100 text-white;
+}
+
+.canvas-item.active {
+  @apply bg-green-200;
+}
+
+.handle {
+  @apply text-gray-300 mr-0.5;
+  cursor: move;
+}
+
+.title {
+  @apply bg-green-200 text-white rounded-t py-0.5 px-2 self-end object-contain;
 }
 
 .ng-invalid.ng-touched,

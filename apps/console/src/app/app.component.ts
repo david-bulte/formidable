@@ -5,8 +5,8 @@ import { faShapes } from '@fortawesome/free-solid-svg-icons/faShapes';
 @Component({
   selector: 'formidable-root',
   template: `
-    <div class="overflow-y-hidden flex flex-row h-full">
-      <nav class="flex flex-col mx-6 pt-20">
+    <div class="flex flex-row h-full">
+      <nav class="flex-0 flex flex-col mx-6 pt-20">
         <formidable-sidenav-link [path]="'home'">
           <fa-icon [icon]="home"></fa-icon>
         </formidable-sidenav-link>
@@ -15,7 +15,7 @@ import { faShapes } from '@fortawesome/free-solid-svg-icons/faShapes';
         </formidable-sidenav-link>
       </nav>
 
-      <div class="w-full">
+      <div class="flex-1">
         <ng-container teleportOutlet="nav"></ng-container>
         <div class="border-l-8 border-t-8 border-green-200 rounded-tl-2xl">
           <router-outlet></router-outlet>

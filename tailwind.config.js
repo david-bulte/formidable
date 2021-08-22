@@ -1,5 +1,5 @@
 module.exports = {
-  mode: 'jit',
+  // mode: 'jit',
   // mode: process.env.TAILWIND_MODE ? 'jit' : '',
   mode: process.env.NODE_ENV && 'jit',
   purge: {

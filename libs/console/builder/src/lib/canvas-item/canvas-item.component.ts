@@ -11,15 +11,16 @@ import { faGripVertical } from '@fortawesome/free-solid-svg-icons/faGripVertical
 import { faTimesCircle } from '@fortawesome/free-solid-svg-icons/faTimesCircle';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
+import { DEFAULT_FORM_ELEMENT_DESCRIPTORS } from '../state/form-element-descriptors';
 import { FormElementQuery } from '../state/form-element-query.service';
 import { FormElementService } from '../state/form-element.service';
-import { DEFAULT_FORM_ELEMENT_DESCRIPTORS } from '../state/form-element-descriptors';
 
 @Component({
   selector: 'formidable-canvas-item',
   template: `
     <div
-      class="bg-gray-100 pl-1 pr-2 py-2 my-1 rounded flex flex-row palette-item__container w-full"
+      class="canvas-item"
+      [class.active]="isActive$ | async"
       [dragonDraggable]="isMoveAble || isCopyAble"
       [dragonData]="formElement"
       [dragonCopy]="false"
@@ -31,13 +32,23 @@ import { DEFAULT_FORM_ELEMENT_DESCRIPTORS } from '../state/form-element-descript
         <div
           class="flex flex-row"
           (click)="onSelect()"
-          [class.active]="isActive$ | async"
+          [class.mb-2]="(children$ | async)?.length > 0"
         >
-          <div class="label">{{ formElement.type }} ({{ formElement.id }},</div>
-          <button (click)="onRemove()" *ngIf="!!formElement.parentId">
+          <div class="label flex-grow">
+            {{ formElement.type }} ({{ formElement.id }},
+          </div>
+          <fa-icon
+            class="mr-1 text-red-400"
+            [icon]="exclamation"
+            *ngIf="invalid"
+          ></fa-icon>
+          <button
+            class="self-end text-gray-300 hover:text-green-300"
+            (click)="onRemove()"
+            *ngIf="!!formElement.parentId"
+          >
             <fa-icon [icon]="times"></fa-icon>
           </button>
-          <fa-icon [icon]="exclamation" *ngIf="invalid"></fa-icon>
         </div>
 
         <div
@@ -53,7 +64,7 @@ import { DEFAULT_FORM_ELEMENT_DESCRIPTORS } from '../state/form-element-descript
           ></formidable-canvas-item>
 
           <div
-            class="drop-zone w-full h-auto bg-blue-100 pb-5"
+            class="drop-zone canvas-item flex flex-row align-middle justify-center"
             [dragonDroppable]="isDroppable"
             (dragonDrop)="onDrop($event)"
             *ngIf="
@@ -63,7 +74,9 @@ import { DEFAULT_FORM_ELEMENT_DESCRIPTORS } from '../state/form-element-descript
                 formElement.type === 'form' ||
                 formElement.type === 'group')
             "
-          ></div>
+          >
+            dropzone
+          </div>
         </div>
       </div>
     </div>
@@ -72,23 +85,6 @@ import { DEFAULT_FORM_ELEMENT_DESCRIPTORS } from '../state/form-element-descript
     `
       :host {
         display: block;
-      }
-
-      .drop-zone {
-        min-height: 3rem;
-      }
-
-      /*todo check inline scss*/
-      .drop-zone.drag--over {
-        background-color: green !important;
-      }
-
-      .handle {
-        cursor: move;
-      }
-
-      .active {
-        background-color: yellow;
       }
 
       .drag--enter {
