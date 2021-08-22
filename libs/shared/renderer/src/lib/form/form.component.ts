@@ -9,7 +9,7 @@ import {
 import { FormGroup } from '@angular/forms';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { addControl } from '../form.utils';
-import { FormElement } from '../model';
+import { FormFormElement, FormElement, isParent } from '../model';
 
 @UntilDestroy()
 @Component({
@@ -49,7 +49,7 @@ import { FormElement } from '../model';
   ],
 })
 export class FormComponent implements OnChanges {
-  @Input() formElement!: FormElement;
+  @Input() formElement!: FormFormElement;
   @Input() value!: FormElement;
   @Output() submitForm = new EventEmitter();
 
@@ -110,9 +110,11 @@ export class FormComponent implements OnChanges {
 
   private createFormGroup(element: FormElement, formValue: any) {
     const group = new FormGroup({});
-    element.children?.forEach((controlItem) =>
-      addControl(group, controlItem, formValue)
-    );
+    if (isParent(element)) {
+      element.children?.forEach((controlItem) =>
+        addControl(group, controlItem, formValue)
+      );
+    }
     return group;
   }
 }

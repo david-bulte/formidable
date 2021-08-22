@@ -9,9 +9,7 @@ import { FormElementQuery } from '../state/form-element-query.service';
   selector: 'formidable-canvas',
   template: `
     <div class="flex items-center justify-between">
-      <h1>
-        Canvas
-      </h1>
+      <h1>Canvas</h1>
     </div>
 
     <div class="mt-4 overflow-y-auto h-screen pr-4">
@@ -70,7 +68,6 @@ import { FormElementQuery } from '../state/form-element-query.service';
   ],
 })
 export class CanvasComponent {
-  items = [];
   root$ = this.formElementQuery.root$;
   previewVisible$$ = new BehaviorSubject(false);
   formView$ = this.previewVisible$$.pipe(
@@ -82,7 +79,7 @@ export class CanvasComponent {
 
   constructor(private formElementQuery: FormElementQuery) {}
 
-  setPreview(preview) {
+  setPreview(preview: boolean) {
     this.previewVisible$$.next(preview);
   }
 }

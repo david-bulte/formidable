@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { FormArray, FormGroup } from '@angular/forms';
-import { FormElement } from '../../model';
+import { FormElement, RepeatFormElement } from '../../model';
 import { faMinusCircle } from '@fortawesome/free-solid-svg-icons/faMinusCircle';
 import { faPlusCircle } from '@fortawesome/free-solid-svg-icons/faPlusCircle';
 import { addControl } from '../../form.utils';
@@ -9,31 +9,31 @@ import { addControl } from '../../form.utils';
   selector: 'formidable-repeat',
   template: `
     <div>
-      <formidable-label [formElement]='formElement'></formidable-label>
+      <formidable-label [formElement]="formElement"></formidable-label>
 
-      <div [formGroup]='parent' class='rounded border p-2'>
+      <div [formGroup]="parent" class="rounded border p-2">
         <div
-          *ngFor='
+          *ngFor="
             let control of fa.controls;
             let index = index;
             let first = first;
             let last = last
-          '
+          "
         >
           <ng-container
-            *ngFor='let child of formElement.children[0].children'
+            *ngFor="let child of formElement.children[0].children"
             formidableDynamicField
-            [formElement]='child'
-            [group]='control'
+            [formElement]="child"
+            [group]="control"
           >
           </ng-container>
 
-          <div class='flex flex-row justify-end'>
-            <button (click)='onMinus(index)' *ngIf='!first'>
-              <fa-icon [icon]='minus'></fa-icon>
+          <div class="flex flex-row justify-end">
+            <button (click)="onMinus(index)" *ngIf="!first">
+              <fa-icon [icon]="minus"></fa-icon>
             </button>
-            <button (click)='onPlus()' class='ml-2' *ngIf='last'>
-              <fa-icon [icon]='plus'></fa-icon>
+            <button (click)="onPlus()" class="ml-2" *ngIf="last">
+              <fa-icon [icon]="plus"></fa-icon>
             </button>
           </div>
         </div>
@@ -43,8 +43,8 @@ import { addControl } from '../../form.utils';
   styles: [],
 })
 export class RepeatComponent {
-  @Input() parent: FormGroup;
-  @Input() formElement: FormElement;
+  @Input() parent!: FormGroup;
+  @Input() formElement!: RepeatFormElement;
 
   plus = faPlusCircle;
   minus = faMinusCircle;
@@ -57,7 +57,7 @@ export class RepeatComponent {
     addControl(this.fa, this.formElement.children[0], null);
   }
 
-  onMinus(index) {
+  onMinus(index: number) {
     this.fa.removeAt(index);
   }
 }

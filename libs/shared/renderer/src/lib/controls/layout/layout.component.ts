@@ -1,15 +1,20 @@
 import { Component, HostBinding, Input } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { FormElement, FormElementType } from '../../model';
+import {
+  ColFormElement,
+  FormElement,
+  FormElementType,
+  RowFormElement,
+} from '../../model';
 
 @Component({
   selector: 'formidable-layout',
   template: `
     <ng-container
-      *ngFor='let child of formElement.children'
+      *ngFor="let child of formElement.children"
       formidableDynamicField
-      [formElement]='child'
-      [group]='parent'
+      [formElement]="child"
+      [group]="parent"
     >
     </ng-container>
   `,
@@ -22,8 +27,8 @@ import { FormElement, FormElementType } from '../../model';
   ],
 })
 export class LayoutComponent {
-  @Input() parent: FormGroup;
-  @Input() formElement: FormElement;
+  @Input() parent!: FormGroup;
+  @Input() formElement!: RowFormElement | ColFormElement;
 
   @HostBinding('class')
   public get classes() {

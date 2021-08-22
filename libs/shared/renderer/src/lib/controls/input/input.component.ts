@@ -2,7 +2,7 @@ import { Component, HostBinding, Input, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { faInfoCircle } from '@fortawesome/free-solid-svg-icons/faInfoCircle';
 import { FormComponent } from '../../form/form.component';
-import { FormElement } from '../../model';
+import { FormElement, InputFormElement } from '../../model';
 
 @Component({
   template: `
@@ -44,8 +44,8 @@ import { FormElement } from '../../model';
   ],
 })
 export class InputComponent implements OnInit {
-  @Input() parent: FormGroup;
-  @Input() formElement: FormElement;
+  @Input() parent!: FormGroup;
+  @Input() formElement!: InputFormElement;
 
   id: string;
   faInfo = faInfoCircle;

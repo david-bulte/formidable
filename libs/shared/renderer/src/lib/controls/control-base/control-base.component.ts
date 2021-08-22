@@ -13,9 +13,9 @@ import { ControlBaseTemplateComponent } from './control-base-template.component'
 @Directive()
 export class ControlBaseComponent implements OnInit {
   @ViewChild(ControlBaseTemplateComponent, { static: true })
-  controlBaseTemplateComponent: ControlBaseTemplateComponent;
-  private _parent: FormGroup;
-  private _formElement: FormElement;
+  controlBaseTemplateComponent!: ControlBaseTemplateComponent;
+  private _parent!: FormGroup;
+  private _formElement!: any;
 
   get parent() {
     return this._parent;

@@ -1,11 +1,20 @@
-import { FormElement, FormElementType } from '@formidable/shared/renderer';
-
-type DefaultProps = { [key: string]: any };
+import {
+  CheckboxFormElement,
+  FormFormElement,
+  FormElement,
+  FormElementType,
+  GroupFormElement,
+  InputFormElement,
+  NumberFormElement,
+  RepeatFormElement,
+  SelectFormElement,
+  TextareaFormElement,
+} from '@formidable/shared/renderer';
 
 export function form(
   children: FormElement[],
-  defaultProps: DefaultProps = {}
-): FormElement {
+  defaultProps?: Partial<Record<keyof FormFormElement['props'], any>>
+): FormFormElement {
   return {
     type: FormElementType.FORM,
     props: {
@@ -19,8 +28,8 @@ export function form(
 export function group(
   name: string,
   children: FormElement[],
-  defaultProps: DefaultProps = {}
-): FormElement {
+  defaultProps?: Partial<Record<keyof GroupFormElement['props'], any>>
+): GroupFormElement {
   return {
     type: FormElementType.GROUP,
     props: {
@@ -32,10 +41,10 @@ export function group(
 }
 
 export function input(
-  labelName,
+  labelName: string,
   required = false,
-  defaultProps: DefaultProps = {}
-): FormElement {
+  defaultProps?: Partial<Record<keyof InputFormElement['props'], any>>
+): InputFormElement {
   return {
     type: FormElementType.INPUT,
     props: {
@@ -50,12 +59,12 @@ export function input(
 }
 
 export function select(
-  labelName,
+  labelName: string,
   mode: 'dropdown' | 'radio',
   options: { value: any; label: string }[] = [],
   required = false,
-  defaultProps: DefaultProps = {}
-): FormElement {
+  defaultProps?: Partial<Record<keyof SelectFormElement['props'], any>>
+): SelectFormElement {
   return {
     type: FormElementType.SELECT,
     props: {
@@ -72,10 +81,10 @@ export function select(
 }
 
 export function number(
-  labelName,
+  labelName: string,
   required = false,
-  defaultProps: DefaultProps = {}
-): FormElement {
+  defaultProps?: Partial<Record<keyof NumberFormElement['props'], any>>
+): NumberFormElement {
   return {
     type: FormElementType.NUMBER,
     props: {
@@ -90,10 +99,9 @@ export function number(
 }
 
 export function checkbox(
-  labelName,
-  required = false,
-  defaultProps: DefaultProps = {}
-): FormElement {
+  labelName: string,
+  defaultProps?: Partial<Record<keyof CheckboxFormElement['props'], any>>
+): CheckboxFormElement {
   return {
     type: FormElementType.CHECKBOX,
     props: {
@@ -101,17 +109,14 @@ export function checkbox(
       name: labelName,
       ...defaultProps,
     },
-    validation: {
-      required,
-    },
   };
 }
 
 export function textarea(
-  labelName,
+  labelName: string,
   required = false,
-  defaultProps: DefaultProps = {}
-): FormElement {
+  defaultProps?: Partial<Record<keyof TextareaFormElement['props'], any>>
+): TextareaFormElement {
   return {
     type: FormElementType.TEXTAREA,
     props: {
@@ -126,15 +131,14 @@ export function textarea(
 }
 
 export function repeat(
-  labelName,
+  labelName: string,
   children: FormElement[],
-  defaultProps: DefaultProps = {}
-): FormElement {
+  defaultProps?: Partial<Record<keyof RepeatFormElement['props'], any>>
+): RepeatFormElement {
   return {
     type: FormElementType.REPEAT,
     props: {
       name: labelName,
-      label: labelName,
       ...defaultProps,
     },
     children,

@@ -1,6 +1,6 @@
 import { Component, HostBinding, Input } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { FormElement } from '../../model';
+import { CheckboxFormElement, FormElement } from '../../model';
 
 @Component({
   selector: 'formidable-checkbox',
@@ -27,8 +27,8 @@ import { FormElement } from '../../model';
   ],
 })
 export class CheckboxComponent {
-  @Input() parent: FormGroup;
-  @Input() formElement: FormElement;
+  @Input() parent!: FormGroup;
+  @Input() formElement!: CheckboxFormElement;
 
   @HostBinding('class')
   public get classes() {

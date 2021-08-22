@@ -13,7 +13,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
 import { FormElementQuery } from '../state/form-element-query.service';
 import { FormElementService } from '../state/form-element.service';
-import { paletteItems } from '../state/palette-items';
+import { DEFAULT_FORM_ELEMENT_DESCRIPTORS } from '../state/form-element-descriptors';
 
 @Component({
   selector: 'formidable-canvas-item',
@@ -33,10 +33,7 @@ import { paletteItems } from '../state/palette-items';
           (click)="onSelect()"
           [class.active]="isActive$ | async"
         >
-          <div class="label">
-            {{ formElement.type }} ({{ formElement.id }},
-            {{ formElement.props?.label }})
-          </div>
+          <div class="label">{{ formElement.type }} ({{ formElement.id }},</div>
           <button (click)="onRemove()" *ngIf="!!formElement.parentId">
             <fa-icon [icon]="times"></fa-icon>
           </button>
@@ -100,13 +97,13 @@ import { paletteItems } from '../state/palette-items';
   ],
 })
 export class CanvasItemComponent implements OnInit, OnChanges {
-  @Input() formElement: FormElement;
+  @Input() formElement!: FormElement;
   @Input() isCopyAble = false;
   @Input() isMoveAble = false;
   @Input() isDraggable = false;
   @Input() isDroppable = false;
 
-  children$: Observable<FormElement[]>;
+  children$!: Observable<FormElement[]>;
   isActive$ = this.formElementQuery
     .selectActiveId()
     .pipe(map((activeId) => activeId === this.formElement.id));
@@ -123,11 +120,11 @@ export class CanvasItemComponent implements OnInit, OnChanges {
   ) {}
 
   get invalid() {
-    return paletteItems
-      .find((paletteItem) => paletteItem.type === this.formElement.type)
-      .requiredProps.some(
-        (requiredProp) => !this.formElement.props[requiredProp]
-      );
+    return DEFAULT_FORM_ELEMENT_DESCRIPTORS.find(
+      (paletteItem) => paletteItem.type === this.formElement.type
+    ).requiredProps.some(
+      (requiredProp) => !this.formElement.props[requiredProp]
+    );
   }
 
   onSelect() {

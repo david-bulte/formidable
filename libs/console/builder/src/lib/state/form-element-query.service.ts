@@ -8,7 +8,7 @@ import {
   FormElementState,
   FormElementStore,
 } from './form-element-store.service';
-import { paletteItems } from './palette-items';
+import { DEFAULT_FORM_ELEMENT_DESCRIPTORS } from './form-element-descriptors';
 
 @Injectable({ providedIn: 'root' })
 export class FormElementQuery extends QueryEntity<FormElementState> {
@@ -20,10 +20,11 @@ export class FormElementQuery extends QueryEntity<FormElementState> {
     .selectActiveId()
     .pipe(switchMap((activeId) => this.selectEntity(activeId)));
 
+  // todo only from active project!!!
   invalid$ = this.selectAll().pipe(
     map((elements) => {
       return elements.some((element) => {
-        const paletteItem = paletteItems.find(
+        const paletteItem = DEFAULT_FORM_ELEMENT_DESCRIPTORS.find(
           (paletteItem) => element.type === paletteItem.type
         );
         return paletteItem.requiredProps.some(
@@ -40,7 +41,8 @@ export class FormElementQuery extends QueryEntity<FormElementState> {
     super(store);
   }
 
-  getComposition(): FormElement {
+  // getComposition(): FormElement {
+  getComposition(): any {
     const root = this.getEntity(this.projectQuery.getActiveId());
     return { ...root, children: this.getChildren(root.id) };
     // const root: FormElement = this.getAll().find(
@@ -74,7 +76,9 @@ export class FormElementQuery extends QueryEntity<FormElementState> {
       distinctUntilChanged(),
       map((type) => {
         if (type) {
-          const paletteItem = paletteItems.find((item) => item.type === type);
+          const paletteItem = DEFAULT_FORM_ELEMENT_DESCRIPTORS.find(
+            (item) => item.type === type
+          );
           return paletteItem?.propsForm;
         } else {
           return null;
