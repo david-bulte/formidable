@@ -7,16 +7,34 @@ import { FormElementService } from '../state/form-element.service';
 @Component({
   selector: 'formidable-properties',
   template: `
-    <div class="flex flex-col">
-      <h1 class="title">Properties</h1>
-      <div class="card h-full overflow-y-auto">
-        <formidable-form
-          [formElement]="props$ | async"
-          [value]="active$ | async"
-          (submitForm)="onSubmitForm($event)"
-        ></formidable-form>
-      </div>
-    </div>
+    <formidable-tabs>
+      <formidable-tab>
+        <ng-template formidableTabTitle> Properties</ng-template>
+        <ng-template formidableTabContent>
+          <formidable-form
+            [formElement]="props$ | async"
+            [value]="active$ | async"
+            (submitForm)="onSubmitForm($event)"
+          ></formidable-form>
+        </ng-template>
+      </formidable-tab>
+
+      <formidable-tab>
+        <ng-template formidableTabTitle>test</ng-template>
+        <ng-template formidableTabContent>nog een test</ng-template>
+      </formidable-tab>
+    </formidable-tabs>
+
+    <!--    <div class="flex flex-col">-->
+    <!--      <h1 class="title">Properties</h1>-->
+    <!--      <div class="card h-full overflow-y-auto">-->
+    <!--        <formidable-form-->
+    <!--          [formElement]="props$ | async"-->
+    <!--          [value]="active$ | async"-->
+    <!--          (submitForm)="onSubmitForm($event)"-->
+    <!--        ></formidable-form>-->
+    <!--      </div>-->
+    <!--    </div>-->
   `,
 })
 export class PropertiesComponent {

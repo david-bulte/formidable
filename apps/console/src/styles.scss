@@ -57,6 +57,10 @@ input {
   @apply bg-green-200 text-white rounded-t py-0.5 px-2 self-end object-contain;
 }
 
+.title.active {
+  @apply bg-green-300;
+}
+
 .ng-invalid.ng-touched,
 ng-invalid.ng-dirty {
   // todo
