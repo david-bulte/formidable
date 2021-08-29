@@ -3,12 +3,14 @@ import { applyTransaction, guid, ID } from '@datorama/akita';
 import { FormElement, FormElementType } from '@formidable/shared/renderer';
 import { FormElementQuery } from './form-element-query.service';
 import { FormElementStore } from './form-element-store.service';
+import { ProjectQuery } from './project-query.service';
 
 @Injectable({ providedIn: 'root' })
 export class FormElementService {
   constructor(
     private store: FormElementStore,
-    private query: FormElementQuery
+    private query: FormElementQuery,
+    private projectQuery: ProjectQuery
   ) {}
 
   createForm(name: string, id?: ID) {
@@ -17,7 +19,7 @@ export class FormElementService {
       type: FormElementType.FORM,
       props: { name },
       validation: { required: false, custom: null },
-      parentId: null,
+      projectId: this.projectQuery.getActiveId(),
     };
     return this.add(formElement);
   }
@@ -29,6 +31,7 @@ export class FormElementService {
         type: formElement.type,
         props: {},
         parentId: formElement.parentId,
+        projectId: formElement.projectId ?? this.projectQuery.getActiveId(),
       };
       this.store.add(formElement);
       this.store.setActive(formElement.id);

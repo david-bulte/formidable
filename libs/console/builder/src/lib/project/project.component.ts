@@ -19,7 +19,7 @@ import { ProjectService } from '../state/project.service';
         <formidable-canvas></formidable-canvas>
       </div>
 
-      <div class="w-4/12 ml-4 mt-6">
+      <div class="w-4/12 ml-4 mt-6 mr-1">
         <formidable-properties></formidable-properties>
       </div>
     </div>

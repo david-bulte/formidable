@@ -44,10 +44,6 @@ import { FormElementQuery } from '../state/form-element-query.service';
             preview
           </button>
         </div>
-
-        <pre>
-    json = {{ debug$ | async | json }}
-    </pre>
       </div>
     </div>
   `,
@@ -66,8 +62,6 @@ export class CanvasComponent {
     map((visible) => (visible ? this.formElementQuery.getComposition() : null))
   );
   invalid$ = this.formElementQuery.invalid$;
-
-  debug$ = this.formElementQuery.selectProject();
 
   constructor(private formElementQuery: FormElementQuery) {}
 

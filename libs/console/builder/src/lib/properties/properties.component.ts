@@ -20,27 +20,19 @@ import { FormElementService } from '../state/form-element.service';
       </formidable-tab>
 
       <formidable-tab>
-        <ng-template formidableTabTitle>test</ng-template>
-        <ng-template formidableTabContent>nog een test</ng-template>
+        <ng-template formidableTabTitle>json (debug)</ng-template>
+        <ng-template formidableTabContent>
+          <pre>{{ debug$ | async | json }}</pre>
+        </ng-template>
       </formidable-tab>
     </formidable-tabs>
-
-    <!--    <div class="flex flex-col">-->
-    <!--      <h1 class="title">Properties</h1>-->
-    <!--      <div class="card h-full overflow-y-auto">-->
-    <!--        <formidable-form-->
-    <!--          [formElement]="props$ | async"-->
-    <!--          [value]="active$ | async"-->
-    <!--          (submitForm)="onSubmitForm($event)"-->
-    <!--        ></formidable-form>-->
-    <!--      </div>-->
-    <!--    </div>-->
   `,
 })
 export class PropertiesComponent {
   // todo
   active$ = this.formElementQuery.selectActive();
   props$ = this.formElementQuery.selectActiveFormDescription();
+  debug$ = this.formElementQuery.selectProject();
 
   constructor(
     private formElementQuery: FormElementQuery,

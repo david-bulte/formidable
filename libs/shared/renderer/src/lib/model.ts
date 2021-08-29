@@ -43,6 +43,7 @@ export interface FormElement {
   type: FormElementType;
   props: { [key: string]: any };
   parentId?: ID;
+  projectId?: ID;
 }
 
 export interface FormFormElement extends FormElement {

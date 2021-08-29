@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
-import { ID, QueryEntity } from '@datorama/akita';
+import { combineQueries, ID, QueryEntity } from '@datorama/akita';
 import { FormElement, FormElementType } from '@formidable/shared/renderer';
 import { Observable } from 'rxjs';
 import { distinctUntilChanged, map, switchMap } from 'rxjs/operators';
-import { ProjectQuery } from './project-query.service';
+import { DEFAULT_FORM_ELEMENT_DESCRIPTORS } from './form-element-descriptors';
 import {
   FormElementState,
   FormElementStore,
 } from './form-element-store.service';
-import { DEFAULT_FORM_ELEMENT_DESCRIPTORS } from './form-element-descriptors';
+import { ProjectQuery } from './project-query.service';
 
 @Injectable({ providedIn: 'root' })
 export class FormElementQuery extends QueryEntity<FormElementState> {
@@ -20,17 +20,22 @@ export class FormElementQuery extends QueryEntity<FormElementState> {
     .selectActiveId()
     .pipe(switchMap((activeId) => this.selectEntity(activeId)));
 
-  // todo only from active project!!!
-  invalid$ = this.selectAll().pipe(
-    map((elements) => {
-      return elements.some((element) => {
-        const paletteItem = DEFAULT_FORM_ELEMENT_DESCRIPTORS.find(
-          (paletteItem) => element.type === paletteItem.type
-        );
-        return paletteItem.requiredProps.some(
-          (requiredProp) => !element.props[requiredProp]
-        );
-      });
+  invalid$ = combineQueries([
+    this.selectAll(),
+    this.projectQuery.selectActiveId(),
+  ]).pipe(
+    map(([formElements, projectId]) => {
+      return formElements
+        .filter((fe) => fe.projectId === projectId)
+        .some((fe) => {
+          const formElementDescriptor = DEFAULT_FORM_ELEMENT_DESCRIPTORS.find(
+            (paletteItem) => fe.type === paletteItem.type
+          );
+          // todo requiredProps?
+          return formElementDescriptor?.requiredProps.some(
+            (requiredProp) => !fe.props[requiredProp]
+          );
+        });
     })
   );
 
