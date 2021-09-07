@@ -46,6 +46,10 @@ export interface FormElement {
   projectId?: ID;
 }
 
+export interface StoredFormElement extends FormElement {
+  id: ID;
+}
+
 export interface FormFormElement extends FormElement {
   type: FormElementType.FORM;
   props: {

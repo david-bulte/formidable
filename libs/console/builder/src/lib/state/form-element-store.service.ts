@@ -1,9 +1,14 @@
 import { Injectable } from '@angular/core';
-import { ActiveState, EntityState, EntityStore, StoreConfig, } from '@datorama/akita';
-import { FormElement } from '@formidable/shared/renderer';
+import {
+  ActiveState,
+  EntityState,
+  EntityStore,
+  StoreConfig,
+} from '@datorama/akita';
+import { FormElement, StoredFormElement } from '@formidable/shared/renderer';
 
 export interface FormElementState
-  extends EntityState<FormElement>,
+  extends EntityState<StoredFormElement>,
     ActiveState {}
 
 @Injectable({ providedIn: 'root' })

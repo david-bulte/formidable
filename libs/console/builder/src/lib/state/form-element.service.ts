@@ -1,6 +1,10 @@
 import { Injectable } from '@angular/core';
 import { applyTransaction, guid, ID } from '@datorama/akita';
-import { FormElement, FormElementType } from '@formidable/shared/renderer';
+import {
+  FormElement,
+  FormElementType,
+  StoredFormElement,
+} from '@formidable/shared/renderer';
 import { FormElementQuery } from './form-element-query.service';
 import { FormElementStore } from './form-element-store.service';
 import { ProjectQuery } from './project-query.service';
@@ -26,15 +30,15 @@ export class FormElementService {
 
   add(formElement: FormElement) {
     applyTransaction(() => {
-      formElement = {
+      const storedFormElement: StoredFormElement = {
         id: formElement.id || guid(),
         type: formElement.type,
         props: {},
         parentId: formElement.parentId,
         projectId: formElement.projectId ?? this.projectQuery.getActiveId(),
       };
-      this.store.add(formElement);
-      this.store.setActive(formElement.id);
+      this.store.add(storedFormElement);
+      this.store.setActive(storedFormElement.id);
     });
     return formElement;
   }

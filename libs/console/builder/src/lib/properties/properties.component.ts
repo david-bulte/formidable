@@ -29,7 +29,6 @@ import { FormElementService } from '../state/form-element.service';
   `,
 })
 export class PropertiesComponent {
-  // todo
   active$ = this.formElementQuery.selectActive();
   props$ = this.formElementQuery.selectActiveFormDescription();
   debug$ = this.formElementQuery.selectProject();

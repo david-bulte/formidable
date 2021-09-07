@@ -16,11 +16,14 @@ import { FormElementQuery } from '../state/form-element-query.service';
             [formElement]="root"
             [isMoveAble]="false"
             [isDroppable]="true"
-            *ngIf="root$ | async as root"
+            *ngIf="rootFormElementBuilderView$ | async as root"
           ></formidable-canvas-item>
         </div>
 
-        <div class="card" *ngIf="formView$ | async as formView">
+        <div
+          class="card"
+          *ngIf="rootFormElementPreviewView$ | async as formView"
+        >
           <formidable-preview [formElement]="formView"></formidable-preview>
         </div>
 
@@ -56,10 +59,13 @@ import { FormElementQuery } from '../state/form-element-query.service';
   ],
 })
 export class CanvasComponent {
-  root$ = this.formElementQuery.root$;
+  rootFormElementBuilderView$ =
+    this.formElementQuery.rootFormElementBuilderView$;
   previewVisible$$ = new BehaviorSubject(false);
-  formView$ = this.previewVisible$$.pipe(
-    map((visible) => (visible ? this.formElementQuery.getComposition() : null))
+  rootFormElementPreviewView$ = this.previewVisible$$.pipe(
+    map((visible) =>
+      visible ? this.formElementQuery.getRootFormElementPreviewView() : null
+    )
   );
   invalid$ = this.formElementQuery.invalid$;
 

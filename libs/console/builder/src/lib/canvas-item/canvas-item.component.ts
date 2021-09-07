@@ -5,7 +5,7 @@ import {
   OnInit,
   SimpleChanges,
 } from '@angular/core';
-import { FormElement } from '@formidable/shared/renderer';
+import { FormElement, StoredFormElement } from '@formidable/shared/renderer';
 import { faExclamationCircle } from '@fortawesome/free-solid-svg-icons/faExclamationCircle';
 import { faGripVertical } from '@fortawesome/free-solid-svg-icons/faGripVertical';
 import { faTimesCircle } from '@fortawesome/free-solid-svg-icons/faTimesCircle';
@@ -156,7 +156,8 @@ export class CanvasItemComponent implements OnInit, OnChanges {
         parentId: this.formElement.id,
       });
     } else {
-      this.formElementService.update(dragonEvent.data.id, {
+      const id = (<StoredFormElement>dragonEvent.data).id;
+      this.formElementService.update(id, {
         ...dragonEvent.data,
         parentId: this.formElement.id,
       });
