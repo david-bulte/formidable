@@ -1,7 +1,7 @@
 import {
-  PaletteGroup,
   FormElementDescriptor,
   FormElementType,
+  PaletteGroup,
 } from '@formidable/shared/renderer';
 import {
   checkbox,
@@ -43,7 +43,16 @@ export const DEFAULT_FORM_ELEMENT_DESCRIPTORS: FormElementDescriptor[] = [
     type: FormElementType.GROUP,
     group: PaletteGroup.BASIC,
     requiredProps: ['name'],
-    propsForm: form([group('props', [input('name', true), input('label')])]),
+    propsForm: form([
+      group('props', [input('name', true), input('label')]),
+      group(
+        'validation',
+        [textarea('custom', false, { tooltip: tooltips.customValidation })],
+        {
+          label: 'validation',
+        }
+      ),
+    ]),
   },
   {
     type: FormElementType.INPUT,

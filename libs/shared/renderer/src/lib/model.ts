@@ -218,7 +218,16 @@ export interface Parent extends FormElement {
 }
 
 export function isParent(obj: any): obj is Parent {
-  return obj['children'];
+  const type = obj['type'] as FormElementType;
+  return (
+    [
+      FormElementType.FORM,
+      FormElementType.GROUP,
+      FormElementType.ROW,
+      FormElementType.COL,
+    ].indexOf(type) > -1
+  );
+  // return !!obj['children'];
 }
 
 export interface Validatable extends FormElement {
@@ -226,5 +235,5 @@ export interface Validatable extends FormElement {
 }
 
 export function isValidatable(obj: any): obj is Validatable {
-  return obj['validation'];
+  return !!obj['validation'];
 }

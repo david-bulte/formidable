@@ -76,13 +76,9 @@ export class FormComponent implements OnChanges {
           formValueChange?.currentValue
         );
         if (this.autosubmit) {
-          this.form.valueChanges
-            .pipe(untilDestroyed(this))
-            .subscribe(($event) => {
-              console.log('$event', $event);
-
-              this.submitForm.emit(this.form.value);
-            });
+          this.form.valueChanges.pipe(untilDestroyed(this)).subscribe(() => {
+            this.submitForm.emit(this.form.value);
+          });
         }
       });
     }

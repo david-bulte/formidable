@@ -24,7 +24,7 @@ import { ProjectService } from '../state/project.service';
         </div>
       </nav>
 
-      <div class="w-full">
+      <div class="flex-1">
         <router-outlet></router-outlet>
       </div>
     </div>
