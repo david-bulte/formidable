@@ -3,7 +3,7 @@ module.exports = {
   // mode: process.env.TAILWIND_MODE ? 'jit' : '',
   mode: process.env.NODE_ENV && 'jit',
   purge: {
-    // enabled: process.env.TAILWIND_MODE === 'build',
+    enabled: process.env.TAILWIND_MODE === 'build',
     content: ['./apps/**/*.{html,ts}', './libs/**/*.{html,ts}'],
   },
   darkMode: false, // or 'media' or 'class'
