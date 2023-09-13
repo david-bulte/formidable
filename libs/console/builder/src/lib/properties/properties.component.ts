@@ -27,6 +27,15 @@ import { FormElementService } from '../state/form-element.service';
       </formidable-tab>
     </formidable-tabs>
   `,
+  styles: [
+    `
+        :host {
+            display: flex;
+            flex: 1;
+            overflow-y: hidden;
+        }
+    `
+  ]
 })
 export class PropertiesComponent {
   active$ = this.formElementQuery.selectActive();

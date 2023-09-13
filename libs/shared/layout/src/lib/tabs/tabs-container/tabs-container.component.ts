@@ -10,7 +10,7 @@ import { TabComponent } from '../tab/tab.component';
 @Component({
   selector: 'formidable-tabs',
   template: `
-    <div class="flex flex-col">
+    <div class="flex flex-col" style="overflow-y: hidden">
       <div class="flex flex-row justify-end">
         <h1
           class="title ml-1 cursor-pointer hover:bg-green-300"
@@ -26,7 +26,15 @@ import { TabComponent } from '../tab/tab.component';
       </div>
     </div>
   `,
-  styles: [],
+  styles: [
+    `
+        :host {
+            display: flex;
+            flex-direction: column;
+            overflow-y: hidden;
+        }
+    `
+  ],
 })
 export class TabsContainerComponent implements AfterContentInit {
   @ContentChildren(TabComponent) tabs!: QueryList<TabComponent>;

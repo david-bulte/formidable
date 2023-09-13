@@ -14,7 +14,8 @@ import { ProjectService } from '../state/project.service';
       </div>
     </formidable-nav>
 
-    <div class="overflow-y-hidden flex flex-row">
+<!--    <div class="overflow-y-hidden flex flex-row">-->
+    <div class="flex flex-row" style="flex: 1; overflow-y: hidden">
       <nav class="flex flex-col mx-6">
         <div class="mt-6 ml-2">
           <formidable-projects
@@ -24,7 +25,9 @@ import { ProjectService } from '../state/project.service';
         </div>
       </nav>
 
-      <div class="flex-1">
+      <div class="flex-1" style="display: flex;
+    flex-direction: column;
+    overflow-y: hidden;">
         <router-outlet></router-outlet>
       </div>
     </div>
@@ -33,6 +36,13 @@ import { ProjectService } from '../state/project.service';
     `
       .nav {
         width: 10rem;
+      }
+      
+      :host {
+          display: flex;
+          flex-direction: column;
+          flex: 1;
+          overflow-y: hidden;
       }
     `,
   ],

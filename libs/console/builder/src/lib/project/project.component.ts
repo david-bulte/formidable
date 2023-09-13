@@ -10,7 +10,7 @@ import { ProjectService } from '../state/project.service';
 @Component({
   selector: 'formidable-project',
   template: `
-    <div class="flex justify-between h-screen">
+    <div class="flex justify-between h-screen" style="overflow-y: hidden">
       <!--      <div class="w-4/12 mr-8 mt-6">-->
       <div class="mr-8 mt-6 max-w-lg w-2/12">
         <formidable-palette></formidable-palette>
@@ -22,15 +22,24 @@ import { ProjectService } from '../state/project.service';
       </div>
 
       <!--      <div class="w-4/12 ml-4 mt-6 mr-1">-->
-      <div class="ml-4 mt-6 mr-1 max-w-lg w-3/12">
+      <div class="ml-4 mt-6 mr-1 max-w-lg w-3/12" style="display: flex;
+    flex-direction: column;
+    overflow-y: hidden;">
         <formidable-properties></formidable-properties>
       </div>
     </div>
   `,
   styles: [
     `
+      /*:host {*/
+      /*  display: block;*/
+      /*}*/
+      
       :host {
-        display: block;
+          display: flex;
+          flex-direction: column;
+          overflow-y: hidden;
+          flex: 1;
       }
     `,
   ],
